@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Prodotti",
+    "about": "Chi Siamo",
+    "faq": "FAQ",
+    "cart": "Carrello",
+    "checkout": "Checkout"
+  },
+  "home": {
+    "banner": {
+      "title": "Benvenuti su ToyShop",
+      "subtitle": "Scopri giocattoli incredibili per tutte le età",
+      "countdown": "Offerta termina in"
+    },
+    "benefits": {
+      "quality": "Qualità Premium",
+      "shipping": "Spedizione Gratuita",
+      "durability": "Divertimento Duraturo"
+    },
+    "upsell": "Compra 1 e ottieni il 2° al 50% di sconto!"
+  },
+  "product": {
+    "price": "Prezzo",
+    "oldPrice": "Vecchio Prezzo",
+    "rating": "Valutazione",
+    "reviews": "Recensioni",
+    "available": "Disponibile",
+    "soldToday": "Venduto Oggi",
+    "addToCart": "Aggiungi al Carrello",
+    "similarProducts": "Prodotti Simili"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "personalInfo": "Informazioni Personali",
+    "shipping": "Indirizzo di Spedizione",
+    "payment": "Metodo di Pagamento",
+    "orderSummary": "Riepilogo Ordine",
+    "placeOrder": "Effettua Ordine"
+  },
+  "footer": {
+    "copyright": "© 2024 ToyShop. Tutti i diritti riservati."
+  }
+}
