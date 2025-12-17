@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../components/layout/Layout';
 import { deliveryApi } from '../services/deliveryApi';
 import type { Delivery, DeliveryTracking } from '../types/delivery';
-import { Package, MapPin, Clock, CheckCircle, Truck, Search, Filter } from 'lucide-react';
+import { Package, MapPin, Clock, CheckCircle, Truck, Search } from 'lucide-react';
 
 const DeliveryManagement: React.FC = () => {
   const [deliveries, setDeliveries] = useState<Delivery[]>([]);

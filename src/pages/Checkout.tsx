@@ -6,7 +6,7 @@ import { isValidEmail } from '../utils/validation';
 import CountrySelector from '../components/common/CountrySelector';
 import paymentApi from '../services/paymentApi';
 import { guestCheckout } from '../utils/guestCheckout';
-import { Truck, Shield, CreditCard, Smartphone, AlertCircle, ChevronRight, Home, Package, CheckCircle } from 'lucide-react';
+import { Truck, Shield, CreditCard, Smartphone, AlertCircle, ChevronRight, Home, CheckCircle } from 'lucide-react';
 
 const Checkout: React.FC = () => {
   const { cart, getTotal, clearCart, sessionId } = useCart();
@@ -28,7 +28,7 @@ const Checkout: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentConfig, setPaymentConfig] = useState<any>(null);
-  const [currentPaymentId, setCurrentPaymentId] = useState<string | null>(null);
+  // const [currentPaymentId] = useState<string | null>(null); // Not currently used
 
   const shippingCost = getTotal() >= 50 ? 0 : 5.99;
   const total = getTotal() + shippingCost;
@@ -85,30 +85,8 @@ const Checkout: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const createOrderData = () => {
-    return {
-      shippingAddress: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        address: formData.address,
-        city: formData.city,
-        postalCode: formData.postalCode,
-        country: formData.country,
-      },
-      items: cart?.cartItems?.map(item => ({
-        productId: item.product.id,
-        quantity: item.quantity,
-        price: item.product.price,
-      })) || [],
-      total: total,
-      subtotal: getTotal(),
-      shippingCost: shippingCost,
-      paymentMethod: paymentMethod,
-    };
-  };
-
+  // Note: createOrderData function is defined but currently unused
+  // It could be used for future order creation features
   const handlePayPalPayment = async () => {
     if (!validateForm()) return;
 
@@ -189,7 +167,7 @@ const Checkout: React.FC = () => {
       );
 
       // Use the redirect-specific checkout method for Stripe
-      const response = await guestCheckout.processCartCheckoutWithRedirect(checkoutData);
+      await guestCheckout.processCartCheckoutWithRedirect(checkoutData);
 
       // Note: For Stripe Checkout Sessions, the redirect happens automatically
       // The function will redirect to Stripe and we won't reach this code
@@ -210,7 +188,7 @@ const Checkout: React.FC = () => {
         throw new Error('No order data found');
       }
 
-      const { orderId, paymentId } = JSON.parse(storedOrderData);
+      const { paymentId } = JSON.parse(storedOrderData);
       
       // Confirm the payment with backend
       await paymentApi.handlePaymentSuccess(provider, {

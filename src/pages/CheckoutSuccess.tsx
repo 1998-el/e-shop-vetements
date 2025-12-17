@@ -7,7 +7,7 @@ import type { Order } from '../types';
 const CheckoutSuccess: React.FC = () => {
   const location = useLocation();
   const order = location.state?.order as Order | undefined;
-  const payment = location.state?.payment;
+  // const payment = location.state?.payment;
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('fr-FR', {

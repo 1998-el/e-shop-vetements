@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import ordersApi from '../services/ordersApi';
 import type { Order } from '../types';
-import { ArrowLeft, Package, Clock, CheckCircle, XCircle, Truck, MapPin, User, CreditCard, Receipt } from 'lucide-react';
+import { ArrowLeft, Package, Clock, CheckCircle, XCircle, Truck, MapPin, User, Receipt } from 'lucide-react';
 
 const OrderDetails: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();

@@ -135,12 +135,6 @@ const BrandLogos: React.FC = () => {
     };
   }, [totalSlides]);
 
-  // Calculer les marques visibles selon le slide
-  const getVisibleBrands = () => {
-    const start = currentSlide * SLIDES_PER_VIEW_MOBILE;
-    return brands.slice(start, start + SLIDES_PER_VIEW_MOBILE);
-  };
-
   return (
     <div className="py-8 md:py-12 bg-gray-50">
       <div className="max-w-6xl mx-auto px-3 md:px-4">

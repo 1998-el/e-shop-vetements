@@ -3,7 +3,8 @@ import { Clock, Zap } from 'lucide-react';
 import { useProducts } from '../../hooks/useProducts';
 
 const DealsSection: React.FC = () => {
-  const { products, loading } = useProducts({ limit: 20 });
+  const { loading } = useProducts({ limit: 20 });
+  // const { products } = useProducts({ limit: 20 }); // products is not currently used
   
   // Countdown timer for deals
   const [timeLeft, setTimeLeft] = useState({

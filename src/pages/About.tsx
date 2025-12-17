@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
-import { Package, Users, Award, Truck, Shield, Star, Target, Clock } from 'lucide-react';
+import { Package, Users, Award, Shield, Star, Target, Clock } from 'lucide-react';
 
 const About: React.FC = () => {
   const stats = [
