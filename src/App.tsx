@@ -11,6 +11,7 @@ import Checkout from './pages/Checkout';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import PaymentCancel from './pages/PaymentCancel';
 import About from './pages/About';
+import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import ProductDetail from './pages/ProductDetail';
 import CartTest from './pages/CartTest';
@@ -33,6 +34,7 @@ function AppContent() {
       <Route path="/orders" element={<Orders />} />
       <Route path="/orders/:orderId" element={<OrderDetails />} />
       <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/faq" element={<FAQ />} />
       {/* Add more routes here as needed */}
     </Routes>

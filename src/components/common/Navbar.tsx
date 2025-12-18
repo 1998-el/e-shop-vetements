@@ -16,6 +16,7 @@ const Navbar: React.FC = () => {
   const navItems = [
     { path: '/products', label: 'Produits' },
     { path: '/about', label: 'À propos' },
+    { path: '/contact', label: 'Contact' },
     { path: '/faq', label: 'FAQ' },
   ];
 
@@ -27,8 +28,8 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo - Gauche */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-xl font-bold text-gray-900">
-              KidsTrésor
+            <Link to="/" className="text-xl font-bold text-red-600">
+              beldouze
             </Link>
           </div>
 

@@ -193,15 +193,6 @@ const ReviewCarousel: React.FC = () => {
           </div>
         </div>
 
-        {/* CTA - Simple */}
-        <div className="text-center mt-12 pt-8 border-t border-gray-200">
-          <button className="px-6 py-2.5 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors">
-            Voir tous les avis
-          </button>
-          <p className="text-sm text-gray-600 mt-3">
-            Rejoignez nos clients satisfaits
-          </p>
-        </div>
       </div>
     </div>
   );

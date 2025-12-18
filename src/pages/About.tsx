@@ -34,7 +34,7 @@ const About: React.FC = () => {
   ];
 
   const milestones = [
-    { year: '2020', title: 'Création', description: 'Lancement de Kids\'Trésor avec une sélection de 50 jouets' },
+    { year: '2020', title: 'Création', description: 'Lancement de beldouze avec une sélection de 50 jouets' },
     { year: '2021', title: 'Expansion', description: 'Ouverture à 10 nouvelles marques partenaires' },
     { year: '2022', title: 'Croissance', description: 'Plus de 5 000 clients satisfaits' },
     { year: '2023', title: 'Innovation', description: 'Lancement de notre plateforme e-commerce complète' },
@@ -48,7 +48,7 @@ const About: React.FC = () => {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                À propos de Kids'Trésor
+                À propos de beldouze
               </h1>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                 Depuis 2020, nous fournissons des jouets de qualité qui stimulent la créativité et le développement des enfants.
@@ -80,7 +80,7 @@ const About: React.FC = () => {
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  Kids'Trésor a été fondé en 2020 avec une mission simple : offrir aux parents un accès facile à des jouets de qualité, 
+                  beldouze a été fondé en 2020 avec une mission simple : offrir aux parents un accès facile à des jouets de qualité,
                   sécurisés et éducatifs pour leurs enfants.
                 </p>
                 <p>
@@ -150,7 +150,7 @@ const About: React.FC = () => {
         <div className="py-12 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-              Pourquoi choisir Kids'Trésor ?
+              Pourquoi choisir beldouze ?
             </h2>
             <div className="space-y-4 text-gray-700">
               <div className="flex items-start gap-3">

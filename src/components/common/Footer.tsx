@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div>
             <h3 className="text-lg font-bold mb-4">
-              KidsTrésor
+              beldouze
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Des jouets de qualité qui stimulent l'imagination et le développement des enfants.
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
             
             <div className="text-center sm:text-right">
               <p className="text-gray-400 text-xs">
-                © {new Date().getFullYear()} KidsTrésor. Tous droits réservés.
+                © {new Date().getFullYear()} beldouze. Tous droits réservés.
               </p>
             </div>
           </div>
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
         {/* Contact Info */}
         <div className="mt-6 pt-4 border-t border-gray-700">
           <div className="text-center text-xs text-gray-400">
-            <p>contact@kids-tresor.fr • 01 23 45 67 89</p>
+            <p>contact@beldouze.fr • 01 23 45 67 89</p>
           </div>
         </div>
       </div>

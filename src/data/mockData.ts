@@ -130,37 +130,137 @@ export const products: Product[] = [
 export const reviews: Review[] = [
   {
     id: '1',
-    userName: 'Marie Dupont',
+    userName: 'Sophie M.',
     userAvatar: '/images/avatars/avatar1.jpg',
     rating: 5,
-    comment: 'Excellent jouet, mon enfant adore ! La qualité est au rendez-vous.',
-    date: '2024-01-15',
+    comment: 'Ma fille adore !! 🎉 La voiture est super solide, elle a résisté à toutes les chutes et les coups ! En plus, pas besoin de montage, on branche et c\'est parti. Super cadeau de Noël !',
+    date: '2024-12-15',
     badge: 'Parent'
   },
   {
     id: '2',
-    userName: 'Jean Martin',
+    userName: 'Maxime L.',
     userAvatar: '/images/avatars/avatar2.jpg',
-    rating: 4,
-    comment: 'Très bon rapport qualité-prix. Livraison rapide.',
-    date: '2024-01-12',
+    rating: 5,
+    comment: 'Franchement, pas déçu ! 🚗💨 Ma petite la manipule bien, même si elle est encore un peu jeune. Le design est top, et les effets lumineux c\'est une tuerie 😍. Je recommande à fond.',
+    date: '2024-12-14',
     badge: 'Client fidèle'
   },
   {
     id: '3',
-    userName: 'Sophie Laurent',
+    userName: 'Julie T.',
     userAvatar: '/images/avatars/avatar3.jpg',
     rating: 5,
-    comment: 'Jouet éducatif et amusant. Parfait pour développer la créativité.',
-    date: '2024-01-10'
+    comment: 'Un jouet qui plait vraiment ! 😎 Mon fils l\'utilise tout le temps. Très facile à prendre en main, et la qualité est au rendez-vous. Ça change des jouets qui se cassent au bout de 2 jours.',
+    date: '2024-12-13',
+    badge: 'Parent'
   },
   {
     id: '4',
-    userName: 'Pierre Dubois',
+    userName: 'Paul D.',
     userAvatar: '/images/avatars/avatar4.jpg',
-    rating: 4,
-    comment: 'Qualité LEGO comme toujours. Mon fils est ravi !',
-    date: '2024-01-08',
+    rating: 5,
+    comment: 'Cadeau parfait pour Noël 🎄. Mon fils a adoré ! Il est tellement content avec ses effets de lumière. En plus, c\'est super simple à utiliser. Franchement, top qualité pour le prix 👏.',
+    date: '2024-12-12',
+    badge: 'Parent'
+  },
+  {
+    id: '5',
+    userName: 'Caroline G.',
+    userAvatar: '/images/avatars/avatar5.jpg',
+    rating: 5,
+    comment: 'Je ne croyais pas que c\'était aussi fun ! 😆 On dirait que la voiture a une vie propre. C\'est vraiment impressionnant pour un jouet à ce prix. À recommander à tous les parents.',
+    date: '2024-12-11',
+    badge: 'Client fidèle'
+  },
+  {
+    id: '6',
+    userName: 'Mélanie P.',
+    userAvatar: '/images/avatars/avatar6.jpg',
+    rating: 5,
+    comment: 'C\'est vraiment un jouet qui déchire 😍 !! Pas besoin de trucs compliqués. Simple à utiliser et les lumières rendent trop bien. Mon fils a même fait un combat de voitures avec son copain 😂. Une belle réussite !',
+    date: '2024-12-10',
+    badge: 'Parent'
+  },
+  {
+    id: '7',
+    userName: 'Thomas B.',
+    userAvatar: '/images/avatars/avatar7.jpg',
+    rating: 5,
+    comment: 'Ma fille l\'adore !! 😅 Le seul bémol c\'est qu\'elle veut plus que moi l\'utiliser 😂 mais c\'est vraiment un super cadeau, facile, fun, et la batterie tient bien !',
+    date: '2024-12-09',
+    badge: 'Parent'
+  },
+  {
+    id: '8',
+    userName: 'Lisa C.',
+    userAvatar: '/images/avatars/avatar8.jpg',
+    rating: 5,
+    comment: 'J\'ai acheté ça pour Noël et franchement, aucune déception ! 🎅 Facile à utiliser, elle fait des cascades et les lumières sont superbes. Le must pour un Noël magique pour les enfants !',
+    date: '2024-12-08',
+    badge: 'Parent'
+  },
+  {
+    id: '9',
+    userName: 'Isabelle F.',
+    userAvatar: '/images/avatars/avatar9.jpg',
+    rating: 5,
+    comment: 'Le produit est solide et vraiment fun pour les enfants ! En plus, pas de tracas avec un montage chiant. Tout de suite prêt à l\'emploi. Mon petit fils l\'a déjà adopté 👍.',
+    date: '2024-12-07',
+    badge: 'Client fidèle'
+  },
+  {
+    id: '10',
+    userName: 'David S.',
+    userAvatar: '/images/avatars/avatar10.jpg',
+    rating: 5,
+    comment: 'Très content de mon achat. Ma fille adore, et en plus elle peut l\'utiliser seule, sans trop de soucis. Les effets lumineux sont vraiment bien faits. Je conseille sans hésiter !',
+    date: '2024-12-06',
+    badge: 'Expert'
+  },
+  {
+    id: '11',
+    userName: 'Antoine R.',
+    userAvatar: '/images/avatars/avatar11.jpg',
+    rating: 5,
+    comment: 'Un vrai succès pour l\'anniversaire de mon fils ! 🎂 La voiture fait des figures incroyables et les lumières colorées fascinent tous les enfants. Qualité professionnelle, je recommande !',
+    date: '2024-12-05',
+    badge: 'Parent'
+  },
+  {
+    id: '12',
+    userName: 'Camille L.',
+    userAvatar: '/images/avatars/avatar12.jpg',
+    rating: 5,
+    comment: 'Waouh ! 🤩 Mon neveu a eu les yeux qui brillent quand il a vu la voiture. Elle est hyper robuste, elle a déjà pris des chocs et elle fonctionne toujours parfaitement. Excellent investissement !',
+    date: '2024-12-04',
+    badge: 'Client fidèle'
+  },
+  {
+    id: '13',
+    userName: 'Nicolas B.',
+    userAvatar: '/images/avatars/avatar13.jpg',
+    rating: 5,
+    comment: 'Parfait pour un cadeau de dernière minute ! 🎁 Pas de complications, on sort de la boîte et c\'est parti. Mon fils de 5 ans s\'en sert comme un pro. Les parents sont contents aussi !',
+    date: '2024-12-03',
+    badge: 'Parent'
+  },
+  {
+    id: '14',
+    userName: 'Valérie M.',
+    userAvatar: '/images/avatars/avatar14.jpg',
+    rating: 5,
+    comment: 'Super content de cet achat ! ✨ Les effets sonores et lumineux sont géniaux, ça donne vraiment vie à la voiture. Ma fille invite ses copines pour jouer avec, c\'est un vrai hit !',
+    date: '2024-12-02',
+    badge: 'Parent'
+  },
+  {
+    id: '15',
+    userName: 'Marc D.',
+    userAvatar: '/images/avatars/avatar15.jpg',
+    rating: 5,
+    comment: 'Le jouet qui occupe intelligemment les enfants ! 🧠 Pas de piles à acheter, pas de montage, juste du fun pur. Les couleurs sont magnifiques et la finition est nickel. Bravo !',
+    date: '2024-12-01',
     badge: 'Expert'
   }
 ];

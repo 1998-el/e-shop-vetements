@@ -24,7 +24,7 @@ const Banner: React.FC = () => {
 
           <div className="px-4 py-8 text-center">
             <h1 className="text-2xl font-bold mb-3 leading-tight text-white">
-              Bienvenue chez <span className="text-accent-300">Kids'Trésor</span>
+              Bienvenue chez <span className="text-white">beldouze</span>
             </h1>
             <p className="text-sm text-primary-100 mb-4 leading-relaxed max-w-xs mx-auto">
               Découvrez des jouets exceptionnels pour enfants de tous âges
@@ -58,10 +58,10 @@ const Banner: React.FC = () => {
             {/* Left Content */}
             <div className="text-left">
               <h1 className="text-5xl font-bold mb-6 leading-tight text-white">
-                Bienvenue chez <span className="text-accent-300">Kids'Trésor</span>
+                Bienvenue chez <span className="text-red-500">beldouze</span>
               </h1>
               <p className="text-xl text-primary-100 mb-8 leading-relaxed max-w-lg">
-                Découvrez des jouets exceptionnels pour enfants de tous âges. Qualité premium, prix compétitifs et livraison rapide.
+                Découvrez des jouets exceptionnels pour enfants de tous âges. Qualité premium, prix compétitifs et livraison rapide avec beldouze.
               </p>
 
               {/* CTA Buttons */}
