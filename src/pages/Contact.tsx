@@ -89,10 +89,10 @@ const Contact: React.FC = () => {
         {/* FAQ Section */}
         <div className="py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
               Questions fréquentes
-            </h2> */}
-            {/* <div className="space-y-4">
+            </h2>
+            <div className="space-y-4">
               {faqItems.map((item, index) => (
                 <div key={index} className="border border-gray-200 rounded-lg p-6">
                   <h3 className="font-medium text-gray-900 mb-3 flex items-start gap-2">
@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
                   <p className="text-sm text-gray-600 pl-7">{item.answer}</p>
                 </div>
               ))}
-            </div> */}
+            </div>
 
             {/* Additional Contact Methods */}
             <div className="mt-8 p-6 bg-gray-50 rounded-lg">
