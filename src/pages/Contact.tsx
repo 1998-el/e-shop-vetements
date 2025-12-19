@@ -4,22 +4,26 @@ import { Mail, Phone, MapPin, Clock, MessageCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const contactInfo = [
+
     {
       icon: Mail,
       title: 'Email',
-      details: 'contact@beldouze.fr',
+      details: 'contact@beldouze.com',
       description: 'Réponse sous 24h'
     },
+
     {
       icon: Phone,
       title: 'Téléphone',
-      details: '+33 1 23 45 67 89',
+      details: '+33 759 59 97 42',
       description: 'Lun-Ven 9h-18h'
     },
+
+
     {
       icon: MapPin,
       title: 'Adresse',
-      details: '123 Rue des Jouets, 75001 Paris',
+      details: '7 Chemin de Beldou, 31790 Saint-Jory, France',
       description: 'France'
     },
     {
@@ -45,7 +49,8 @@ const Contact: React.FC = () => {
     },
     {
       question: 'Comment contacter le service client ?',
-      answer: 'Vous pouvez nous contacter par email à contact@beldouze.fr ou par téléphone au +33 1 23 45 67 89 du lundi au vendredi de 9h à 18h.'
+
+      answer: 'Vous pouvez nous contacter par email à contact@beldouze.com ou par téléphone au +33 759 59 97 42 du lundi au vendredi de 9h à 18h.'
     }
   ];
 
@@ -108,13 +113,14 @@ const Contact: React.FC = () => {
             <div className="mt-8 p-6 bg-gray-50 rounded-lg">
               <h3 className="font-medium text-gray-900 mb-4">Autres moyens de nous contacter</h3>
               <div className="space-y-3 text-sm">
+
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-gray-600" />
-                  <span className="text-gray-700">support@beldouze.fr (support technique)</span>
+                  <span className="text-gray-700">support@beldouze.com (support technique)</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-gray-600" />
-                  <span className="text-gray-700">+33 1 23 45 67 90 (service commercial)</span>
+                  <span className="text-gray-700">+33 759 59 97 42 (service commercial)</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MessageCircle className="w-4 h-4 text-gray-600" />

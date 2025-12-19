@@ -1,19 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Petrona:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Scrolling Banner Animations */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
 @layer base {
+  /* Helloboku-inspired CSS variables */
+  :root {
+    --color-page-bg: #f3f4ff;
+    --color-stars: #0e0e52;
+    --color-content-bg: #f3f4ff;
+    --color-text: #0e0e52;
+    --color-links: #3931f8;
+    --color-headings: #0e0e52;
+    --color-btn: #ffffff;
+    --color-btn-bg: #3931f8;
+    --color-btn-bg-light: #3931f830;
+    --color-btn-border: #3931f8;
+    --color-btn-secondary: #3931f8;
+    --color-btn-bg-secondary: #ffffff;
+    --color-btn-border-secondary: #3931f8;
+    --color-select-bg: #f3f4ff;
+  }
+
   body {
     width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: theme('colors.secondary.700');
+    color: var(--color-text);
     line-height: 1.6;
+    background-color: var(--color-page-bg);
   }
 
   /* Improve touch targets for mobile */
@@ -40,9 +85,10 @@
 
   /* Professional heading styles */
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
     font-weight: 600;
     line-height: 1.25;
-    color: theme('colors.secondary.900');
+    color: var(--color-headings);
   }
 
   h1 {
@@ -60,8 +106,9 @@
 
 @layer components {
   .logo_ {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
     font-weight: 700;
+    color: var(--color-links);
   }
 
   /* Professional button styles */
@@ -70,15 +117,37 @@
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 focus:ring-primary-500 shadow-soft hover:shadow-medium;
+    @apply btn;
+    background-color: var(--color-btn-bg);
+    color: var(--color-btn);
+    border: 1px solid var(--color-btn-border);
+    box-shadow: 0 2px 15px -3px rgba(57, 49, 248, 0.2);
+  }
+  
+  .btn-primary:hover {
+    background-color: #2e28cc;
+    box-shadow: 0 4px 25px -5px rgba(57, 49, 248, 0.3);
   }
 
   .btn-secondary {
-    @apply btn bg-white text-secondary-700 border border-secondary-300 hover:bg-secondary-50 active:bg-secondary-100 focus:ring-primary-500;
+    @apply btn;
+    background-color: var(--color-btn-bg-secondary);
+    color: var(--color-btn-secondary);
+    border: 1px solid var(--color-btn-border-secondary);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-page-bg);
   }
 
   .btn-outline {
-    @apply btn bg-transparent text-primary-600 border border-primary-600 hover:bg-primary-50 active:bg-primary-100 focus:ring-primary-500;
+    @apply btn bg-transparent;
+    color: var(--color-links);
+    border: 1px solid var(--color-btn-border);
+  }
+  
+  .btn-outline:hover {
+    background-color: var(--color-btn-bg-light);
   }
 
   .btn-ghost {
@@ -87,11 +156,24 @@
 
   /* Professional card styles */
   .card {
-    @apply bg-white rounded-xl border border-secondary-200 shadow-soft hover:shadow-medium transition-all duration-200 overflow-hidden;
+    @apply bg-white rounded-xl;
+    border: 1px solid rgba(57, 49, 248, 0.1);
+    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 25px -5px rgba(57, 49, 248, 0.15);
+    border-color: rgba(57, 49, 248, 0.2);
   }
 
   .card-interactive {
-    @apply card hover:border-primary-200 cursor-pointer;
+    @apply card cursor-pointer;
+  }
+  
+  .card-interactive:hover {
+    border-color: rgba(57, 49, 248, 0.3);
+    transform: translateY(-1px);
   }
 
   /* Input styles */

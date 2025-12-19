@@ -73,7 +73,7 @@ const ProductGrid: React.FC = () => {
   }
 
   return (
-    <div className="bg-white py-6 lg:py-12">
+    <div className="bg-gray-50 py-6 lg:py-12">
       <div className="max-w-7xl mx-auto px-3 lg:px-8">
         {/* Section Header - Mobile Optimized */}
         <div className="mb-6 lg:mb-8">
@@ -164,19 +164,13 @@ const ProductGrid: React.FC = () => {
           </div>
         </div>
 
-        {/* Products Grid - Horizontal Scroll on Mobile */}
-        <div 
+        {/* Products Grid - Responsive Grid */}
+        <div
           id="products-grid"
-          className="flex lg:grid lg:grid-cols-1 lg:sm:grid-cols-2 lg:grid-cols-3 lg:xl:grid-cols-4 gap-3 lg:gap-6 mb-6 lg:mb-8 overflow-x-auto lg:overflow-visible scrollbar-hide pb-2"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-6 mb-6 lg:mb-8"
         >
           {activeProducts.map((product) => (
-            <div 
-              key={product.id} 
-              className="flex-shrink-0 w-[calc(50%-6px)] sm:w-[calc(33.333%-8px)] lg:w-auto"
-            >
-              <ProductCard product={product} />
-            </div>
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
 

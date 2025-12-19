@@ -1,40 +1,59 @@
+
+
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Truck, Shield, Recycle, Heart } from 'lucide-react';
 import { benefits } from '../../data/mockData';
 
 const Benefits: React.FC = () => {
-  const { t } = useTranslation();
+  // Icônes encore plus minimalistes
+  const benefitIcons = {
+    '🚚': Truck,
+    '⭐': Shield,
+    '♻️': Recycle,
+    '💝': Heart
+  };
 
   return (
-    <div className="bg-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-16">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Header ultra-minimaliste */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 font-fredoka">
-            Why Choose beldouze?
+          <h2 className="text-2xl font-light text-gray-900 tracking-wide">
+            Nos avantages
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            We're committed to providing the best toy shopping experience with quality, safety, and fun in mind.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="text-4xl mb-4">{benefit.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {t(`home.benefits.${benefit.title.toLowerCase().replace(' ', '')}`)}
-              </h3>
-              <p className="text-gray-600">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
+        {/* Benefits Grid - Style ultra-minimaliste */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+          {benefits.map((benefit, index) => {
+            const IconComponent = benefitIcons[benefit.icon as keyof typeof benefitIcons] || Shield;
+            
+            return (
+              <div
+                key={index}
+                className="text-center group"
+              >
+                {/* Icon ultra-simple avec transition */}
+                <div className="flex justify-center mb-4">
+                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-50 group-hover:bg-gray-100 transition-all duration-300">
+                    <IconComponent className="w-5 h-5 text-gray-700" strokeWidth={1.5} />
+                  </div>
+                </div>
+
+                {/* Content ultra-épuré */}
+                <h3 className="text-sm font-light text-gray-900 mb-2 tracking-wide">
+                  {benefit.title}
+                </h3>
+                
+                <p className="text-xs text-gray-500 leading-relaxed max-w-32 mx-auto">
+                  {benefit.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

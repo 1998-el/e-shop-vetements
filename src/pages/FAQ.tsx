@@ -26,11 +26,12 @@ const FAQ: React.FC = () => {
         },
         {
           question: 'Puis-je modifier ma commande ?',
-          answer: 'Vous pouvez modifier votre commande dans les 30 minutes suivant la validation en nous contactant au 01 23 45 67 89.'
+
+          answer: 'Vous pouvez modifier votre commande dans les 30 minutes suivant la validation en nous contactant au +33 759 59 97 42.'
         },
         {
           question: 'Moyens de paiement acceptés ?',
-          answer: 'Cartes bancaires (Visa, Mastercard), PayPal, virements bancaires. Tous les paiements sont sécurisés.'
+          answer: 'Cartes bancaires (Visa, Mastercard), PayPal, Stripe. Tous les paiements sont sécurisés.'
         }
       ]
     },
@@ -82,7 +83,8 @@ const FAQ: React.FC = () => {
       questions: [
         {
           question: 'Comment vous contacter ?',
-          answer: 'Service client : Lundi-vendredi 9h-12h30 / 13h30-17h au 01 23 45 67 89. Email : contact@kids-tresor.fr'
+
+          answer: 'Service client : Lundi-vendredi 9h-12h30 / 13h30-17h au +33 759 59 97 42. Email : contact@beldouze.com'
         }
       ]
     }
@@ -170,7 +172,8 @@ const FAQ: React.FC = () => {
                   <Phone className="w-4 h-4 text-gray-600 mt-0.5 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-gray-900">Téléphone</div>
-                    <div className="text-gray-600 text-sm">01 23 45 67 89</div>
+
+                    <div className="text-gray-600 text-sm">+33 759 59 97 42</div>
                     <div className="text-gray-500 text-xs mt-1">Lundi-vendredi 9h-12h30 / 13h30-17h</div>
                   </div>
                 </div>
@@ -180,7 +183,8 @@ const FAQ: React.FC = () => {
                   </svg>
                   <div>
                     <div className="font-medium text-gray-900">Email</div>
-                    <div className="text-gray-600 text-sm">contact@kids-tresor.fr</div>
+
+                    <div className="text-gray-600 text-sm">contact@beldouze.com</div>
                   </div>
                 </div>
               </div>

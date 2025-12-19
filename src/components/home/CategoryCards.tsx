@@ -1,23 +1,42 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+
 const BrandLogos: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const brands = [
+    // Grands médias mondiaux (références du web)
+    {
+      id: 'bbc',
+      name: 'BBC',
+      logo: 'https://i.pinimg.com/1200x/c3/ac/ce/c3acceb1fe47b7b211692d1625f4d887.jpg',
+      alt: 'BBC World News Logo'
+    },
+    {
+      id: 'cnn',
+      name: 'CNN',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/1024px-CNN.svg.png',
+      alt: 'CNN Logo'
+    },
+    {
+      id: 'reuters',
+      name: 'Reuters',
+      logo: 'https://i.pinimg.com/1200x/24/93/83/249383cf7c5179e133ad5b17646bb130.jpg',
+      alt: 'Reuters Logo'
+    },
+   
+ 
+    // Entreprises leaders dans les jouets pour enfants (références du web)
     {
       id: 'lego',
       name: 'LEGO',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/1024px-LEGO_logo.svg.png',
       alt: 'LEGO Logo'
     },
-    {
-      id: 'barbie',
-      name: 'Barbie',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Barbie_Logo.svg/1024px-Barbie_Logo.svg.png',
-      alt: 'Barbie Logo'
-    },
+
+    
     {
       id: 'nintendo',
       name: 'Nintendo',
@@ -25,59 +44,12 @@ const BrandLogos: React.FC = () => {
       alt: 'Nintendo Logo'
     },
     {
-      id: 'playmobil',
-      name: 'Playmobil',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Playmobil_logo.svg/1024px-Playmobil_logo.svg.png',
-      alt: 'Playmobil Logo'
+      id: 'bandai',
+      name: 'Bandai',
+      logo: 'https://i.pinimg.com/736x/b0/4c/0a/b04c0a57d167491f0adb0c8f71fb6193.jpg',
+      alt: 'Bandai Logo'
     },
-    {
-      id: 'hasbro',
-      name: 'Hasbro',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Hasbro_Logo.svg/1024px-Hasbro_Logo.svg.png',
-      alt: 'Hasbro Logo'
-    },
-    {
-      id: 'fisher-price',
-      name: 'Fisher-Price',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Fisher-Price_logo.svg/1024px-Fisher-Price_logo.svg.png',
-      alt: 'Fisher-Price Logo'
-    },
-    {
-      id: 'vtech',
-      name: 'VTech',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/VTech_logo.svg/1024px-VTech_logo.svg.png',
-      alt: 'VTech Logo'
-    },
-    {
-      id: 'mattel',
-      name: 'Mattel',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Mattel_Logo.svg/1024px-Mattel_Logo.svg.png',
-      alt: 'Mattel Logo'
-    },
-    {
-      id: 'hot-wheels',
-      name: 'Hot Wheels',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Hot_Wheels_Logo.svg/1024px-Hot_Wheels_Logo.svg.png',
-      alt: 'Hot Wheels Logo'
-    },
-    {
-      id: 'schleich',
-      name: 'Schleich',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Schleich_logo.svg/1024px-Schleich_logo.svg.png',
-      alt: 'Schleich Logo'
-    },
-    {
-      id: 'melissa-doug',
-      name: 'Melissa & Doug',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Melissa_%26_Doug_logo.svg/1024px-Melissa_%26_Doug_logo.svg.png',
-      alt: 'Melissa & Doug Logo'
-    },
-    {
-      id: 'ravensburger',
-      name: 'Ravensburger',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ravensburger_logo.svg/1024px-Ravensburger_logo.svg.png',
-      alt: 'Ravensburger Logo'
-    }
+    
   ];
 
   // Configuration du carrousel
@@ -135,8 +107,11 @@ const BrandLogos: React.FC = () => {
     };
   }, [totalSlides]);
 
+
+
+
   return (
-    <div className="py-8 md:py-12 bg-gray-50">
+    <div className="py-8 md:py-12 bg-[#f3f4ff]">
       <div className="max-w-6xl mx-auto px-3 md:px-4">
         <h3 className="text-center text-lg md:text-2xl font-bold text-gray-900 mb-6 md:mb-8">
           Marques Partenaires
@@ -147,7 +122,7 @@ const BrandLogos: React.FC = () => {
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200"
+              className="flex items-center justify-center p-4 transition-shadow duration-300 "
             >
               <img
                 src={brand.logo}

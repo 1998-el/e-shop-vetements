@@ -187,16 +187,19 @@ const About: React.FC = () => {
             <h3 className="text-lg font-medium text-gray-900 mb-4">
               Prêt à découvrir notre sélection ?
             </h3>
+
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="/products"
-                className="px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors"
+                className="px-6 py-3 text-white text-sm font-medium rounded transition-colors"
+                style={{ backgroundColor: '#0e0e52' }}
               >
                 Voir nos produits
               </a>
               <a
                 href="/contact"
-                className="px-6 py-3 border border-gray-300 text-gray-700 text-sm font-medium rounded hover:bg-gray-50 transition-colors"
+                className="px-6 py-3 border text-sm font-medium rounded hover:bg-gray-50 transition-colors"
+                style={{ borderColor: '#0e0e52', color: '#0e0e52' }}
               >
                 Nous contacter
               </a>

@@ -7,23 +7,25 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'display': ['Inter', 'system-ui', 'sans-serif'],
+        'sans': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        'display': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        'heading': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        'petrona': ['Petrona', 'serif'],
       },
       colors: {
-        // Professional color palette for e-commerce
+        // Helloboku-inspired color palette
         'primary': {
-          '50': '#f0f9ff',
-          '100': '#e0f2fe',
-          '200': '#bae6fd',
-          '300': '#7dd3fc',
-          '400': '#38bdf8',
-          '500': '#0ea5e9', // Main primary color
-          '600': '#0284c7',
-          '700': '#0369a1',
-          '800': '#075985',
-          '900': '#0c4a6e',
-          '950': '#082f49',
+          '50': '#f3f4ff',
+          '100': '#e6e7ff',
+          '200': '#d1d2ff',
+          '300': '#b3b5ff',
+          '400': '#8c90ff',
+          '500': '#3931f8', // Main helloboku purple
+          '600': '#2e28cc',
+          '700': '#2522a3',
+          '800': '#1e1c85',
+          '900': '#0e0e52', // Main text color
+          '950': '#0a0a3d',
         },
         'secondary': {
           '50': '#f8fafc',
@@ -90,11 +92,28 @@ export default {
           '900': '#7f1d1d',
           '950': '#450a0a',
         },
-        // Keep some brand colors but make them more professional
+        // Helloboku brand colors
         'brand': {
-          'yellow': '#facc15', // Updated to use accent-400
-          'blue': '#0ea5e9', // Updated to use primary-500
-          'gray': '#64748b', // Updated to use secondary-500
+          'purple': '#3931f8', // Main helloboku purple
+          'dark-blue': '#0e0e52', // Text and stars
+          'light-bg': '#f3f4ff', // Page background
+          'petrona': '#6b5b8e', // Petrona font color
+        },
+        'helloboku': {
+          'page-bg': '#f3f4ff',
+          'content-bg': '#f3f4ff',
+          'text': '#0e0e52',
+          'links': '#3931f8',
+          'headings': '#0e0e52',
+          'btn': '#ffffff',
+          'btn-bg': '#3931f8',
+          'btn-light': '#3931f830',
+          'btn-border': '#3931f8',
+          'btn-secondary': '#3931f8',
+          'btn-bg-secondary': '#ffffff',
+          'btn-border-secondary': '#3931f8',
+          'select-bg': '#f3f4ff',
+          'stars': '#0e0e52',
         },
       },
       animation: {

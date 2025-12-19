@@ -1,17 +1,8 @@
 
 
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
-import { Clock, Zap } from 'lucide-react';
-import { useProducts } from '../../hooks/useProducts';
-
 
 const DealsSection: React.FC = () => {
-  const { loading } = useProducts({ limit: 20 });
   
   // Countdown timer with persistence
   const [timeLeft, setTimeLeft] = useState({
@@ -21,10 +12,10 @@ const DealsSection: React.FC = () => {
   });
   const [isTimerActive, setIsTimerActive] = useState(false);
 
-
   useEffect(() => {
     // Check if there's a saved timer state
     const savedEndTime = localStorage.getItem('dealsTimerEndTime');
+    const savedIsActive = localStorage.getItem('dealsTimerActive');
     
     if (savedEndTime) {
       const endTime = parseInt(savedEndTime);
@@ -93,11 +84,11 @@ const DealsSection: React.FC = () => {
         return;
       }
       
-
       // Page is visible again, check if timer state is still valid
       const savedEndTime = localStorage.getItem('dealsTimerEndTime');
+      const savedIsActive = localStorage.getItem('dealsTimerActive');
       
-      if (savedEndTime) {
+      if (savedEndTime && savedIsActive === 'true') {
         const endTime = parseInt(savedEndTime);
         const now = Date.now();
         
@@ -116,78 +107,36 @@ const DealsSection: React.FC = () => {
   }, []);
 
 
-
-
-
-  if (loading) {
-    return (
-      <div className="bg-gradient-to-r from-helloboku-links to-purple-600 py-6">
-        <div className="max-w-7xl mx-auto px-4 text-center text-white">
-          <div className="animate-pulse text-sm">Chargement...</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <section className="bg-[#0e0e52] py-4">
+    <section className="bg-[#0e0e52] py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Compact Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Zap className="w-5 h-5 text-red-600" />
-            <h2 className="text-2xl lg:text-3xl font-heading font-bold text-white">
-              Offres <span className="text-red-600">Flash</span>
-            </h2>
-          </div>
-          
-          {/* Compact Timer */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 max-w-lg mx-auto border border-white/20">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Clock className="w-4 h-4 text-red-300" />
+        {/* Compact Timer Only */}
+        <div className="text-center">
+          <div className="bg-white/10 rounded-lg p-4 max-w-md mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-3">
               <span className="text-white text-sm font-medium">Se termine dans :</span>
             </div>
             
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-4">
               {[
                 { value: timeLeft.hours, label: 'H' },
                 { value: timeLeft.minutes, label: 'M' },
                 { value: timeLeft.seconds, label: 'S' }
               ].map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="bg-white text-helloboku-links px-3 py-2 rounded-lg font-bold text-lg min-w-[2.5rem]">
+                  <div className="bg-white text-black px-4 py-2 rounded font-bold text-xl min-w-[3rem]">
                     {String(item.value).padStart(2, '0')}
                   </div>
-                  <div className="text-white/70 text-xs mt-1">{item.label}</div>
+                  <div className="text-white/80 text-xs mt-1">{item.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-
-
-
-
-        {/* Compact Trust Indicators */}
-        {/* <div className="mt-8 flex justify-center items-center gap-8 text-center">
-          <div className="flex items-center gap-2 text-white/80">
-            <Zap className="w-4 h-4 text-yellow-300" />
-            <span className="text-xs font-medium">Offres limitées</span>
-          </div>
-          
-          <div className="flex items-center gap-2 text-white/80">
-            <Clock className="w-4 h-4 text-yellow-300" />
-            <span className="text-xs font-medium">Livraison rapide</span>
-          </div>
-          
-          <div className="flex items-center gap-2 text-white/80">
-            <Star className="w-4 h-4 text-yellow-300" />
-            <span className="text-xs font-medium">Qualité garantie</span>
-          </div>
-        </div> */}
       </div>
     </section>
   );
 };
 
 export default DealsSection;
+
