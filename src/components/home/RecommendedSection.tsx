@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, Star, Eye } from 'lucide-react';
 import { useProducts } from '../../hooks/useProducts';
 
@@ -158,13 +159,13 @@ const RecommendedSection: React.FC = () => {
 
         {/* View All Button */}
         <div className="text-center mt-8">
-          <a
-            href="/products"
+          <Link
+            to="/products"
             className="inline-flex items-center bg-white text-orange-600 border-2 border-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 hover:text-white transition-colors"
           >
             Voir plus de produits
             <ShoppingCart className="w-4 h-4 ml-2" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

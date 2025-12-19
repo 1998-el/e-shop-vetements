@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { useProducts } from '../../hooks/useProducts';
 import { AlertCircle, RefreshCw, Flame, Clock, Tag, Sparkles, ChevronRight, Grid } from 'lucide-react';
@@ -176,14 +178,14 @@ const ProductGrid: React.FC = () => {
 
         {/* View All Button */}
         <div className="text-center">
-          <a 
-            href="/products" 
+          <Link
+            to="/products"
             className="inline-block border border-gray-300 text-gray-700 px-5 py-2.5 lg:px-6 lg:py-3 rounded text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors"
           >
             <span className="hidden sm:inline">Voir tous les produits</span>
             <span className="sm:hidden">Voir tout</span>
             <ChevronRight className="w-4 h-4 inline-block ml-1" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

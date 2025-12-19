@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { Package, Users, Award, Shield, Star, Target, Clock } from 'lucide-react';
 
@@ -189,20 +190,20 @@ const About: React.FC = () => {
             </h3>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="/products"
+              <Link
+                to="/products"
                 className="px-6 py-3 text-white text-sm font-medium rounded transition-colors"
                 style={{ backgroundColor: '#0e0e52' }}
               >
                 Voir nos produits
-              </a>
-              <a
-                href="/contact"
+              </Link>
+              <Link
+                to="/contact"
                 className="px-6 py-3 border text-sm font-medium rounded hover:bg-gray-50 transition-colors"
                 style={{ borderColor: '#0e0e52', color: '#0e0e52' }}
               >
                 Nous contacter
-              </a>
+              </Link>
             </div>
           </div>
         </div>

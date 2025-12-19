@@ -1,4 +1,6 @@
+
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 
 const TrendingCategories: React.FC = () => {
@@ -122,13 +124,13 @@ const TrendingCategories: React.FC = () => {
 
         {/* View All Categories Button */}
         <div className="text-center mt-12">
-          <a
-            href="/products"
+          <Link
+            to="/products"
             className="inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-xl font-bold hover:from-orange-700 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             Voir toutes les catégories
             <ArrowRight className="w-5 h-5 ml-2" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>
