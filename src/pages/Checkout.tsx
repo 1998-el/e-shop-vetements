@@ -45,7 +45,7 @@ const Checkout: React.FC = () => {
     country: 'France',
   });
 
-  const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'stripe'>('paypal');
+  const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'stripe'>('stripe');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentConfig, setPaymentConfig] = useState<any>(null);
