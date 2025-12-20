@@ -1,8 +1,15 @@
 services:
-  - type: static
+  - type: web
     name: beldouze-ecommerce
+    env: node
+    plan: free
     buildCommand: npm install && npm run build
-    staticPath: dist
+    startCommand: npm start
+    healthCheckPath: /
+
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
 
     headers:
       - path: /*
