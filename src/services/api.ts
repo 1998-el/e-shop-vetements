@@ -36,7 +36,7 @@ export const productsApi = {
         }
       });
 
-      const response = await api.get(`/api/products?${params.toString()}`);
+      const response = await api.get(`/products?${params.toString()}`);
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la récupération des produits:', error);
@@ -47,7 +47,7 @@ export const productsApi = {
   // Récupérer un produit par ID
   getById: async (id: string): Promise<Product> => {
     try {
-      const response = await api.get(`/api/products/${id}`);
+      const response = await api.get(`/products/${id}`);
       return response.data;
     } catch (error) {
       console.error(`Erreur lors de la récupération du produit ${id}:`, error);
@@ -92,7 +92,7 @@ export const productsApi = {
 export const categoriesApi = {
   getAll: async (): Promise<Category[]> => {
     try {
-      const response = await api.get('/api/categories');
+      const response = await api.get('/categories');
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la récupération des catégories:', error);
@@ -102,7 +102,7 @@ export const categoriesApi = {
 
   getById: async (id: string): Promise<Category> => {
     try {
-      const response = await api.get(`/api/categories/${id}`);
+      const response = await api.get(`/categories/${id}`);
       return response.data;
     } catch (error) {
       console.error(`Erreur lors de la récupération de la catégorie ${id}:`, error);
