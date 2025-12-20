@@ -1,30 +1,16 @@
 services:
-  - type: web
+  - type: static
     name: beldouze-ecommerce
-    env: node
-    plan: free
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -l $PORT
-    healthCheckPath: /
-    
-    envVars:
-      - key: NODE_VERSION
-        value: "18"
-      - key: NPM_FLAGS
-        value: "--production=false"
-        
+    staticPath: dist
 
     headers:
       - path: /*
         name: Cache-Control
         value: "public, max-age=0, must-revalidate"
       - path: /assets/*
-        name: Cache-Control  
+        name: Cache-Control
         value: "public, max-age=31536000, immutable"
-        
-    routes:
-      - src: /(.*)
-        dest: /index.html
         
 
 
