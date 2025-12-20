@@ -283,6 +283,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // SPA Routing - Must be after API routes but before 404 handler
 app.get('*', (req, res) => {
+  // Don't redirect API calls
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ message: 'API endpoint not found' });
+  }
+  
   const indexPath = path.join(__dirname, 'dist', 'index.html');
   
   if (fs.existsSync(indexPath)) {
