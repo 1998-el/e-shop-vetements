@@ -6,6 +6,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, ShoppingCart } from 'lucide-react';
 import type { UIProduct } from '../../types';
+import { useCart } from '../../context/CartContext';
 
 interface ProductCardProps {
   product: UIProduct;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [imageError, setImageError] = React.useState(false);
+  const { addToCart, loading } = useCart();
 
   // Calculate discount percentage
   const discountPercentage = product.oldPrice && product.oldPrice > product.price 
@@ -81,8 +83,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               className="mt-2 lg:mt-3 w-full bg-helloboku-links text-white py-1.5 lg:py-2 px-3 lg:px-4 rounded-lg font-medium text-xs lg:text-sm hover:bg-purple-600 transition-colors duration-200 flex items-center justify-center gap-1 lg:gap-2 group-hover:bg-helloboku-headings"
               onClick={(e) => {
                 e.preventDefault();
-                // Handle add to cart
+                e.stopPropagation();
+                addToCart(product.id, 1);
               }}
+              disabled={loading}
             >
               <ShoppingCart className="w-3 h-3 lg:w-4 lg:h-4" />
               <span className="hidden sm:inline">Ajouter au panier</span>

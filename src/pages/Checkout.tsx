@@ -927,7 +927,29 @@ const Checkout: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Cart Items */}
                 <div className="border-t border-gray-100 pt-4 mb-4">
+                  <div className="space-y-3 mb-4">
+                    {(cart?.cartItems || []).map((item) => (
+                      <div key={item.id} className="flex items-center gap-3">
+                        <img
+                          src={item.product.images?.find(img => img.isPrimary)?.url || item.product.images?.[0]?.url || '/images/products/default.jpg'}
+                          alt={item.product.name}
+                          className="w-10 h-10 object-contain rounded-lg border border-gray-200"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = '/images/products/default.jpg';
+                          }}
+                        />
+                        <div className="flex-1">
+                          <h3 className="text-sm font-medium text-gray-900">{item.product.name}</h3>
+                          <p className="text-xs text-gray-600">Qté: {item.quantity}</p>
+                        </div>
+                        <span className="text-sm font-medium">€{(item.product.price * item.quantity).toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
+
                   <div className="flex justify-between text-sm mb-2">
                     <span className="text-gray-600">Sous-total</span>
                     <span className="font-medium">€{getTotal().toFixed(2)}</span>
@@ -944,9 +966,36 @@ const Checkout: React.FC = () => {
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
                   <span>Livraison gratuite dès 50€</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-gray-600">
+                <div className="flex items-center gap-2 text-xs text-gray-600 mb-6">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
                   <span>Paiement sécurisé SSL</span>
+                </div>
+
+                {/* Mobile Payment Button */}
+                <button
+                  type="button"
+                  onClick={paymentMethod === 'paypal' ? handlePayPalPayment : handleStripePayment}
+                  disabled={isSubmitting || !isFormValid}
+                  className="w-full bg-gray-900 text-white py-4 rounded-xl hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-all"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Traitement en cours...
+                    </>
+                  ) : (
+                    <>
+                      <Shield className="w-5 h-5" />
+                      {paymentMethod === 'paypal' ? 'Payer avec PayPal' : 'Procéder au paiement'}
+                    </>
+                  )}
+                </button>
+
+                <div className="mt-3 text-xs text-gray-500 text-center">
+                  <div className="flex items-center justify-center gap-1">
+                    <Shield className="w-3 h-3" />
+                    <span>Paiement sécurisé SSL</span>
+                  </div>
                 </div>
               </div>
             </div>
