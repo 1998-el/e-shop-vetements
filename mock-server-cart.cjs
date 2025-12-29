@@ -166,6 +166,65 @@ app.post('/cart/guest/items', (req, res) => {
   res.json(updatedItem);
 });
 
+// PUT /cart/guest/items/:itemId - Update item quantity in guest cart
+app.put('/cart/guest/items/:itemId', (req, res) => {
+  const sessionId = req.headers['x-session-id'];
+  const { quantity } = req.body;
+  const itemId = req.params.itemId;
+  
+  if (!sessionId) {
+    return res.status(400).json({ error: 'X-Session-Id header is required' });
+  }
+
+  let cart = guestCarts.get(sessionId);
+  if (!cart) {
+    return res.status(404).json({ error: 'Cart not found' });
+  }
+
+  const itemIndex = cart.cartItems.findIndex(item => item.id === itemId);
+  if (itemIndex === -1) {
+    return res.status(404).json({ error: 'Item not found in cart' });
+  }
+
+  if (quantity <= 0) {
+    // Remove item if quantity is 0 or negative
+    cart.cartItems.splice(itemIndex, 1);
+  } else {
+    // Update quantity
+    cart.cartItems[itemIndex].quantity = quantity;
+  }
+
+  cart.updatedAt = new Date().toISOString();
+  
+  res.json(cart);
+});
+
+// DELETE /cart/guest/items/:itemId - Remove item from guest cart
+app.delete('/cart/guest/items/:itemId', (req, res) => {
+  const sessionId = req.headers['x-session-id'];
+  const itemId = req.params.itemId;
+  
+  if (!sessionId) {
+    return res.status(400).json({ error: 'X-Session-Id header is required' });
+  }
+
+  let cart = guestCarts.get(sessionId);
+  if (!cart) {
+    return res.status(404).json({ error: 'Cart not found' });
+  }
+
+  const itemIndex = cart.cartItems.findIndex(item => item.id === itemId);
+  if (itemIndex === -1) {
+    return res.status(404).json({ error: 'Item not found in cart' });
+  }
+
+  // Remove the item
+  cart.cartItems.splice(itemIndex, 1);
+  cart.updatedAt = new Date().toISOString();
+  
+  res.json(cart);
+});
+
 // POST /cart/guest/convert-to-user - Convert anonymous cart to user cart
 app.post('/cart/guest/convert-to-user', (req, res) => {
   const sessionId = req.headers['x-session-id'];
@@ -499,6 +558,8 @@ app.listen(PORT, () => {
   console.log('CART ENDPOINTS:');
   console.log('GET  /cart/guest');
   console.log('POST /cart/guest/items');
+  console.log('PUT  /cart/guest/items/:itemId');
+  console.log('DELETE /cart/guest/items/:itemId');
   console.log('POST /cart/guest/convert-to-user');
   console.log('POST /cart/guest/checkout');
   console.log('');

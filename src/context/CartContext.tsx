@@ -81,15 +81,18 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const updateCartItem = async (_itemId: string, _quantity: number) => {
-    // For guest cart operations, we need to regenerate cart after update
-    // since the backend doesn't expose update/remove methods for guest cart
+  const updateCartItem = async (itemId: string, quantity: number) => {
+    if (!sessionId) {
+      throw new Error('Session ID not initialized');
+    }
+
     try {
       setLoading(true);
       setError(null);
       
-      // Refresh cart to get latest state
-      await loadCart();
+      // Utiliser la nouvelle méthode API pour mettre à jour l'article
+      const updatedCart = await cartApi.updateGuestCartItem(sessionId, itemId, quantity);
+      setCart(updatedCart);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update cart item');
       console.error('Error updating cart item:', err);
@@ -99,14 +102,18 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const removeFromCart = async (_itemId: string) => {
-    // For guest cart operations, we need to regenerate cart after removal
+  const removeFromCart = async (itemId: string) => {
+    if (!sessionId) {
+      throw new Error('Session ID not initialized');
+    }
+
     try {
       setLoading(true);
       setError(null);
       
-      // Refresh cart to get latest state
-      await loadCart();
+      // Utiliser la nouvelle méthode API pour supprimer l'article
+      const updatedCart = await cartApi.removeFromGuestCart(sessionId, itemId);
+      setCart(updatedCart);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to remove cart item');
       console.error('Error removing cart item:', err);

@@ -5,7 +5,7 @@ import { Package, Users, Award, Shield, Star, Target, Clock } from 'lucide-react
 
 const About: React.FC = () => {
   const stats = [
-    { number: '10K+', label: 'Jouets vendus', icon: Package },
+    { number: '10K+', label: 'Produits vendus', icon: Package },
     { number: '5K+', label: 'Clients', icon: Users },
     { number: '50+', label: 'Marques', icon: Award },
     { number: '98%', label: 'Satisfaction', icon: Star }
@@ -15,29 +15,29 @@ const About: React.FC = () => {
     {
       icon: Target,
       title: 'Notre mission',
-      description: 'Offrir aux enfants des jouets qui allient plaisir et développement, tout en garantissant sécurité et qualité.'
+      description: 'Simplifier la vie en cuisine avec des accessoires innovants qui transforment les corvées en moments de plaisir.'
     },
     {
       icon: Shield,
       title: 'Sécurité',
-      description: 'Tous nos produits respectent strictement les normes européennes de sécurité et sont testés avant commercialisation.'
+      description: 'Tous nos produits respectent strictement les normes européennes de sécurité alimentaire et sont testés avant commercialisation.'
     },
     {
       icon: Award,
       title: 'Qualité',
-      description: 'Nous sélectionnons rigoureusement chaque produit pour assurer durabilité et excellence.'
+      description: 'Nous sélectionnons rigoureusement chaque produit pour assurer durabilité et excellence en cuisine.'
     },
     {
       icon: Clock,
       title: 'Service',
-      description: 'Notre équipe est disponible pour vous accompagner dans chaque étape de votre achat.'
+      description: 'Notre équipe est disponible pour vous accompagner dans chaque étape de votre achat culinaire.'
     }
   ];
 
   const milestones = [
-    { year: '2020', title: 'Création', description: 'Lancement de beldouze avec une sélection de 50 jouets' },
-    { year: '2021', title: 'Expansion', description: 'Ouverture à 10 nouvelles marques partenaires' },
-    { year: '2022', title: 'Croissance', description: 'Plus de 5 000 clients satisfaits' },
+    { year: '2020', title: 'Création', description: 'Lancement de beldouze avec une sélection de 50 accessoires de cuisine' },
+    { year: '2021', title: 'Expansion', description: 'Ouverture à 10 nouvelles marques partenaires spécialisées cuisine' },
+    { year: '2022', title: 'Croissance', description: 'Plus de 5 000 clients satisfaits de nos solutions culinaires' },
     { year: '2023', title: 'Innovation', description: 'Lancement de notre plateforme e-commerce complète' },
   ];
 
@@ -52,7 +52,7 @@ const About: React.FC = () => {
                 À propos de beldouze
               </h1>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Depuis 2020, nous fournissons des jouets de qualité qui stimulent la créativité et le développement des enfants.
+                Depuis 2020, nous révolutionnons la cuisine avec des accessoires innovants qui simplifient la préparation et transforment chaque repas en plaisir.
               </p>
             </div>
           </div>
@@ -81,16 +81,16 @@ const About: React.FC = () => {
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  beldouze a été fondé en 2020 avec une mission simple : offrir aux parents un accès facile à des jouets de qualité,
-                  sécurisés et éducatifs pour leurs enfants.
+                  beldouze a été fondé en 2020 avec une mission simple : offrir aux cuisiniers un accès facile à des accessoires de cuisine de qualité,
+                  innovants et qui simplifient vraiment la préparation des repas.
                 </p>
                 <p>
-                  En observant le manque de transparence et de qualité sur le marché, nous avons décidé de créer une plateforme 
-                  qui mettrait l'accent sur la sécurité, la durabilité et l'aspect éducatif des jouets.
+                  En observant le manque d'innovation et de qualité sur le marché des ustensiles, nous avons décidé de créer une plateforme 
+                  qui mettrait l'accent sur la praticité, la durabilité et l'aspect révolutionnaire des accessoires de cuisine.
                 </p>
                 <p>
                   Aujourd'hui, nous collaborons avec plus de 50 marques réputées et avons aidé des milliers de familles 
-                  à trouver les jouets adaptés au développement de leurs enfants.
+                  à découvrir des solutions culinaires qui transforment leur quotidien en cuisine.
                 </p>
               </div>
             </div>
@@ -158,19 +158,19 @@ const About: React.FC = () => {
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
                 </div>
-                <p>Sélection rigoureuse de jouets répondant aux normes de sécurité les plus strictes</p>
+                <p>Sélection rigoureuse d'accessoires de cuisine répondant aux normes de sécurité alimentaire les plus strictes</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
                 </div>
-                <p>Partenariats exclusifs avec les meilleures marques du marché</p>
+                <p>Partenariats exclusifs avec les meilleures marques d'accessoires de cuisine</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
                 </div>
-                <p>Service client dédié pour vous accompagner dans vos choix</p>
+                <p>Service client dédié pour vous accompagner dans vos choix culinaires</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">
@@ -186,7 +186,7 @@ const About: React.FC = () => {
         <div className="py-12 bg-white border-t border-gray-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h3 className="text-lg font-medium text-gray-900 mb-4">
-              Prêt à découvrir notre sélection ?
+              Prêt à révolutionner votre cuisine ?
             </h3>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

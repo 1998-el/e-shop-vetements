@@ -72,8 +72,8 @@ const FAQ: React.FC = () => {
       icon: Shield,
       questions: [
         {
-          question: 'Jouets sûrs pour enfants ?',
-          answer: 'Tous nos jouets respectent les normes CE et sont testés selon les standards EN 71. Marques certifiées uniquement.'
+          question: 'Vos accessoires de cuisine sont-ils sûrs ?',
+          answer: 'Tous nos accessoires respectent les normes européennes de sécurité alimentaire et sont testés pour la qualité. Marques certifiées uniquement.'
         }
       ]
     },

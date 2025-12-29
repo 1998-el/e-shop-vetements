@@ -23,15 +23,29 @@ const Cart: React.FC = () => {
   }
 
   const shippingCost = getTotal() >= 50 ? 0 : 5.99;
-  const totalWithShipping = getTotal() + shippingCost;
+  const subtotal = getTotal();
+  const tva = subtotal * 0.20;
+  const totalWithShipping = subtotal + shippingCost + tva;
 
-  const displayItems = cart?.cartItems?.map(item => ({
-    id: item.id,
-    name: item.product.name,
-    price: item.product.price,
-    image: item.product.images?.[0]?.url || '/images/products/default.jpg',
-    quantity: item.quantity
-  })) || [];
+  const displayItems = cart?.cartItems?.map(item => {
+    // Gérer les deux types d'images possibles : string[] ou ProductImage[]
+    const firstImage = item.product.images?.[0];
+    let imageUrl = '/images/products/default.jpg';
+    
+    if (typeof firstImage === 'string') {
+      imageUrl = firstImage;
+    } else if (firstImage && typeof firstImage === 'object' && 'url' in firstImage) {
+      imageUrl = firstImage.url;
+    }
+    
+    return {
+      id: item.id,
+      name: item.product.name,
+      price: item.product.price,
+      image: imageUrl,
+      quantity: item.quantity
+    };
+  }) || [];
 
   if (error) {
     return (
@@ -69,7 +83,7 @@ const Cart: React.FC = () => {
                 <ShoppingBag className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400" />
               </div>
               <h1 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Votre panier est vide</h1>
-              <p className="text-gray-600 mb-6 text-sm sm:text-base">Découvrez notre sélection de jouets</p>
+              <p className="text-gray-600 mb-6 text-sm sm:text-base">Découvrez notre sélection d'accessoires de cuisine</p>
 
               <Link
                 to="/products"
@@ -181,8 +195,13 @@ const Cart: React.FC = () => {
 
                 <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm sm:text-base text-gray-600">Sous-total</span>
-                    <span className="text-sm sm:text-base font-medium">€{getTotal().toFixed(2)}</span>
+                    <span className="text-sm sm:text-base text-gray-600">Prix total</span>
+                    <span className="text-sm sm:text-base font-medium">€{subtotal.toFixed(2)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm sm:text-base text-gray-600">Taxes TVA (20%)</span>
+                    <span className="text-sm sm:text-base font-medium">€{tva.toFixed(2)}</span>
                   </div>
 
                   <div className="flex justify-between items-center">

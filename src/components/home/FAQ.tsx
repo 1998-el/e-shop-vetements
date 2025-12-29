@@ -17,7 +17,7 @@ const FAQ: React.FC = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-gray-600">
-            Find answers to common questions about our toys and services.
+            Find answers to common questions about our kitchen accessories and services.
           </p>
         </div>
 

@@ -11,7 +11,7 @@ const BrandLogos: React.FC = () => {
     {
       id: 'bbc',
       name: 'BBC',
-      logo: 'https://i.pinimg.com/1200x/c3/ac/ce/c3acceb1fe47b7b211692d1625f4d887.jpg',
+      logo: 'https://1000logos.net/wp-content/uploads/2017/12/KitchenAid-Logo-768x432.png',
       alt: 'BBC World News Logo'
     },
     {
@@ -28,7 +28,7 @@ const BrandLogos: React.FC = () => {
     },
    
  
-    // Entreprises leaders dans les jouets pour enfants (références du web)
+    // Marques leaders dans les accessoires de cuisine (références du web)
     {
       id: 'lego',
       name: 'LEGO',

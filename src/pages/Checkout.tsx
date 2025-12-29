@@ -752,8 +752,8 @@ const Checkout: React.FC = () => {
                             <Smartphone className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-gray-900">Stripe</h3>
-                            <p className="text-sm text-gray-600">Carte bancaire</p>
+                            <h3 className="font-semibold text-gray-900">Carte Bancaire</h3>
+                            <p className="text-sm text-gray-600">Paiement sécurisé</p>
                           </div>
                         </div>
                       </div>
@@ -782,17 +782,7 @@ const Checkout: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* PayPal Unavailable Notice */}
-                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
-                    <div className="flex items-center gap-2 mb-2">
-                      <AlertCircle className="w-4 h-4 text-amber-600" />
-                      <span className="text-sm font-medium text-amber-900">PayPal temporairement indisponible</span>
-                    </div>
-                    <p className="text-sm text-amber-700">
-                      Nous travaillons actuellement sur l'intégration PayPal. 
-                      Vous pouvez utiliser Stripe pour vos paiements par carte bancaire.
-                    </p>
-                  </div>
+
 
                   <div className="p-4 bg-blue-50 rounded-xl">
                     <div className="flex items-center gap-2 mb-2">

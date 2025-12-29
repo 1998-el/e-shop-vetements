@@ -119,7 +119,7 @@ const ProductDetail: React.FC = () => {
       userName: 'Jean-Pierre B.',
       userAvatar: '/images/avatars/avatar19.jpg',
       rating: 5,
-      comment: 'Parfait pour notre famille. Les enfants adorent et nous sommes très contents de la qualité.',
+      comment: 'Parfait pour toute la famille. Tous adorent ce produit et nous sommes très contents de la qualité.',
       date: '2024-12-12',
       badge: 'Parent'
     },
@@ -322,8 +322,14 @@ const ProductDetail: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
 
+          {/* Promotional Text */}
+          <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-blue-50 rounded-lg border border-blue-200">
+            <p className="text-blue-900 font-medium text-sm sm:text-base text-center leading-relaxed">
+              Fini les longues corvées d'épluchage : avec notre éplucheur innovant, préparez vos légumes en un instant, sans effort et en toute sécurité
+            </p>
+          </div>
+        </div>
 
         {/* Product Details Tabs */}
         <div className="mt-8 sm:mt-12 border border-gray-200 rounded">

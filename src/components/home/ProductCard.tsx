@@ -21,6 +21,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : 0;
 
+  const handleAddToCart = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      await addToCart(product.id, 1);
+      console.log('Produit ajouté au panier:', product.name);
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout au panier:', error);
+    }
+  };
+
   return (
     <div className="group bg-white border border-helloboku-page-bg h-full flex flex-col rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-helloboku-links/30">
       <Link to={`/product/${product.id}`} className="flex flex-col h-full">
@@ -77,24 +88,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 </span>
               )}
             </div>
-
-            {/* Add to cart button */}
-            <button
-              className="mt-2 lg:mt-3 w-full bg-helloboku-links text-white py-1.5 lg:py-2 px-3 lg:px-4 rounded-lg font-medium text-xs lg:text-sm hover:bg-purple-600 transition-colors duration-200 flex items-center justify-center gap-1 lg:gap-2 group-hover:bg-helloboku-headings"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                addToCart(product.id, 1);
-              }}
-              disabled={loading}
-            >
-              <ShoppingCart className="w-3 h-3 lg:w-4 lg:h-4" />
-              <span className="hidden sm:inline">Ajouter au panier</span>
-              <span className="sm:hidden">Ajouter</span>
-            </button>
           </div>
         </div>
       </Link>
+      
+      {/* Add to cart button - Outside the Link */}
+      <div className="p-3 lg:p-4 pt-0">
+        <button
+          className="w-full bg-helloboku-links text-white py-2 px-3 lg:px-4 rounded-lg font-medium text-sm hover:bg-purple-600 transition-colors duration-200 flex items-center justify-center gap-2 group-hover:bg-helloboku-headings disabled:opacity-50"
+          onClick={handleAddToCart}
+          disabled={loading}
+        >
+          <ShoppingCart className="w-4 h-4" />
+          <span className="hidden sm:inline">Ajouter au panier</span>
+          <span className="sm:hidden">Ajouter</span>
+        </button>
+      </div>
     </div>
   );
 };

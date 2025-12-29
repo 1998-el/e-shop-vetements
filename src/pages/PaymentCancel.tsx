@@ -178,7 +178,7 @@ const PaymentCancel: React.FC = () => {
                   </a>
                   
                   <a
-                    href="mailto:support@kids-tresor.com"
+                    href="mailto:support@beldouze.com"
                     className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-2 rounded transition-colors"
                   >
                     <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">

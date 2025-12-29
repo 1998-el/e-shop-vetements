@@ -55,8 +55,7 @@ const Footer: React.FC = () => {
               </h3>
             </Link>
             <p className="text-gray-100 text-xs lg:text-sm leading-relaxed mb-4 lg:mb-6 max-w-md">
-              Des jouets de qualité qui stimulent l'imagination et le développement des enfants.
-              Nous sélectionnons avec soin chaque produit pour garantir sécurité et diversión.
+              Des produits de qualité qui améliorent votre quotidien. Nous sélectionnons avec soin chaque article pour garantir fiabilité, sécurité et plaisir d'utilisation.
             </p>
 
             {/* Contact Info */}
@@ -163,20 +162,31 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold text-white mb-4">
               Moyens de paiement acceptés
             </h4>
-            <div className="flex items-center justify-center gap-6">
-              <div className="  p-3 ">
-                <img 
-                  src="https://i.pinimg.com/736x/df/e7/d8/dfe7d85565213cdab9c559d0991955c5.jpg" 
-                  alt="Stripe" 
-                  className="h-8 w-auto"
-                />
+            <div className="flex items-center justify-center gap-4">
+              <div className="p-2">
+                <div className="bg-white rounded px-3 py-2">
+                  <span className="text-red-600 font-bold text-sm">VISA</span>
+                </div>
               </div>
-              <div className="p-3 ">
-                <img 
-                  src="/images/logos/paypal-logo.png" 
-                  alt="PayPal" 
-                  className="h-8 w-auto"
-                />
+              <div className="p-2">
+                <div className="bg-white rounded px-3 py-2">
+                  <span className="text-red-500 font-bold text-sm">Mastercard</span>
+                </div>
+              </div>
+              <div className="p-2">
+                <div className="bg-white rounded px-3 py-2">
+                  <span className="text-blue-600 font-bold text-sm">Amex</span>
+                </div>
+              </div>
+              <div className="p-2">
+                <div className="bg-blue-600 rounded px-3 py-2">
+                  <span className="text-white font-bold text-sm">PayPal</span>
+                </div>
+              </div>
+              <div className="p-2">
+                <div className="bg-purple-600 rounded px-3 py-2">
+                  <span className="text-white font-bold text-sm">Stripe</span>
+                </div>
               </div>
             </div>
             <p className="text-gray-400 text-xs mt-3">

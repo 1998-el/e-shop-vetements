@@ -14,7 +14,7 @@ const MobileBanner: React.FC = () => {
       {/* Content */}
       <div className="relative px-4 py-6 text-center text-white">
         <h2 className="text-lg font-bold mb-2"> Offre Spéciale Mobile</h2>
-        <p className="text-sm opacity-90 mb-3">Livraison gratuite sur tous vos jouets préférés</p>
+        <p className="text-sm opacity-90 mb-3">Livraison gratuite sur tous vos accessoires de cuisine préférés</p>
         <div className="flex justify-center items-center space-x-4 text-xs">
           <span className="flex items-center">
             <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
@@ -28,8 +28,8 @@ const MobileBanner: React.FC = () => {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute top-2 left-2 text-white/20 text-2xl">🧸</div>
-      <div className="absolute bottom-2 right-2 text-white/20 text-2xl">🎈</div>
+      <div className="absolute top-2 left-2 text-white/20 text-2xl">🍳</div>
+      <div className="absolute bottom-2 right-2 text-white/20 text-2xl">🥄</div>
       <div className="absolute top-1/2 right-4 text-white/10 text-3xl">✨</div>
     </div>
   );

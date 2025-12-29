@@ -159,6 +159,36 @@ export const cartApi = {
     }
   },
 
+  // Mettre à jour la quantité d'un article dans le panier guest
+  updateGuestCartItem: async (sessionId: string, itemId: string, quantity: number): Promise<Cart> => {
+    try {
+      const response = await api.put(`/cart/guest/items/${itemId}`, { quantity }, {
+        headers: {
+          'X-Session-Id': sessionId,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de l\'article:', error);
+      throw error;
+    }
+  },
+
+  // Supprimer un article du panier guest
+  removeFromGuestCart: async (sessionId: string, itemId: string): Promise<Cart> => {
+    try {
+      const response = await api.delete(`/cart/guest/items/${itemId}`, {
+        headers: {
+          'X-Session-Id': sessionId,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'article:', error);
+      throw error;
+    }
+  },
+
   // Convertir le panier anonyme en panier utilisateur
   convertAnonymousCartToUser: async (
     sessionId: string,

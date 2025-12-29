@@ -11,7 +11,7 @@ const ScrollingBanner: React.FC = () => {
     "Expédition sous 24-48h",
     "Paiement sécurisé",
     "Retours gratuits sous 14 jours",
-    "Plus de 10 000 jouets vendus"
+    "Plus de 10 000 accessoires vendus"
   ];
 
   useEffect(() => {

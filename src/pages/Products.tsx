@@ -47,7 +47,7 @@ const Products: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
-                Tous nos jouets
+                Nos accessoires de cuisine
               </h1>
               <p className="text-gray-600 text-xs sm:text-sm">
                 {loading ? 'Chargement...' : `${pagination?.total || 0} produits`}
@@ -124,7 +124,7 @@ const Products: React.FC = () => {
         {/* Empty State */}
         {!loading && !error && products.length === 0 && (
           <div className="text-center py-8 sm:py-16 px-4">
-            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">🧸</div>
+            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">🍳</div>
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Aucun produit disponible</h3>
             <p className="text-gray-600 text-sm sm:text-base">Revenez plus tard pour découvrir notre sélection.</p>
           </div>

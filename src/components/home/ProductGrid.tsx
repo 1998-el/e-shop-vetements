@@ -83,7 +83,7 @@ const ProductGrid: React.FC = () => {
             Notre sélection
           </h2>
           <p className="text-gray-600 text-xs lg:text-sm">
-            Jouets de qualité pour l'éveil des enfants
+            Accessoires de cuisine de qualité pour simplifier vos repas
           </p>
         </div>
 
