@@ -36,10 +36,37 @@ export const productsApi = {
         }
       });
 
-      const response = await api.get(`/products?${params.toString()}`);
+      const queryString = params.toString();
+      const requestUrl = `/products${queryString ? '?' + queryString : ''}`;
+      
+      console.log(`🌐 API Request: GET ${requestUrl}`, {
+        filters,
+        timestamp: new Date().toISOString()
+      });
+      
+      const response = await api.get(requestUrl);
+      
+      console.log(`📦 API Response: GET ${requestUrl}`, {
+        status: response.status,
+        productsCount: response.data.products?.length || 0,
+        pagination: response.data.pagination,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Log des images pour les premiers produits
+      if (response.data.products && response.data.products.length > 0) {
+        const sampleProducts = response.data.products.slice(0, 3);
+        console.log('🖼️  Sample products images from API:', sampleProducts.map((p: Product) => ({
+          id: p.id,
+          name: p.name,
+          imagesCount: p.images?.length || 0,
+          primaryImage: p.images?.[0] || null
+        })));
+      }
+      
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des produits:', error);
+      console.error('❌ API Error - GET /products:', error);
       throw error;
     }
   },
@@ -47,10 +74,27 @@ export const productsApi = {
   // Récupérer un produit par ID
   getById: async (id: string): Promise<Product> => {
     try {
-      const response = await api.get(`/products/${id}`);
+      const requestUrl = `/products/${id}`;
+      
+      console.log(`🌐 API Request: GET ${requestUrl}`, {
+        productId: id,
+        timestamp: new Date().toISOString()
+      });
+      
+      const response = await api.get(requestUrl);
+      
+      console.log(`📦 API Response: GET ${requestUrl}`, {
+        status: response.status,
+        productId: response.data.id,
+        productName: response.data.name,
+        imagesCount: response.data.images?.length || 0,
+        hasImages: !!(response.data.images && response.data.images.length > 0),
+        timestamp: new Date().toISOString()
+      });
+      
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors de la récupération du produit ${id}:`, error);
+      console.error(`❌ API Error - GET /products/${id}:`, error);
       throw error;
     }
   },

@@ -71,9 +71,50 @@ export const useProducts = (initialFilters: UseProductsFilters = {}) => {
 
     try {
       const apiFilters = convertFilters(currentFilters);
+      
+      // Log du début du fetch des produits
+      console.log('🔍 Début du fetch des produits depuis le backend', {
+        filters: apiFilters,
+        timestamp: new Date().toISOString()
+      });
+      
       const response = await productsApi.getAll(apiFilters);
       
-      const mappedProducts = response.products.map(mapApiProductToUI);
+      // Log de la réponse du backend
+      console.log('📦 Réponse reçue du backend pour les produits', {
+        totalProducts: response.products.length,
+        pagination: response.pagination,
+        timestamp: new Date().toISOString()
+      });
+      
+      const mappedProducts = response.products.map((product, index) => {
+        // Log détaillé pour les images de chaque produit
+        const imageInfo = {
+          productId: product.id,
+          productName: product.name,
+          imagesCount: product.images?.length || 0,
+          primaryImage: product.images?.[0] || null,
+          hasImages: !!(product.images && product.images.length > 0)
+        };
+        
+        if (index < 3) { // Log only first 3 products to avoid spam
+          console.log(`🖼️  Images du produit [${index + 1}/${response.products.length}]`, imageInfo);
+        }
+        
+        return mapApiProductToUI(product);
+      });
+      
+      // Log de synthèse après traitement
+      const imageStats = {
+        totalProducts: mappedProducts.length,
+        productsWithImages: mappedProducts.filter(p => p.images && p.images.length > 0).length,
+        productsWithoutImages: mappedProducts.filter(p => !p.images || p.images.length === 0).length,
+        averageImagesPerProduct: mappedProducts.length > 0 
+          ? (mappedProducts.filter(p => p.images).reduce((sum, p) => sum + (p.images?.length || 0), 0) / mappedProducts.length).toFixed(2)
+          : 0
+      };
+      
+      console.log('📊 Statistiques des images après traitement', imageStats);
       
       setState(prev => ({
         ...prev,
@@ -81,8 +122,14 @@ export const useProducts = (initialFilters: UseProductsFilters = {}) => {
         pagination: response.pagination,
         loading: false,
       }));
+      
+      console.log('✅ Fetch des produits et images terminé avec succès', {
+        productsLoaded: mappedProducts.length,
+        timestamp: new Date().toISOString()
+      });
+      
     } catch (error) {
-      console.error('Erreur lors du chargement des produits:', error);
+      console.error('❌ Erreur lors du chargement des produits:', error);
       setState(prev => ({
         ...prev,
         error: 'Impossible de charger les produits. Veuillez réessayer.',
@@ -146,10 +193,35 @@ export const useProducts = (initialFilters: UseProductsFilters = {}) => {
   // Get product by ID
   const getProductById = useCallback(async (id: string): Promise<UIProduct | null> => {
     try {
+      console.log(`🔍 Début du fetch du produit individuel depuis le backend`, {
+        productId: id,
+        timestamp: new Date().toISOString()
+      });
+      
       const apiProduct = await productsApi.getById(id);
-      return mapApiProductToUI(apiProduct);
+      
+      // Log des informations du produit reçu
+      console.log(`📦 Produit reçu du backend`, {
+        productId: apiProduct.id,
+        productName: apiProduct.name,
+        imagesCount: apiProduct.images?.length || 0,
+        hasImages: !!(apiProduct.images && apiProduct.images.length > 0),
+        primaryImage: apiProduct.images?.[0] || null,
+        timestamp: new Date().toISOString()
+      });
+      
+      const mappedProduct = mapApiProductToUI(apiProduct);
+      
+      console.log(`✅ Produit individuel traité avec succès`, {
+        productId: mappedProduct.id,
+        productName: mappedProduct.name,
+        finalImageCount: mappedProduct.images?.length || 0,
+        timestamp: new Date().toISOString()
+      });
+      
+      return mappedProduct;
     } catch (error) {
-      console.error(`Erreur lors du chargement du produit ${id}:`, error);
+      console.error(`❌ Erreur lors du chargement du produit ${id}:`, error);
       return null;
     }
   }, []);

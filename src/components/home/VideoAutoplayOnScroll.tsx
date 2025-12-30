@@ -147,10 +147,10 @@ const VideoAutoplayOnScroll: React.FC<VideoAutoplayOnScrollProps> = ({
         </div>
 
         {/* Légende sous la vidéo */}
-        <div className="mt-4 text-gray-600 text-sm">
+        {/* <div className="mt-4 text-gray-600 text-sm">
           <p>Vidéo se lance automatiquement quand vous la voyez à l'écran</p>
           <p className="mt-1">Cliquez sur l'icône 🔊 pour activer le son</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

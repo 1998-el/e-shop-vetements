@@ -16,6 +16,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [imageError, setImageError] = React.useState(false);
   const { addToCart, loading } = useCart();
 
+  // Log for image rendering
+  React.useEffect(() => {
+    console.log('🖼️  ProductCard rendering product image', {
+      productId: product.id,
+      productName: product.name,
+      imagesCount: product.images?.length || 0,
+      primaryImage: product.images?.[0] || null,
+      hasImages: !!(product.images && product.images.length > 0),
+      imageError,
+      timestamp: new Date().toISOString()
+    });
+  }, [product.id, product.images, imageError]);
+
   // Calculate discount percentage
   const discountPercentage = product.oldPrice && product.oldPrice > product.price 
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
@@ -48,7 +61,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={imageError ? '/images/products/default.jpg' : product.images[0]}
             alt={product.name}
             className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-            onError={() => setImageError(true)}
+            onError={() => {
+              console.log('❌ ProductCard image failed to load', {
+                productId: product.id,
+                productName: product.name,
+                failedImageUrl: product.images[0],
+                timestamp: new Date().toISOString()
+              });
+              setImageError(true);
+            }}
             loading="lazy"
           />
         </div>
