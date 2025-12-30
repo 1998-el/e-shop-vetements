@@ -45,7 +45,7 @@ const Home: React.FC = () => {
       
       {/* Section vidéo avec autoplay au scroll - Plus large */}
       <VideoAutoplayOnScroll
-        videoSrc="https://www.youtube.com/shorts/RfT9E308THg?feature=share" // Vidéo de démo pour test
+        videoSrc="/videos/tiktok_1766724838220.mp4" // Vidéo de démo pour test
         posterSrc="https://picsum.photos/1920/1080?random=1" // Image de remplacement
         title="L'épluchage ne doit plus être une souffrance"
         description="Regardez comment notre éplucheur révolutionnaire transforme la préparation des légumes en quelques secondes, sans effort et avec une précision parfaite."
