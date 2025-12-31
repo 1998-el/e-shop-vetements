@@ -15,7 +15,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [imageError, setImageError] = React.useState(false);
-  const { addToCart, loading } = useCart();
+  const [addingToCart, setAddingToCart] = React.useState(false);
+  const { addToCart } = useCart();
 
   // Log for image rendering
   React.useEffect(() => {
@@ -38,11 +39,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // Set local loading state for this specific product card
+    setAddingToCart(true);
+    
     try {
       await addToCart(product.id, 1);
       console.log('Produit ajouté au panier:', product.name);
     } catch (error) {
       console.error('Erreur lors de l\'ajout au panier:', error);
+    } finally {
+      // Always reset local loading state
+      setAddingToCart(false);
     }
   };
 
@@ -128,18 +136,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <button
           className="w-full bg-helloboku-links text-white py-2 px-3 lg:px-4 rounded-lg font-medium text-sm hover:bg-purple-600 transition-colors duration-200 flex items-center justify-center gap-2 group-hover:bg-helloboku-headings disabled:opacity-50"
           onClick={handleAddToCart}
-          disabled={loading}
+          disabled={addingToCart}
         >
-          {loading ? (
+          {addingToCart ? (
             <ButtonSpinner size="sm" color="white" />
           ) : (
             <ShoppingCart className="w-4 h-4" />
           )}
           <span className="hidden sm:inline">
-            {loading ? 'Ajout en cours...' : 'Ajouter au panier'}
+            {addingToCart ? 'Ajout en cours...' : 'Ajouter au panier'}
           </span>
           <span className="sm:hidden">
-            {loading ? '...' : 'Ajouter'}
+            {addingToCart ? '...' : 'Ajouter'}
           </span>
         </button>
       </div>
