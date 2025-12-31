@@ -1,13 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { useCart } from '../context/CartContext';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from 'lucide-react';
 
 const Cart: React.FC = () => {
-  const { cart, loading, error, updateCartItem, removeFromCart, getTotal, clearCart } = useCart();
+  const { cart, loading: cartLoading, error, updateCartItem, removeFromCart, getTotal, clearCart } = useCart();
+  const [updatingItems, setUpdatingItems] = useState<Set<string>>(new Set());
 
-  if (loading) {
+  // Fonction pour gérer la mise à jour d'un item avec état local
+  const handleUpdateQuantity = async (itemId: string, newQuantity: number) => {
+    // Éviter les quantités négatives ou nulles
+    if (newQuantity <= 0) {
+      await handleRemoveItem(itemId);
+      return;
+    }
+
+    // Ajouter l'item à la liste des items en cours de mise à jour
+    setUpdatingItems(prev => new Set([...prev, itemId]));
+
+    try {
+      await updateCartItem(itemId, newQuantity);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la quantité:', error);
+    } finally {
+      // Retirer l'item de la liste des items en cours de mise à jour
+      setUpdatingItems(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(itemId);
+        return newSet;
+      });
+    }
+  };
+
+  // Fonction pour gérer la suppression d'un item avec état local
+  const handleRemoveItem = async (itemId: string) => {
+    // Ajouter l'item à la liste des items en cours de suppression
+    setUpdatingItems(prev => new Set([...prev, itemId]));
+
+    try {
+      await removeFromCart(itemId);
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'item:', error);
+    } finally {
+      // Retirer l'item de la liste des items en cours de suppression
+      setUpdatingItems(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(itemId);
+        return newSet;
+      });
+    }
+  };
+
+  if (cartLoading) {
     return (
       <Layout>
         <div className="min-h-screen bg-gray-50 py-8 sm:py-12">
@@ -28,7 +73,7 @@ const Cart: React.FC = () => {
   const totalWithShipping = subtotal + shippingCost + tva;
 
   const displayItems = cart?.cartItems?.map(item => {
-    // Gérer les deux types d'images possibles : string[] ou ProductImage[]
+    // Utiliser directement les images du backend
     const firstImage = item.product.images?.[0];
     let imageUrl = '/images/products/default.jpg';
     
@@ -135,16 +180,16 @@ const Cart: React.FC = () => {
                           <div className="flex items-center gap-3">
                             <div className="flex items-center border border-gray-300 rounded-lg">
                               <button
-                                onClick={() => updateCartItem(item.id, item.quantity - 1)}
-                                disabled={loading}
+                                onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                                disabled={updatingItems.has(item.id)}
                                 className="p-2 hover:bg-gray-50 disabled:opacity-50 transition-colors rounded-l-lg"
                               >
                                 <Minus className="w-4 h-4" />
                               </button>
                               <span className="px-4 py-2 text-sm font-medium min-w-[3rem] text-center">{item.quantity}</span>
                               <button
-                                onClick={() => updateCartItem(item.id, item.quantity + 1)}
-                                disabled={loading}
+                                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                                disabled={updatingItems.has(item.id)}
                                 className="p-2 hover:bg-gray-50 disabled:opacity-50 transition-colors rounded-r-lg"
                               >
                                 <Plus className="w-4 h-4" />
@@ -161,8 +206,8 @@ const Cart: React.FC = () => {
                             </p>
                           </div>
                           <button
-                            onClick={() => removeFromCart(item.id)}
-                            disabled={loading}
+                            onClick={() => handleRemoveItem(item.id)}
+                            disabled={updatingItems.has(item.id)}
                             className="text-gray-500 hover:text-red-600 p-2 disabled:opacity-50 transition-colors rounded-lg hover:bg-red-50"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -243,7 +288,7 @@ const Cart: React.FC = () => {
 
                   <button
                     onClick={clearCart}
-                    disabled={loading}
+                    disabled={cartLoading}
                     className="w-full border-2 border-[#0e0e52] text-[#0e0e52] py-3 sm:py-4 px-4 sm:px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-[#0e0e52] hover:text-white disabled:opacity-50 transition-colors"
                   >
                     Vider le panier
