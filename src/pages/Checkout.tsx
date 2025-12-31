@@ -218,32 +218,39 @@ const Checkout: React.FC = () => {
 
 
           <div className="block sm:hidden">
-            <div className="flex items-center justify-center space-x-4">
+            <div className="flex items-center justify-between max-w-xs mx-auto">
               {steps.map((step) => {
                 const Icon = step.icon;
                 const isActive = currentStep === step.id;
                 const isCompleted = currentStep > step.id;
                 
                 return (
-                  <div key={step.id} className="flex flex-col items-center">
-                    <div className={`
-                      flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all
-                      ${isActive ? 'border-gray-900 bg-gray-900 text-white' : 
-                        isCompleted ? 'border-green-500 bg-green-500 text-white' : 
-                        'border-gray-300 text-gray-400'}
-                    `}>
-                      {isCompleted ? (
-                        <CheckCircle className="w-4 h-4" />
-                      ) : (
-                        <Icon className="w-4 h-4" />
-                      )}
+                  <React.Fragment key={step.id}>
+                    <div className="flex flex-col items-center">
+                      <div className={`
+                        flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all
+                        ${isActive ? 'border-gray-900 bg-gray-900 text-white' : 
+                          isCompleted ? 'border-green-500 bg-green-500 text-white' : 
+                          'border-gray-300 text-gray-400'}
+                      `}>
+                        {isCompleted ? (
+                          <CheckCircle className="w-4 h-4" />
+                        ) : (
+                          <Icon className="w-4 h-4" />
+                        )}
+                      </div>
+                      <span className={`mt-1 text-xs font-medium text-center max-w-[60px] ${
+                        isActive ? 'text-gray-900' : isCompleted ? 'text-green-600' : 'text-gray-400'
+                      }`}>
+                        {step.name}
+                      </span>
                     </div>
-                    <span className={`mt-1 text-xs font-medium text-center ${
-                      isActive ? 'text-gray-900' : isCompleted ? 'text-green-600' : 'text-gray-400'
-                    }`}>
-                      {step.name}
-                    </span>
-                  </div>
+                    {step.id < steps.length && (
+                      <div className={`flex-1 h-0.5 mx-2 ${
+                        isCompleted ? 'bg-green-500' : 'bg-gray-300'
+                      }`} />
+                    )}
+                  </React.Fragment>
                 );
               })}
             </div>
@@ -976,7 +983,8 @@ const Checkout: React.FC = () => {
                   ) : (
                     <>
                       <Shield className="w-5 h-5" />
-                      {paymentMethod === 'paypal' ? 'Payer avec PayPal' : 'Procéder au paiement'}
+                      <span className="hidden sm:inline">{paymentMethod === 'paypal' ? 'Payer avec PayPal' : 'Procéder au paiement'}</span>
+                      <span className="sm:hidden">Payer maintenant</span>
                     </>
                   )}
                 </button>

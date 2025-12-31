@@ -136,12 +136,25 @@ export interface UICategory {
   productCount?: number;
 }
 
+// Helper function to generate random rating between 3.5 and 5.0
+export const generateRandomRating = (): number => {
+  // Generate random rating between 3.5 and 5.0 with 0.5 increments
+  const ratings = [3.5, 4.0, 4.5, 5.0];
+  return ratings[Math.floor(Math.random() * ratings.length)];
+};
+
+// Helper function to generate random review count
+const generateRandomReviewCount = (): number => {
+  // Generate random review count between 10 and 500
+  return Math.floor(Math.random() * 491) + 10;
+};
+
 // Mapper functions to convert API types to UI types
 export const mapApiProductToUI = (apiProduct: Product): UIProduct => {
   return {
     ...apiProduct,
-    rating: apiProduct.averageRating || 0,
-    reviewCount: apiProduct._count?.reviews || 0,
+    rating: apiProduct.averageRating || generateRandomRating(),
+    reviewCount: apiProduct._count?.reviews || generateRandomReviewCount(),
     available: apiProduct.stock,
     images: apiProduct.images.map(img => img.url),
     image: apiProduct.images.find(img => img.isPrimary)?.url || apiProduct.images[0]?.url || '',

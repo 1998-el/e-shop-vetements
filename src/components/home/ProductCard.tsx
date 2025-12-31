@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Star, ShoppingCart } from 'lucide-react';
 import type { UIProduct } from '../../types';
 import { useCart } from '../../context/CartContext';
+import ButtonSpinner from '../common/ButtonSpinner';
 
 interface ProductCardProps {
   product: UIProduct;
@@ -81,19 +82,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {product.name}
           </h3>
 
-          {/* Star rating - 4.5 stars */}
+          {/* Star rating - Dynamic based on product rating */}
           <div className="flex items-center gap-1 mb-3 lg:mb-4">
-            {[...Array(4)].map((_, i) => (
-              <Star
-                key={i}
-                className="w-3 h-3 lg:w-4 lg:h-4 text-yellow-400 fill-current"
-              />
-            ))}
-            <Star
-              className="w-3 h-3 lg:w-4 lg:h-4 text-yellow-400 fill-current"
-              style={{ clipPath: 'inset(0 50% 0 0)' }}
-            />
-            <span className="text-xs text-gray-500 ml-1 lg:ml-2">(4.5)</span>
+            {[...Array(5)].map((_, i) => {
+              const ratingValue = i + 1;
+              const isFullStar = product.rating >= ratingValue;
+              const isHalfStar = product.rating >= ratingValue - 0.5 && product.rating < ratingValue;
+              
+              return (
+                <Star
+                  key={i}
+                  className={`w-3 h-3 lg:w-4 lg:h-4 ${
+                    isFullStar 
+                      ? 'text-yellow-400 fill-current' 
+                      : isHalfStar 
+                        ? 'text-yellow-400 fill-current' 
+                        : 'text-gray-300'
+                  }`}
+                  style={isHalfStar ? { clipPath: 'inset(0 50% 0 0)' } : {}}
+                />
+              );
+            })}
+            <span className="text-xs text-gray-500 ml-1 lg:ml-2">({product.rating.toFixed(1)})</span>
           </div>
 
           {/* Price with modern styling */}
@@ -120,9 +130,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           onClick={handleAddToCart}
           disabled={loading}
         >
-          <ShoppingCart className="w-4 h-4" />
-          <span className="hidden sm:inline">Ajouter au panier</span>
-          <span className="sm:hidden">Ajouter</span>
+          {loading ? (
+            <ButtonSpinner size="sm" color="white" />
+          ) : (
+            <ShoppingCart className="w-4 h-4" />
+          )}
+          <span className="hidden sm:inline">
+            {loading ? 'Ajout en cours...' : 'Ajouter au panier'}
+          </span>
+          <span className="sm:hidden">
+            {loading ? '...' : 'Ajouter'}
+          </span>
         </button>
       </div>
     </div>
