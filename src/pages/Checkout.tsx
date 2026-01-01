@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { useCart } from '../context/CartContext';
 import CountrySelector from '../components/common/CountrySelector';
 import FormField from '../components/common/FormField';
-import paymentApi from '../services/paymentApi';
+
 import { guestCheckout } from '../utils/guestCheckout';
-import { 
-  Truck, Shield, CreditCard, Smartphone, AlertCircle, ChevronRight, 
-  Home, CheckCircle, User, MapPin, CreditCard as PaymentIcon,
-  Loader2, CheckCircle2, XCircle, Save, ArrowLeft
+import {
+  Truck, Shield, CreditCard, Smartphone, AlertCircle,
+  User, MapPin, Loader2, ArrowLeft
 } from 'lucide-react';
 
 const Checkout: React.FC = () => {
@@ -31,22 +30,13 @@ const Checkout: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [paymentConfig, setPaymentConfig] = useState<any>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+
 
   const shippingCost = getTotal() >= 50 ? 0 : 5.99;
   const total = getTotal() + shippingCost;
 
   useEffect(() => {
-    loadPaymentConfig();
-    
     // Load saved form data
     const savedData = localStorage.getItem('checkout-form-data');
     if (savedData) {
@@ -57,15 +47,6 @@ const Checkout: React.FC = () => {
       }
     }
   }, []);
-
-  const loadPaymentConfig = async () => {
-    try {
-      const config = await paymentApi.getPaymentConfig();
-      setPaymentConfig(config);
-    } catch (error) {
-      console.error('Failed to load payment config:', error);
-    }
-  };
 
   // Save form data on change
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
