@@ -3,10 +3,50 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { useCart } from '../context/CartContext';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from 'lucide-react';
+import type { UIProduct, Product, ProductImage } from '../types';
 
 const Cart: React.FC = () => {
   const { cart, loading: cartLoading, error, updateCartItem, removeFromCart, getTotal, clearCart } = useCart();
   const [updatingItems, setUpdatingItems] = useState<Set<string>>(new Set());
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+
+  // Gestion des erreurs d'image
+  const handleImageError = (productId: string) => {
+    setImageErrors(prev => new Set([...prev, productId]));
+  };
+
+  // Fonction pour obtenir l'URL de l'image avec gestion d'erreur
+  const getImageUrl = (product: Product, productId: string): string => {
+    if (imageErrors.has(productId)) {
+      return '/images/products/default.jpg';
+    }
+    
+    const firstImage = product.images?.[0];
+    if (firstImage && typeof firstImage === 'object') {
+      // Pour les objets ProductImage, utiliser la propriété url
+      const urlProperty = (firstImage as ProductImage).url;
+      if (typeof urlProperty === 'string') {
+        return urlProperty;
+      }
+    }
+    
+    return '/images/products/default.jpg';
+  };
+
+  // Log for image rendering in cart
+  React.useEffect(() => {
+    cart?.cartItems?.forEach(item => {
+      console.log('🖼️  Cart rendering product image', {
+        productId: item.product.id,
+        productName: item.product.name,
+        imagesCount: item.product.images?.length || 0,
+        primaryImage: item.product.images?.[0] || null,
+        hasImages: !!(item.product.images && item.product.images.length > 0),
+        imageError: imageErrors.has(item.product.id),
+        timestamp: new Date().toISOString()
+      });
+    });
+  }, [cart, imageErrors]);
 
   // Fonction pour gérer la mise à jour d'un item avec état local
   const handleUpdateQuantity = async (itemId: string, newQuantity: number) => {
@@ -73,21 +113,11 @@ const Cart: React.FC = () => {
   const totalWithShipping = subtotal + shippingCost + tva;
 
   const displayItems = cart?.cartItems?.map(item => {
-    // Utiliser directement les images du backend
-    const firstImage = item.product.images?.[0];
-    let imageUrl = '/images/products/default.jpg';
-    
-    if (typeof firstImage === 'string') {
-      imageUrl = firstImage;
-    } else if (firstImage && typeof firstImage === 'object' && 'url' in firstImage) {
-      imageUrl = firstImage.url;
-    }
-    
     return {
       id: item.id,
       name: item.product.name,
       price: item.product.price,
-      image: imageUrl,
+      image: getImageUrl(item.product, item.product.id),
       quantity: item.quantity
     };
   }) || [];
@@ -165,7 +195,9 @@ const Cart: React.FC = () => {
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-full h-full object-cover rounded-lg border border-gray-200"
+                        className="w-full h-full object-contain rounded-lg border border-gray-200 p-2"
+                        onError={() => handleImageError(item.id)}
+                        loading="lazy"
                       />
                     </div>
 
