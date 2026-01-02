@@ -9,6 +9,8 @@ interface CartContextType {
   loading: boolean;
   error: string | null;
   sessionId: string;
+  updatingItems: Set<string>;
+  addingItems: boolean;
   addToCart: (productId: string, quantity?: number) => Promise<void>;
   updateCartItem: (itemId: string, quantity: number) => Promise<void>;
   removeFromCart: (itemId: string) => Promise<void>;
@@ -26,6 +28,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string>('');
+  const [updatingItems, setUpdatingItems] = useState<Set<string>>(new Set());
+  const [addingItems, setAddingItems] = useState(false);
 
   // Initialize session ID on mount
   useEffect(() => {
@@ -61,75 +65,125 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       throw new Error('Session ID not initialized');
     }
 
+    setAddingItems(true);
+    setError(null);
+
     try {
-      setLoading(true);
-      setError(null);
-      
       const cartItemDto: GuestCartItemDto = {
         productId,
         quantity
       };
 
+      // Send to server in background
       await cartApi.addToGuestCart(sessionId, cartItemDto);
-      await loadCart(); // Refresh cart after adding
+      
+      // Refresh cart to get real data only after successful add
+      await loadCart();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to add item to cart');
       console.error('Error adding to cart:', err);
       throw err;
     } finally {
-      setLoading(false);
+      setAddingItems(false);
     }
   };
 
   const updateCartItem = async (itemId: string, quantity: number) => {
-    if (!sessionId) {
-      throw new Error('Session ID not initialized');
+    if (!sessionId || !cart) {
+      throw new Error('Session ID or cart not initialized');
     }
 
+    // Store the target state for optimistic update
+    const targetCart = {
+      ...cart,
+      cartItems: quantity <= 0 
+        ? cart.cartItems.filter(item => item.id !== itemId)
+        : cart.cartItems.map(item => 
+            item.id === itemId 
+              ? { ...item, quantity }
+              : item
+          ),
+      totalItems: quantity <= 0 
+        ? cart.cartItems.filter(item => item.id !== itemId).reduce((total, item) => total + item.quantity, 0)
+        : cart.cartItems.map(item => 
+            item.id === itemId 
+              ? { ...item, quantity }
+              : item
+          ).reduce((total, item) => total + item.quantity, 0)
+    };
+
+    // Immediately update UI optimistically
+    setCart(targetCart);
+    setUpdatingItems(prev => new Set([...prev, itemId]));
+    setError(null);
+
     try {
-      setLoading(true);
-      setError(null);
+      // Send to server in background
+      await cartApi.updateGuestCartItem(sessionId, itemId, quantity);
       
-      // Utiliser la nouvelle méthode API pour mettre à jour l'article
-      const updatedCart = await cartApi.updateGuestCartItem(sessionId, itemId, quantity);
-      setCart(updatedCart);
+      // If successful, just remove from updating items - cart already has correct state
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update cart item');
       console.error('Error updating cart item:', err);
+      
+      // On error, restore original cart state
+      setCart(cart);
       throw err;
     } finally {
-      setLoading(false);
+      setUpdatingItems(prev => {
+        const newSet = new Set([...prev]);
+        newSet.delete(itemId);
+        return newSet;
+      });
     }
   };
 
   const removeFromCart = async (itemId: string) => {
-    if (!sessionId) {
-      throw new Error('Session ID not initialized');
+    if (!sessionId || !cart) {
+      throw new Error('Session ID or cart not initialized');
     }
 
+    // Store current cart for potential rollback
+    const currentCart = cart;
+
+    // Optimistically remove item from UI
+    const targetCart = {
+      ...cart,
+      cartItems: cart.cartItems.filter(item => item.id !== itemId),
+      totalItems: cart.cartItems.filter(item => item.id !== itemId).reduce((total, item) => total + item.quantity, 0)
+    };
+
+    // Immediately update UI optimistically
+    setCart(targetCart);
+    setUpdatingItems(prev => new Set([...prev, itemId]));
+    setError(null);
+
     try {
-      setLoading(true);
-      setError(null);
+      // Send to server in background
+      await cartApi.removeFromGuestCart(sessionId, itemId);
       
-      // Utiliser la nouvelle méthode API pour supprimer l'article
-      const updatedCart = await cartApi.removeFromGuestCart(sessionId, itemId);
-      setCart(updatedCart);
+      // If successful, just remove from updating items - cart already has correct state
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to remove cart item');
       console.error('Error removing cart item:', err);
+      
+      // On error, restore original cart state
+      setCart(currentCart);
       throw err;
     } finally {
-      setLoading(false);
+      setUpdatingItems(prev => {
+        const newSet = new Set([...prev]);
+        newSet.delete(itemId);
+        return newSet;
+      });
     }
   };
 
   const clearCart = async () => {
-    // For guest cart, we clear by creating a new session
     try {
       setLoading(true);
       setError(null);
       
-      // Generate new session ID to clear cart
       const newSessionId = cartApi.generateSessionId();
       localStorage.setItem('guestSessionId', newSessionId);
       setSessionId(newSessionId);
@@ -155,7 +209,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const convertedCart = await cartApi.convertAnonymousCartToUser(sessionId, deliveryInfo);
       setCart(convertedCart);
       
-      // Clear guest session after conversion
       localStorage.removeItem('guestSessionId');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to convert cart');
@@ -179,7 +232,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         sessionId
       });
       
-      // Clear cart after successful order creation
       await clearCart();
       
       return order;
@@ -205,6 +257,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       loading,
       error,
       sessionId,
+      updatingItems,
+      addingItems,
       addToCart,
       updateCartItem,
       removeFromCart,

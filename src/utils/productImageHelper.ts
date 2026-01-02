@@ -7,6 +7,32 @@ export interface ProductImageObject {
   altText?: string;
 }
 
+// Image validation function with cross-browser compatibility
+export const validateImageUrl = (url: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    if (!url) {
+      resolve(false);
+      return;
+    }
+    
+    const img = new Image();
+    img.crossOrigin = 'anonymous'; // Important for cross-browser compatibility
+    
+    img.onload = () => {
+      resolve(true);
+    };
+    
+    img.onerror = () => {
+      resolve(false);
+    };
+    
+    img.src = url;
+    
+    // Timeout after 5 seconds
+    setTimeout(() => resolve(false), 5000);
+  });
+};
+
 export const getProductImageUrl = (product: any): string => {
   console.log('🖼️  getProductImageUrl called', {
     productId: product.id,
@@ -21,7 +47,8 @@ export const getProductImageUrl = (product: any): string => {
   if (Array.isArray(product.images)) {
     // Check if first element is a string (legacy format)
     if (typeof product.images[0] === 'string') {
-      const result = product.images[0] || '/images/products/default.jpg';
+      const imageUrl = product.images[0];
+      const result = imageUrl;
       console.log('🖼️  Legacy string format detected', {
         productId: product.id,
         selectedImage: result
@@ -32,7 +59,8 @@ export const getProductImageUrl = (product: any): string => {
     // Check if elements are objects (API format)
     if (typeof product.images[0] === 'object') {
       const primaryImage = product.images.find((img: ProductImageObject) => img.isPrimary);
-      const result = primaryImage?.url || product.images[0]?.url || '/images/products/default.jpg';
+      const imageUrl = primaryImage?.url || product.images[0]?.url;
+      const result = imageUrl;
       console.log('🖼️  API object format detected', {
         productId: product.id,
         primaryImageFound: !!primaryImage,
@@ -52,11 +80,11 @@ export const getProductImageUrl = (product: any): string => {
     return product.image;
   }
   
-  // Fallback to default image
-  console.log('🖼️  Using default fallback image', {
+  // No fallback - return empty string to trigger error handling
+  console.log('🖼️  No image available for product', {
     productId: product.id
   });
-  return '/images/products/default.jpg';
+  return '';
 };
 
 export const getProductImageSrcSet = (product: any): string => {

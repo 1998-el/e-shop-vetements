@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, Star, Eye } from 'lucide-react';
 import { useProducts } from '../../hooks/useProducts';
+import { getProductImageUrl } from '../../utils/productImageHelper';
 
 const RecommendedSection: React.FC = () => {
   const { products, loading } = useProducts({ limit: 20 });
@@ -70,9 +71,18 @@ const RecommendedSection: React.FC = () => {
             <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
               <div className="relative">
                 <img
-                  src={product.images[0]}
+                  src={getProductImageUrl(product)}
                   alt={product.name}
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    console.log('❌ RecommendedSection backend image failed to load', {
+                      productId: product.id,
+                      productName: product.name,
+                      failedImageUrl: getProductImageUrl(product)
+                    });
+                  }}
+                  loading="lazy"
+                  crossOrigin="anonymous"
                 />
                 
                 {/* Badges */}

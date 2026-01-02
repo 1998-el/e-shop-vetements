@@ -8,6 +8,7 @@ import { Star, ShoppingCart } from 'lucide-react';
 import type { UIProduct } from '../../types';
 import { useCart } from '../../context/CartContext';
 import ButtonSpinner from '../common/ButtonSpinner';
+import { getProductImageUrl } from '../../utils/productImageHelper';
 
 interface ProductCardProps {
   product: UIProduct;
@@ -67,19 +68,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
           
           <img
-            src={imageError ? '/images/products/default.jpg' : product.images[0]}
+            src={getProductImageUrl(product)}
             alt={product.name}
             className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
             onError={() => {
-              console.log('❌ ProductCard image failed to load', {
+              console.log('❌ ProductCard image failed to load from backend', {
                 productId: product.id,
                 productName: product.name,
-                failedImageUrl: product.images[0],
+                failedImageUrl: getProductImageUrl(product),
                 timestamp: new Date().toISOString()
               });
-              setImageError(true);
             }}
             loading="lazy"
+            crossOrigin="anonymous"
           />
         </div>
 

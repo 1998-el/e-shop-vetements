@@ -6,6 +6,7 @@ import ButtonSpinner from '../components/common/ButtonSpinner';
 import { useProduct, useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import { reviews } from '../data/mockData';
+import { getProductImageUrl } from '../utils/productImageHelper';
 import { Star, ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus, AlertCircle, Shield, CheckCircle } from 'lucide-react';
 
 const ProductDetail: React.FC = () => {
@@ -157,13 +158,16 @@ const ProductDetail: React.FC = () => {
 
             <div className="relative bg-gray-50 rounded border border-gray-200">
               <img
-                src={product.images[selectedImage]}
+                src={product.images[selectedImage] || getProductImageUrl(product)}
                 alt={product.name}
                 className="w-full h-64 sm:h-80 md:h-96 object-contain p-4 sm:p-6 md:p-8"
                 onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = '/images/products/default.jpg';
+                  console.log('❌ ProductDetail backend main image failed to load', {
+                    productId: product.id,
+                    failedImageUrl: product.images[selectedImage]
+                  });
                 }}
+                crossOrigin="anonymous"
               />
               {product.images.length > 1 && (
                 <>
@@ -203,6 +207,14 @@ const ProductDetail: React.FC = () => {
                         src={image}
                         alt={`${product.name} ${index + 1}`}
                         className="w-full h-full object-cover rounded"
+                        onError={(e) => {
+                          console.log('❌ ProductDetail backend thumbnail failed to load', {
+                            productId: product.id,
+                            failedImageUrl: image
+                          });
+                        }}
+                        loading="lazy"
+                        crossOrigin="anonymous"
                       />
                     </button>
                   ))}
@@ -450,9 +462,12 @@ const ProductDetail: React.FC = () => {
                             alt={review.userName}
                             className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200"
                             onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/images/products/default.jpg';
+                              console.log('❌ ProductDetail backend avatar failed to load', {
+                                reviewId: review.id,
+                                failedImageUrl: review.userAvatar
+                              });
                             }}
+                            crossOrigin="anonymous"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
