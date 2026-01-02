@@ -161,7 +161,7 @@ const ProductDetail: React.FC = () => {
                 src={product.images[selectedImage] || getProductImageUrl(product)}
                 alt={product.name}
                 className="w-full h-64 sm:h-80 md:h-96 object-contain p-4 sm:p-6 md:p-8"
-                onError={(e) => {
+                onError={(_e) => {
                   console.log('❌ ProductDetail backend main image failed to load', {
                     productId: product.id,
                     failedImageUrl: product.images[selectedImage]
@@ -207,7 +207,7 @@ const ProductDetail: React.FC = () => {
                         src={image}
                         alt={`${product.name} ${index + 1}`}
                         className="w-full h-full object-cover rounded"
-                        onError={(e) => {
+                        onError={(_e) => {
                           console.log('❌ ProductDetail backend thumbnail failed to load', {
                             productId: product.id,
                             failedImageUrl: image
@@ -461,7 +461,7 @@ const ProductDetail: React.FC = () => {
                             src={review.userAvatar}
                             alt={review.userName}
                             className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200"
-                            onError={(e) => {
+                            onError={(_e) => {
                               console.log('❌ ProductDetail backend avatar failed to load', {
                                 reviewId: review.id,
                                 failedImageUrl: review.userAvatar

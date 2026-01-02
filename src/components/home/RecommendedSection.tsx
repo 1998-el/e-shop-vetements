@@ -74,7 +74,7 @@ const RecommendedSection: React.FC = () => {
                   src={getProductImageUrl(product)}
                   alt={product.name}
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
+                  onError={(_e) => {
                     console.log('❌ RecommendedSection backend image failed to load', {
                       productId: product.id,
                       productName: product.name,

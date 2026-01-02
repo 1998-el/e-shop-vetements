@@ -15,7 +15,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const [imageError, setImageError] = React.useState(false);
+  const [_imageError, _setImageError] = React.useState(false);
   const [addingToCart, setAddingToCart] = React.useState(false);
   const { addToCart } = useCart();
 
@@ -27,10 +27,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       imagesCount: product.images?.length || 0,
       primaryImage: product.images?.[0] || null,
       hasImages: !!(product.images && product.images.length > 0),
-      imageError,
+      _imageError,
       timestamp: new Date().toISOString()
     });
-  }, [product.id, product.images, imageError]);
+  }, [product.id, product.images, _imageError]);
 
   // Calculate discount percentage
   const discountPercentage = product.oldPrice && product.oldPrice > product.price 
