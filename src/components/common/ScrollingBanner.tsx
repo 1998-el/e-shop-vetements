@@ -27,11 +27,11 @@ const ScrollingBanner: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-[#0e0e52] text-white py-2 px-4 relative border-b border-gray-700">
+    <div className="bg-[#0e0e52] text-white py-2 px-2 sm:px-4 relative border-b border-gray-700">
       {/* Contenu */}
       <div className="flex items-center justify-center">
-        <div className="text-center text-sm whitespace-nowrap overflow-hidden">
-          <span className="inline-block transition-opacity duration-300">
+        <div className="text-center text-xs sm:text-sm max-w-full overflow-hidden">
+          <span className="inline-block transition-opacity duration-300 px-2 leading-tight">
             {messages[currentMessageIndex]}
           </span>
         </div>

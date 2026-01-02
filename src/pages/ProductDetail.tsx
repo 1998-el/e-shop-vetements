@@ -7,7 +7,7 @@ import { useProduct, useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import { reviews } from '../data/mockData';
 import { getProductImageUrl } from '../utils/productImageHelper';
-import { Star, ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus, AlertCircle, Shield, CheckCircle } from 'lucide-react';
+import { Star, ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus, AlertCircle, Shield, CheckCircle, Truck, RefreshCw, Lock, Award } from 'lucide-react';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -304,28 +304,28 @@ const ProductDetail: React.FC = () => {
             <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm mb-4 sm:mb-6">
                 <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <div className="w-6 h-6 text-green-600 flex-shrink-0">✓</div>
+                  <Truck className="w-6 h-6 text-green-600 flex-shrink-0" />
                   <div className="min-w-0">
                     <div className="font-medium text-gray-800 text-sm sm:text-base">Livraison gratuite</div>
                     <div className="text-gray-600 text-xs">Dès 50€ d'achat</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <div className="w-6 h-6 text-blue-600 flex-shrink-0">✓</div>
+                  <RefreshCw className="w-6 h-6 text-blue-600 flex-shrink-0" />
                   <div className="min-w-0">
                     <div className="font-medium text-gray-800 text-sm sm:text-base">Retour 14 jours</div>
                     <div className="text-gray-600 text-xs">Satisfait ou remboursé</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <div className="w-6 h-6 text-purple-600 flex-shrink-0">✓</div>
+                  <Lock className="w-6 h-6 text-purple-600 flex-shrink-0" />
                   <div className="min-w-0">
                     <div className="font-medium text-gray-800 text-sm sm:text-base">Paiement sécurisé</div>
                     <div className="text-gray-600 text-xs">SSL 256-bit chiffré</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <div className="w-6 h-6 text-orange-600 flex-shrink-0">✓</div>
+                  <Award className="w-6 h-6 text-orange-600 flex-shrink-0" />
                   <div className="min-w-0">
                     <div className="font-medium text-gray-800 text-sm sm:text-base">Garantie qualité</div>
                     <div className="text-gray-600 text-xs">Produits certifiés CE</div>
