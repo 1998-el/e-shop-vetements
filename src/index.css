@@ -80,6 +80,24 @@
     max-width: 100vw;
   }
 
+  /* Global mobile overflow prevention */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure all containers prevent overflow */
+  div, section, article, aside, header, footer, nav, main {
+    max-width: 100%;
+  }
+
+  /* Fix for long words breaking layout */
+  .break-word {
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
   /* Improve touch targets for mobile */
   button, a, input, select, textarea {
     min-height: 44px;

@@ -8,36 +8,36 @@ const Footer: React.FC = () => {
     <footer className="border-t border-gray-200" style={{ backgroundColor: '#0e0e52' }}>
       {/* Trust Section - Helloboku Style */}
       <div className="bg-helloboku-page-bg border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             {/* Trust Item */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
-              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-helloboku-links/10 rounded-full flex items-center justify-center">
-                <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-helloboku-links" />
+            <div className="flex items-center gap-3 text-center sm:text-left">
+              <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-helloboku-links/10 rounded-full flex items-center justify-center">
+                <Truck className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-helloboku-links" />
               </div>
-              <div>
-                <h4 className="font-semibold text-helloboku-headings mb-1 text-sm sm:text-base">Livraison gratuite</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Dès 50€ d'achat en France métropolitaine</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
-              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-helloboku-links/10 rounded-full flex items-center justify-center">
-                <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-helloboku-links" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-helloboku-headings mb-1 text-sm sm:text-base">Paiement sécurisé</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Vos données sont protégées à 100%</p>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-helloboku-headings mb-1 text-xs sm:text-sm lg:text-base">Livraison gratuite</h4>
+                <p className="text-xs sm:text-sm text-gray-600 leading-tight">Dès 50€ d'achat en France métropolitaine</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
-              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-helloboku-links/10 rounded-full flex items-center justify-center">
-                <RotateCcw className="w-5 h-5 sm:w-6 sm:h-6 text-helloboku-links" />
+            <div className="flex items-center gap-3 text-center sm:text-left">
+              <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-helloboku-links/10 rounded-full flex items-center justify-center">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-helloboku-links" />
               </div>
-              <div>
-                <h4 className="font-semibold text-helloboku-headings mb-1 text-sm sm:text-base">Retours faciles</h4>
-                <p className="text-xs sm:text-sm text-gray-600">14 jours pour changer d'avis</p>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-helloboku-headings mb-1 text-xs sm:text-sm lg:text-base">Paiement sécurisé</h4>
+                <p className="text-xs sm:text-sm text-gray-600 leading-tight">Vos données sont protégées à 100%</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 text-center sm:text-left sm:col-span-2 lg:col-span-1">
+              <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-helloboku-links/10 rounded-full flex items-center justify-center">
+                <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-helloboku-links" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-helloboku-headings mb-1 text-xs sm:text-sm lg:text-base">Retours faciles</h4>
+                <p className="text-xs sm:text-sm text-gray-600 leading-tight">14 jours pour changer d'avis</p>
               </div>
             </div>
           </div>
@@ -162,30 +162,30 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold text-white mb-4">
               Moyens de paiement acceptés
             </h4>
-            <div className="flex items-center justify-center gap-4">
-              <div className="p-2">
-                <div className="bg-white rounded px-3 py-2">
-                  <span className="text-red-600 font-bold text-sm">VISA</span>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:gap-4 max-w-lg mx-auto">
+              <div className="flex-shrink-0 p-2">
+                <div className="bg-white rounded px-2 sm:px-3 py-1 sm:py-2">
+                  <span className="text-red-600 font-bold text-xs sm:text-sm">VISA</span>
                 </div>
               </div>
-              <div className="p-2">
-                <div className="bg-white rounded px-3 py-2">
-                  <span className="text-red-500 font-bold text-sm">Mastercard</span>
+              <div className="flex-shrink-0 p-2">
+                <div className="bg-white rounded px-2 sm:px-3 py-1 sm:py-2">
+                  <span className="text-red-500 font-bold text-xs sm:text-sm">Mastercard</span>
                 </div>
               </div>
-              <div className="p-2">
-                <div className="bg-white rounded px-3 py-2">
-                  <span className="text-blue-600 font-bold text-sm">Amex</span>
+              <div className="flex-shrink-0 p-2">
+                <div className="bg-white rounded px-2 sm:px-3 py-1 sm:py-2">
+                  <span className="text-blue-600 font-bold text-xs sm:text-sm">Amex</span>
                 </div>
               </div>
-              <div className="p-2">
-                <div className="bg-blue-600 rounded px-3 py-2">
-                  <span className="text-white font-bold text-sm">PayPal</span>
+              <div className="flex-shrink-0 p-2">
+                <div className="bg-blue-600 rounded px-2 sm:px-3 py-1 sm:py-2">
+                  <span className="text-white font-bold text-xs sm:text-sm">PayPal</span>
                 </div>
               </div>
-              <div className="p-2">
-                <div className="bg-purple-600 rounded px-3 py-2">
-                  <span className="text-white font-bold text-sm">Stripe</span>
+              <div className="flex-shrink-0 p-2">
+                <div className="bg-purple-600 rounded px-2 sm:px-3 py-1 sm:py-2">
+                  <span className="text-white font-bold text-xs sm:text-sm">Stripe</span>
                 </div>
               </div>
             </div>
@@ -198,21 +198,23 @@ const Footer: React.FC = () => {
 
       {/* Bottom Bar */}
       <div className="bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 lg:gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 lg:py-4">
+          <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between gap-3 lg:gap-4">
             <div className="text-center sm:text-left">
               <p className="text-xs text-gray-500">
-                © {new Date().getFullYear()} beldouze. Tous droits réservés.
+                © 2020 beldouze. Tous droits réservés.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs text-gray-500 text-center sm:text-left">
-              <span className="flex items-center gap-1">
+            <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 text-xs text-gray-500 text-center sm:text-left">
+              <div className="flex items-center gap-1 justify-center sm:justify-start">
                 <Heart className="w-3 h-3 text-red-500" />
-                Fait avec amour en France
-              </span>
-              <span className="hidden sm:inline">•</span>
-              <span>Jouets certifiés CE</span>
+                <span>Fait avec amour en France</span>
+              </div>
+              <div className="flex items-center gap-1 justify-center sm:justify-start">
+                <span className="hidden sm:inline text-gray-400">•</span>
+                <span>Accessoires certifiés CE</span>
+              </div>
             </div>
           </div>
         </div>
