@@ -43,7 +43,7 @@ const Checkout: React.FC = () => {
       try {
         setFormData(JSON.parse(savedData));
       } catch (error) {
-        console.warn('Failed to parse saved form data:', error);
+
       }
     }
   }, []);
@@ -172,7 +172,7 @@ const Checkout: React.FC = () => {
 
       await guestCheckout.processCartCheckoutWithRedirect(checkoutData);
     } catch (error: any) {
-      console.error('Stripe payment error:', error);
+
       setErrors({ submit: error.message || 'Erreur lors du paiement Stripe' });
       setIsSubmitting(false);
     }
@@ -224,7 +224,7 @@ const Checkout: React.FC = () => {
         throw new Error(response.error || 'Erreur lors du paiement PayPal');
       }
     } catch (error: any) {
-      console.error('PayPal payment error:', error);
+
       setErrors({ submit: error.message || 'Erreur lors du paiement PayPal' });
     } finally {
       setIsSubmitting(false);

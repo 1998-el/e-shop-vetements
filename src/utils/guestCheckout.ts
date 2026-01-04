@@ -38,7 +38,7 @@ export const guestCheckout = {
       // For PayPal or embedded payments, return response for further processing
       return response;
     } catch (error) {
-      console.error('Guest checkout error:', error);
+
       throw error;
     }
   },
@@ -86,7 +86,7 @@ export const guestCheckout = {
       
       return response;
     } catch (error) {
-      console.error('Guest checkout with redirect error:', error);
+
       throw error;
     }
   },

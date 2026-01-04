@@ -80,7 +80,7 @@ class PaymentApiService {
       const response = await api.get('/payments/config');
       return response.data;
     } catch (error) {
-      console.error('Failed to fetch payment config:', error);
+
       // Return default configuration if backend is not available
       return {
         stripe: {
@@ -233,7 +233,7 @@ class PaymentApiService {
         backend: true,
       };
     } catch (error) {
-      console.error('Payment health check failed:', error);
+
       return {
         stripe: false,
         paypal: false,
@@ -289,7 +289,7 @@ class PaymentApiService {
       const response = await api.post('/payments/unified-checkout', checkoutData);
       return response.data;
     } catch (error) {
-      console.error('Unified checkout error:', error);
+
       throw error;
     }
   }

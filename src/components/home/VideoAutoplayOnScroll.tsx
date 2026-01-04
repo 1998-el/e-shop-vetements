@@ -35,7 +35,7 @@ const VideoAutoplayOnScroll: React.FC<VideoAutoplayOnScrollProps> = ({
             // Délai léger pour s'assurer que la vidéo est prête
             setTimeout(() => {
               videoRef.current?.play().catch(error => {
-                console.log("Autoplay blocked:", error);
+
                 // Fallback: ajouter un bouton de lecture manuelle
               });
             }, 300);

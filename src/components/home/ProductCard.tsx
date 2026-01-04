@@ -19,18 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [addingToCart, setAddingToCart] = React.useState(false);
   const { addToCart } = useCart();
 
-  // Log for image rendering
-  React.useEffect(() => {
-    console.log('🖼️  ProductCard rendering product image', {
-      productId: product.id,
-      productName: product.name,
-      imagesCount: product.images?.length || 0,
-      primaryImage: product.images?.[0] || null,
-      hasImages: !!(product.images && product.images.length > 0),
-      _imageError,
-      timestamp: new Date().toISOString()
-    });
-  }, [product.id, product.images, _imageError]);
+
 
   // Calculate discount percentage
   const discountPercentage = product.oldPrice && product.oldPrice > product.price 
@@ -46,9 +35,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     
     try {
       await addToCart(product.id, 1);
-      console.log('Produit ajouté au panier:', product.name);
+
     } catch (error) {
-      console.error('Erreur lors de l\'ajout au panier:', error);
+
     } finally {
       // Always reset local loading state
       setAddingToCart(false);
@@ -71,14 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={getProductImageUrl(product)}
             alt={product.name}
             className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-            onError={() => {
-              console.log('❌ ProductCard image failed to load from backend', {
-                productId: product.id,
-                productName: product.name,
-                failedImageUrl: getProductImageUrl(product),
-                timestamp: new Date().toISOString()
-              });
-            }}
+            onError={() => {}}
             loading="lazy"
             crossOrigin="anonymous"
           />

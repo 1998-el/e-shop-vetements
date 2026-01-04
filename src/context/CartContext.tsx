@@ -54,7 +54,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setCart(cartData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load cart');
-      console.error('Error loading cart:', err);
+
     } finally {
       setLoading(false);
     }
@@ -81,7 +81,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       await loadCart();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to add item to cart');
-      console.error('Error adding to cart:', err);
+
       throw err;
     } finally {
       setAddingItems(false);
@@ -124,7 +124,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       // If successful, just remove from updating items - cart already has correct state
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update cart item');
-      console.error('Error updating cart item:', err);
+
       
       // On error, restore original cart state
       setCart(cart);
@@ -165,7 +165,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       // If successful, just remove from updating items - cart already has correct state
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to remove cart item');
-      console.error('Error removing cart item:', err);
+
       
       // On error, restore original cart state
       setCart(currentCart);
@@ -190,7 +190,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setCart(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to clear cart');
-      console.error('Error clearing cart:', err);
+
       throw err;
     } finally {
       setLoading(false);
@@ -212,7 +212,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       localStorage.removeItem('guestSessionId');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to convert cart');
-      console.error('Error converting cart:', err);
+
       throw err;
     } finally {
       setLoading(false);
@@ -237,7 +237,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return order;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create order from cart');
-      console.error('Error creating order from cart:', err);
+
       throw err;
     } finally {
       setLoading(false);

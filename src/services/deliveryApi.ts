@@ -17,7 +17,7 @@ export const deliveryApi = {
       const response = await api.post('/deliveries', createDeliveryDto);
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la création de la livraison:', error);
+
       throw error;
     }
   },
@@ -37,7 +37,7 @@ export const deliveryApi = {
       const response = await api.get(`/deliveries?${params.toString()}`);
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des livraisons:', error);
+
       throw error;
     }
   },
@@ -48,7 +48,7 @@ export const deliveryApi = {
       const response = await api.get(`/deliveries/${id}`);
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors de la récupération de la livraison ${id}:`, error);
+
       throw error;
     }
   },
@@ -63,7 +63,7 @@ export const deliveryApi = {
       if (error && typeof error === 'object' && 'response' in error && (error as any).response?.status === 404) {
         return null;
       }
-      console.error(`Erreur lors de la récupération de la livraison pour la commande ${orderId}:`, error);
+
       throw error;
     }
   },
@@ -74,7 +74,7 @@ export const deliveryApi = {
       const response = await api.put(`/deliveries/${id}`, updateDeliveryDto);
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors de la mise à jour de la livraison ${id}:`, error);
+
       throw error;
     }
   },
@@ -85,7 +85,7 @@ export const deliveryApi = {
       const response = await api.put(`/deliveries/${id}/status`, updateStatusDto);
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors de la mise à jour du statut de la livraison ${id}:`, error);
+
       throw error;
     }
   },
@@ -95,7 +95,7 @@ export const deliveryApi = {
     try {
       await api.delete(`/deliveries/${id}`);
     } catch (error) {
-      console.error(`Erreur lors de la suppression de la livraison ${id}:`, error);
+
       throw error;
     }
   },
@@ -106,7 +106,7 @@ export const deliveryApi = {
       const response = await api.get(`/deliveries/tracking/${trackingNumber}`);
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors du suivi du colis ${trackingNumber}:`, error);
+
       throw error;
     }
   },
@@ -120,7 +120,7 @@ export const deliveryApi = {
       const response = await api.get('/deliveries/stats');
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des statistiques:', error);
+
       throw error;
     }
   },
@@ -136,7 +136,7 @@ export const deliveryApi = {
       const response = await api.get(`/deliveries/date-range?${params.toString()}`);
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des livraisons par date:', error);
+
       throw error;
     }
   },

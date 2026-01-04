@@ -232,7 +232,7 @@ app.get('/api/products', (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Error fetching products:', error);
+
     res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -248,7 +248,7 @@ app.get('/api/products/:id', (req, res) => {
     
     res.json(product);
   } catch (error) {
-    console.error('Error fetching product:', error);
+
     res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -257,7 +257,7 @@ app.get('/api/categories', (req, res) => {
   try {
     res.json(mockCategories);
   } catch (error) {
-    console.error('Error fetching categories:', error);
+
     res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -273,7 +273,7 @@ app.get('/api/categories/:id', (req, res) => {
     
     res.json(category);
   } catch (error) {
-    console.error('Error fetching category:', error);
+
     res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -299,11 +299,5 @@ app.get('*', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Visit http://localhost:${PORT}`);
-  console.log('API endpoints available at:');
-  console.log('- GET /api/products');
-  console.log('- GET /api/products/:id');
-  console.log('- GET /api/categories');
-  console.log('- GET /api/categories/:id');
+
 });

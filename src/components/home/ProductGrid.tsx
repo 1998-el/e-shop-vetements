@@ -10,7 +10,12 @@ const ProductGrid: React.FC = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Fetch products from API
-  const { products, loading, error, refresh } = useProducts({ limit: 20 });
+  const { products: allProducts, loading, error, refresh } = useProducts({ limit: 20 });
+
+  // Filter out accessoires category products to show only in their dedicated section
+  const products = allProducts.filter(product => 
+    product.categoryName?.toLowerCase() !== 'accessoires'
+  );
 
   // Get different product categories based on API data
   const bestsellers = products

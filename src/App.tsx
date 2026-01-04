@@ -18,6 +18,8 @@ import CartTest from './pages/CartTest';
 import DeliveryManagement from './pages/DeliveryManagement';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 function AppContent() {
   return (
@@ -36,6 +38,8 @@ function AppContent() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/faq" element={<FAQ />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/terms" element={<Terms />} />
       {/* Add more routes here as needed */}
     </Routes>
   );

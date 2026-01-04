@@ -39,34 +39,21 @@ export const productsApi = {
       const queryString = params.toString();
       const requestUrl = `/products${queryString ? '?' + queryString : ''}`;
       
-      console.log(`🌐 API Request: GET ${requestUrl}`, {
-        filters,
-        timestamp: new Date().toISOString()
-      });
+
       
       const response = await api.get(requestUrl);
       
-      console.log(`📦 API Response: GET ${requestUrl}`, {
-        status: response.status,
-        productsCount: response.data.products?.length || 0,
-        pagination: response.data.pagination,
-        timestamp: new Date().toISOString()
-      });
+
       
       // Log des images pour les premiers produits
       if (response.data.products && response.data.products.length > 0) {
         const sampleProducts = response.data.products.slice(0, 3);
-        console.log('🖼️  Sample products images from API:', sampleProducts.map((p: Product) => ({
-          id: p.id,
-          name: p.name,
-          imagesCount: p.images?.length || 0,
-          primaryImage: p.images?.[0] || null
-        })));
+
       }
       
       return response.data;
     } catch (error) {
-      console.error('❌ API Error - GET /products:', error);
+
       throw error;
     }
   },
@@ -76,25 +63,15 @@ export const productsApi = {
     try {
       const requestUrl = `/products/${id}`;
       
-      console.log(`🌐 API Request: GET ${requestUrl}`, {
-        productId: id,
-        timestamp: new Date().toISOString()
-      });
+
       
       const response = await api.get(requestUrl);
       
-      console.log(`📦 API Response: GET ${requestUrl}`, {
-        status: response.status,
-        productId: response.data.id,
-        productName: response.data.name,
-        imagesCount: response.data.images?.length || 0,
-        hasImages: !!(response.data.images && response.data.images.length > 0),
-        timestamp: new Date().toISOString()
-      });
+
       
       return response.data;
     } catch (error) {
-      console.error(`❌ API Error - GET /products/${id}:`, error);
+
       throw error;
     }
   },
@@ -105,7 +82,7 @@ export const productsApi = {
       const response = await api.post('/products', productData);
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la création du produit:', error);
+
       throw error;
     }
   },
@@ -116,7 +93,7 @@ export const productsApi = {
       const response = await api.put(`/products/${id}`, productData);
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors de la mise à jour du produit ${id}:`, error);
+
       throw error;
     }
   },
@@ -126,7 +103,7 @@ export const productsApi = {
     try {
       await api.delete(`/products/${id}`);
     } catch (error) {
-      console.error(`Erreur lors de la suppression du produit ${id}:`, error);
+
       throw error;
     }
   },
@@ -139,7 +116,7 @@ export const categoriesApi = {
       const response = await api.get('/categories');
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des catégories:', error);
+
       throw error;
     }
   },
@@ -149,7 +126,7 @@ export const categoriesApi = {
       const response = await api.get(`/categories/${id}`);
       return response.data;
     } catch (error) {
-      console.error(`Erreur lors de la récupération de la catégorie ${id}:`, error);
+
       throw error;
     }
   },
@@ -183,7 +160,7 @@ export const cartApi = {
       });
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération du panier:', error);
+
       throw error;
     }
   },
@@ -198,7 +175,7 @@ export const cartApi = {
       });
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de l\'ajout au panier:', error);
+
       throw error;
     }
   },
@@ -213,7 +190,7 @@ export const cartApi = {
       });
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la mise à jour de l\'article:', error);
+
       throw error;
     }
   },
@@ -228,7 +205,7 @@ export const cartApi = {
       });
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la suppression de l\'article:', error);
+
       throw error;
     }
   },
@@ -246,7 +223,7 @@ export const cartApi = {
       });
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la conversion du panier:', error);
+
       throw error;
     }
   },
@@ -257,7 +234,7 @@ export const cartApi = {
       const response = await api.post('/cart/guest/checkout', guestCheckoutDto);
       return response.data;
     } catch (error) {
-      console.error('Erreur lors du checkout guest:', error);
+
       throw error;
     }
   },

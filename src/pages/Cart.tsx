@@ -50,7 +50,7 @@ const Cart: React.FC = () => {
     try {
       await updateCartItem(itemId, newQuantity);
     } catch (error) {
-      console.error('Erreur lors de la mise à jour de la quantité:', error);
+
       setUpdateError('Erreur lors de la mise à jour de la quantité. Veuillez réessayer.');
     }
   };
@@ -61,7 +61,7 @@ const Cart: React.FC = () => {
     try {
       await removeFromCart(itemId);
     } catch (error) {
-      console.error('Erreur lors de la suppression de l\'item:', error);
+
       setUpdateError('Erreur lors de la suppression de l\'article. Veuillez réessayer.');
     }
   };

@@ -34,14 +34,7 @@ export const validateImageUrl = (url: string): Promise<boolean> => {
 };
 
 export const getProductImageUrl = (product: any): string => {
-  console.log('🖼️  getProductImageUrl called', {
-    productId: product.id,
-    productName: product.name,
-    hasImages: !!(product.images),
-    imagesType: Array.isArray(product.images) ? 'array' : typeof product.images,
-    imagesLength: Array.isArray(product.images) ? product.images.length : 'N/A',
-    hasImageProperty: !!product.image
-  });
+
   
   // Handle case where images is an array of strings (Legacy/UI Product)
   if (Array.isArray(product.images)) {
@@ -49,10 +42,7 @@ export const getProductImageUrl = (product: any): string => {
     if (typeof product.images[0] === 'string') {
       const imageUrl = product.images[0];
       const result = imageUrl;
-      console.log('🖼️  Legacy string format detected', {
-        productId: product.id,
-        selectedImage: result
-      });
+
       return result;
     }
     
@@ -61,44 +51,27 @@ export const getProductImageUrl = (product: any): string => {
       const primaryImage = product.images.find((img: ProductImageObject) => img.isPrimary);
       const imageUrl = primaryImage?.url || product.images[0]?.url;
       const result = imageUrl;
-      console.log('🖼️  API object format detected', {
-        productId: product.id,
-        primaryImageFound: !!primaryImage,
-        selectedImage: result,
-        totalImages: product.images.length
-      });
+
       return result;
     }
   }
   
   // Handle single image property (UI Product)
   if (product.image) {
-    console.log('🖼️  Single image property used', {
-      productId: product.id,
-      imageProperty: product.image
-    });
+
     return product.image;
   }
   
   // No fallback - return empty string to trigger error handling
-  console.log('🖼️  No image available for product', {
-    productId: product.id
-  });
+
   return '';
 };
 
 export const getProductImageSrcSet = (product: any): string => {
-  console.log('🖼️  getProductImageSrcSet called', {
-    productId: product.id,
-    productName: product.name,
-    hasImages: !!(product.images && product.images.length > 0),
-    imagesType: Array.isArray(product.images) ? 'array' : typeof product.images
-  });
+
   
   if (!Array.isArray(product.images) || product.images.length === 0) {
-    console.log('🖼️  No images available for srcset', {
-      productId: product.id
-    });
+
     return '';
   }
   
@@ -112,11 +85,7 @@ export const getProductImageSrcSet = (product: any): string => {
       return `${img} ${index + 1}x`;
     }).join(', ');
     
-    console.log('🖼️  Legacy string format for srcset', {
-      productId: product.id,
-      imagesCount: product.images.length,
-      srcSetPreview: srcSet.substring(0, 100) + (srcSet.length > 100 ? '...' : '')
-    });
+
   }
   
   // Handle API format (array of objects)
@@ -125,18 +94,10 @@ export const getProductImageSrcSet = (product: any): string => {
       return `${img.url} ${index + 1}x`;
     }).join(', ');
     
-    console.log('🖼️  API object format for srcset', {
-      productId: product.id,
-      imagesCount: product.images.length,
-      srcSetPreview: srcSet.substring(0, 100) + (srcSet.length > 100 ? '...' : '')
-    });
+
   }
   
-  console.log('🖼️  Final srcSet result', {
-    productId: product.id,
-    srcSetLength: srcSet.length,
-    isEmpty: srcSet === ''
-  });
+
   
   return srcSet;
 };

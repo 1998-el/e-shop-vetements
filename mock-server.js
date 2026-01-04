@@ -275,11 +275,6 @@ app.get('/categories/:id', (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`Mock API server running on http://localhost:${PORT}`);
-  console.log('Available endpoints:');
-  console.log('- GET /products');
-  console.log('- GET /products/:id');
-  console.log('- GET /categories');
-  console.log('- GET /categories/:id');
 });
 
 export default app;

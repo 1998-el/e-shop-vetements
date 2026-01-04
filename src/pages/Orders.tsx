@@ -25,7 +25,7 @@ const Orders: React.FC = () => {
       setOrders(ordersData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors du chargement des commandes');
-      console.error('Error loading orders:', err);
+
     } finally {
       setLoading(false);
     }
