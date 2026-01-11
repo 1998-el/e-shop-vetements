@@ -19,7 +19,7 @@ const FeaturedBrands: React.FC = () => {
       logo: '⚡',
       description: 'Sport & Innovation',
       products: '2.1k+ produits',
-      rating: 4.7,
+      rating: 4.8,
       discount: 'Jusqu\'à -35%',
       color: 'from-blue-600 to-blue-800'
     },
@@ -29,7 +29,7 @@ const FeaturedBrands: React.FC = () => {
       logo: '✨',
       description: 'Fashion Forward',
       products: '1.8k+ produits',
-      rating: 4.6,
+      rating: 4.8,
       discount: 'Jusqu\'à -50%',
       color: 'from-purple-600 to-purple-800'
     },
@@ -39,7 +39,7 @@ const FeaturedBrands: React.FC = () => {
       logo: '🌟',
       description: 'Affordable Fashion',
       products: '3.2k+ produits',
-      rating: 4.5,
+      rating: 4.8,
       discount: 'Jusqu\'à -60%',
       color: 'from-red-600 to-red-800'
     },

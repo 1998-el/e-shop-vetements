@@ -78,31 +78,13 @@ export const useProducts = (initialFilters: UseProductsFilters = {}) => {
       
 
       
-      const mappedProducts = response.products.map((product, index) => {
-        // Log détaillé pour les images de chaque produit
-        const imageInfo = {
-          productId: product.id,
-          productName: product.name,
-          imagesCount: product.images?.length || 0,
-          primaryImage: product.images?.[0] || null,
-          hasImages: !!(product.images && product.images.length > 0)
-        };
-        
+      const mappedProducts = response.products.map((product) => {
 
+        // Log détaillé pour les images de chaque produit
         
         return mapApiProductToUI(product);
       });
-      
       // Log de synthèse après traitement
-      const imageStats = {
-        totalProducts: mappedProducts.length,
-        productsWithImages: mappedProducts.filter(p => p.images && p.images.length > 0).length,
-        productsWithoutImages: mappedProducts.filter(p => !p.images || p.images.length === 0).length,
-        averageImagesPerProduct: mappedProducts.length > 0 
-          ? (mappedProducts.filter(p => p.images).reduce((sum, p) => sum + (p.images?.length || 0), 0) / mappedProducts.length).toFixed(2)
-          : 0
-      };
-      
 
       
       setState(prev => ({

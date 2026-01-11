@@ -16,7 +16,7 @@ const ProductFilters: React.FC = () => {
   ];
 
   const serviceLinks = [
-    { title: 'Satisfait ou remboursé', description: '14 jours pour changer d\'avis' },
+    { title: '30 jours satisfait ou remboursées', description: '30 jours pour changer d\'avis' },
     { title: 'Paiement 100% sécurisé', description: 'Moyens de paiement' },
     { title: 'Livraison Offerte', description: 'en magasin et point relais dès 59€' },
     { title: 'Retrait magasin', description: 'Consultez, réservez, retirez' },

@@ -5,9 +5,7 @@ import { useProducts } from '../hooks/useProducts';
 import type { UIProduct } from '../types';
 import { RefreshCw, AlertCircle } from 'lucide-react';
 import ReviewCarousel from '../components/home/ReviewCarousel';
-import Benefits from '../components/home/Benefits';
 import PromotionsZone from '../components/products/PromotionsZone';
-import TrustIndicators from '../components/products/TrustIndicators';
 
 const Products: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -47,7 +45,7 @@ const Products: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
-                Nos accessoires de cuisine
+                Nos produits
               </h1>
               <p className="text-gray-600 text-xs sm:text-sm">
                 {loading ? 'Chargement...' : `${pagination?.total || 0} produits`}
@@ -132,13 +130,10 @@ const Products: React.FC = () => {
       </div>
 
       {/* Trust Indicators */}
-      <TrustIndicators />
+    
 
       {/* Reviews Section */}
       <ReviewCarousel />
-
-      {/* Benefits Section */}
-      <Benefits />
     </Layout>
   );
 };

@@ -5,17 +5,15 @@ import CategoryCards from '../components/home/CategoryCards';
 import ProductGrid from '../components/home/ProductGrid';
 import ReviewCarousel from '../components/home/ReviewCarousel';
 import FAQ from '../components/home/FAQ';
-import Video_UGC from '../components/common/Video_UGC';
 import Positionnement from '../components/common/Positionnement';
-import LogoCarousel from '../components/home/LogoCarousel';
-import ProductCarousel from '../components/home/ProductCarousel';
 import VideoAutoplayOnScroll from '../components/home/VideoAutoplayOnScroll';
+import Benefices from '../components/common/Benefices';
+import Video_UGC from '../components/common/Video_UGC'; 
 
 // New Amazon/Alibaba style components
-
 const Home: React.FC = () => {
-  return (
-    <Layout>
+    return (
+      <Layout>
       {/* Top Mini Banner */}
       {/* <MiniBanner /> */}
       
@@ -43,6 +41,7 @@ const Home: React.FC = () => {
 
           {/* Positionnement - juste après le bloc des stats */}
           <Positionnement />
+          
       
       {/* Trending Categories - Alibaba Style */}
       {/* <TrendingCategories /> */}
@@ -52,7 +51,7 @@ const Home: React.FC = () => {
       
       {/* Product Grid - Existing but enhanced */}
       <ProductGrid />
-      
+      <Benefices />
       {/* Recommended Products - Amazon Style */}
       {/* <RecommendedSection /> */}
       
@@ -81,13 +80,13 @@ const Home: React.FC = () => {
       /> */}
 
       {/* Accessories Carousel */}
-      <ProductCarousel 
+      {/* <ProductCarousel 
         title="Accessoires" 
         subtitle="Compléments essentiels pour votre cuisine"
         maxProducts={6}
         category="accessoires"
         className="bg-gray-50"
-      />
+      /> */}
 
       {/* Intro Text Below Video */}
       <div className="bg-white py-8">
@@ -99,9 +98,6 @@ const Home: React.FC = () => {
       </div>
       {/* Vidéos UGC juste après le texte d'intro */}
         <Video_UGC 
-          autoSlideInterval={3000} // 3 secondes
-          showArrows={false}
-          showDots={true}
           className="my-8"
         />
 
@@ -129,25 +125,7 @@ const Home: React.FC = () => {
 
             {/* Points de différenciation avec icônes sobres */}
             <div className="grid md:grid-cols-3 gap-8 mt-12">
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center space-y-4">
-                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-helloboku-links" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-helloboku-headings">Notre Crédibilité</h3>
-                <p className="text-helloboku-text">Experts reconnus dans l'innovation cuisine</p>
-              </div>
-              
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center space-y-4">
-                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-helloboku-links" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-helloboku-headings">Storytelling Lifestyle</h3>
-                <p className="text-helloboku-text">Chaque produit raconte une histoire</p>
-              </div>
+           
               
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center space-y-4">
                 <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">

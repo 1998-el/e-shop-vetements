@@ -1,0 +1,18 @@
+@keyframes benefit-slide-in-left {
+  from { transform: translateX(-60px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes benefit-slide-in-right {
+  from { transform: translateX(60px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-benefit-slide-in-left {
+  animation: benefit-slide-in-left 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.animate-benefit-slide-in-right {
+  animation: benefit-slide-in-right 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.animate-delay-0 { animation-delay: 0.1s; }
+.animate-delay-1 { animation-delay: 0.3s; }
+.animate-delay-2 { animation-delay: 0.5s; }
+.animate-delay-3 { animation-delay: 0.7s; }

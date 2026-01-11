@@ -363,7 +363,7 @@ const Cart: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-green-500">✓</span>
-                      <span>Garantie satisfait ou remboursé</span>
+                      <span>30 jours satisfait ou remboursées</span>
                     </div>
                   </div>
                 </div>

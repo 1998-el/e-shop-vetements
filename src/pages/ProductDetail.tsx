@@ -102,7 +102,7 @@ const ProductDetail: React.FC = () => {
       userName: 'Marc D.',
       userAvatar: '/images/avatars/avatar17.jpg',
       rating: 4,
-      comment: 'Bon rapport qualité-prix. Livraison rapide comme promis. Je recommande ce produit.',
+      comment: 'Bon rapport qualité-prix. Produits livrés en 6 jours comme promis. Je recommande ce produit.',
       date: '2024-12-14',
       badge: 'Parent'
     },
@@ -304,7 +304,7 @@ const ProductDetail: React.FC = () => {
                   <RefreshCw className="w-6 h-6 text-blue-600 flex-shrink-0" />
                   <div className="min-w-0">
                     <div className="font-medium text-gray-800 text-sm sm:text-base">Retour 14 jours</div>
-                    <div className="text-gray-600 text-xs">Satisfait ou remboursé</div>
+                    <div className="text-gray-600 text-xs">30 jours satisfait ou remboursées</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">

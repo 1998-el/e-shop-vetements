@@ -59,11 +59,11 @@ const FAQ: React.FC = () => {
       questions: [
         {
           question: 'Politique de retour ?',
-          answer: '14 jours pour retourner un article. Produits doivent être dans leur état d\'origine, non utilisés, avec emballage intact.'
+          answer: '30 jours pour retourner un article. Produits doivent être dans leur état d\'origine, non utilisés, avec emballage intact.'
         },
         {
           question: 'Quand serai-je remboursé ?',
-          answer: 'Remboursement dans les 3-5 jours ouvrés suivant la réception et validation de votre retour.'
+          answer: 'Remboursement dans les 3-5 jours ouvrés suivant la réception et validation de votre retour, dans la limite de 30 jours satisfait ou remboursées.'
         }
       ]
     },

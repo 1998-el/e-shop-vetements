@@ -34,8 +34,7 @@ const VideoAutoplayOnScroll: React.FC<VideoAutoplayOnScrollProps> = ({
           if (videoRef.current) {
             // Délai léger pour s'assurer que la vidéo est prête
             setTimeout(() => {
-              videoRef.current?.play().catch(error => {
-
+              videoRef.current?.play().catch(() => {
                 // Fallback: ajouter un bouton de lecture manuelle
               });
             }, 300);
@@ -46,9 +45,9 @@ const VideoAutoplayOnScroll: React.FC<VideoAutoplayOnScrollProps> = ({
           // videoRef.current.pause();
         }
       },
-      {
+          {               // Fallback: ajouter un bouton de lecture manuelle
         threshold: threshold,
-        rootMargin: '50px' // Détecter un peu avant d'arriver à l'élément
+        rootMargin: '50px', // Détecter un peu avant d'arriver à l'élément
       }
     );
 

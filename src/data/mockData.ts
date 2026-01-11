@@ -63,7 +63,7 @@ export const products: Product[] = [
     name: 'Éplucheur Révolutionnaire',
     price: 74.99,
     oldPrice: 124.99,
-    rating: generateRandomRating(),
+    rating: 4.8,
     reviewCount: 2100,
     available: 75,
     soldToday: 25,
@@ -167,7 +167,7 @@ export const reviews: Review[] = [
     id: '4',
     userName: 'Paul D.',
     userAvatar: '/images/image_review/image_review4.png',
-    rating: 5,
+    rating: 4.8,
     comment: 'J\'utilise tt les jours, ça change la vie 😅 plus besoin de couteau dangereux',
     date: '2024-12-12',
     badge: 'Utilisateur quotidien'
@@ -176,7 +176,7 @@ export const reviews: Review[] = [
     id: '5',
     userName: 'Caroline G.',
     userAvatar: '/images/image_review/image_review5.png',
-    rating: 4,
+    rating: 4.8,
     comment: 'Super utile pour les carrots 🥕 et courgetes, par contre faut pas forcer sinon ça bloque un peu',
     date: '2024-12-11',
     badge: 'Cuisinier amateur'

@@ -9,7 +9,7 @@ const MiniBanner: React.FC = () => {
           <span className="text-[#e60023]">•</span>
           <span>Jouets de qualité premium</span>
           <span className="text-[#e60023]">•</span>
-          <span>Livraison rapide</span>
+          <span>Produits livrés en 6 jours</span>
           <span className="text-[#e60023]">•</span>
           <span>Paiement sécurisé</span>
         </div>

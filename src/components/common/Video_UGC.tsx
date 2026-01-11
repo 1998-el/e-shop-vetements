@@ -12,7 +12,7 @@ const DEFAULT_VIDEOS = [
   { src: '/videos/video_ugc/video-ugc (3).mp4', alt: 'Video 3' },
 ];
 
-const ITEM_WIDTH = 340;
+const ITEM_WIDTH = 310;
 
 const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -20,8 +20,17 @@ const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
+
   // Infinite array for illusion
   const infiniteVideos = [...videos, ...videos, ...videos];
+
+  // Volume state for each video (only one active at a time)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Toggle mute on click, only one video can have sound
+  const handleVideoClick = (index: number) => {
+    setActiveIndex((prev) => (prev === index ? null : index));
+  };
 
   // Drag handlers
   const onMouseDown = (e: React.MouseEvent) => {
@@ -40,7 +49,7 @@ const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className
     <div className={`relative ${className || ''}`}>
       <div className="max-w-4xl mx-auto mb-4">
         <h2 className="text-xl md:text-2xl font-bold text-center text-helloboku-headings mb-6">
-          Découvrez les avis authentiques de nos clients en vidéo !
+          Rien de plus agréable que des personnes satisfaites !
         </h2>
       </div>
       <div className="relative mx-auto max-w-4xl">
@@ -55,21 +64,31 @@ const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className
         >
           {infiniteVideos.map((video, index) => {
             const v = video as { src: string; poster?: string; alt?: string };
+            const isActive = activeIndex === index;
             return (
               <div
                 key={index}
                 style={{ minWidth: ITEM_WIDTH, maxWidth: ITEM_WIDTH, scrollSnapAlign: 'center' }}
-                className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg border border-gray-100"
+                className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border border-gray-100 relative group"
               >
                 <video
                   src={v.src}
                   {...(v.poster ? { poster: v.poster } : {})}
-                  muted
+                  muted={!isActive}
                   loop
                   playsInline
                   autoPlay
-                  className="w-full h-[440px] object-cover"
+                  className="w-[95%] h-[440px] object-cover cursor-pointer mx-auto"
+                  onClick={() => handleVideoClick(index)}
                 />
+                <button
+                  type="button"
+                  onClick={() => handleVideoClick(index)}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white rounded-full p-4 text-2xl opacity-90 group-hover:opacity-100 transition"
+                  style={{ zIndex: 2 }}
+                >
+                  {isActive ? '🔊' : '🔇'}
+                </button>
               </div>
             );
           })}

@@ -176,7 +176,7 @@ const About: React.FC = () => {
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
                 </div>
-                <p>Livraison rapide et soignée dans toute la France</p>
+                <p>Produits livrés en 6 jours et soignée dans toute la France</p>
               </div>
             </div>
           </div>

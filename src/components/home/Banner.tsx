@@ -25,14 +25,14 @@ const Banner: React.FC = () => {
           </h1>
           
           <p className="text-white/90 mb-6 text-sm max-w-md">
-            Découvrez nos solutions uniques pour préparer vos repas en un temps record
+            Notre machine épluche tous vos ingrédients en 1-2 minutes, vous permettant de cuisiner rapidement et sans effort vos repas préférés.
           </p>
           
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 bg-white text-helloboku-links px-6 py-3 rounded-lg font-semibold hover:bg-helloboku-page-bg transition-all"
+            className="inline-flex items-center gap-2 bg-helloboku-links text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-helloboku-links transition-all"
           >
-            Profiter de l'offre
+            Je cuisine plus vite 
             <ArrowRight className="w-4 h-4" />
           </Link>
           

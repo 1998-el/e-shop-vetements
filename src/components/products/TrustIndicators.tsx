@@ -11,7 +11,7 @@ const TrustIndicators: React.FC = () => {
     },
     {
       icon: Star,
-      value: '4.9/5',
+      value: '4.8/5',
       label: 'Note moyenne',
       description: 'Basée sur 2500+ avis'
     },

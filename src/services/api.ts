@@ -28,32 +28,21 @@ export const productsApi = {
   getAll: async (filters: ProductFilterDto = {}): Promise<PaginatedResponse<Product>> => {
     try {
       const params = new URLSearchParams();
-      
       // Ajouter les filtres à la query string
       Object.entries(filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== '') {
           params.append(key, value.toString());
         }
       });
-
       const queryString = params.toString();
       const requestUrl = `/products${queryString ? '?' + queryString : ''}`;
-      
-
-      
       const response = await api.get(requestUrl);
-      
-
-      
       // Log des images pour les premiers produits
       if (response.data.products && response.data.products.length > 0) {
-        const sampleProducts = response.data.products.slice(0, 3);
-
+        // ... (logique de log si besoin)
       }
-      
       return response.data;
     } catch (error) {
-
       throw error;
     }
   },
