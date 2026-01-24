@@ -10,6 +10,7 @@ const DEFAULT_VIDEOS = [
   { src: '/videos/video_ugc/video-ugc (1).mp4', alt: 'Video 1' },
   { src: '/videos/video_ugc/video-ugc (2).mp4', alt: 'Video 2' },
   { src: '/videos/video_ugc/video-ugc (3).mp4', alt: 'Video 3' },
+  { src: '/videos/video_ugc/video-ugc (4).mp4', alt: 'Video 4' },
 ];
 
 const ITEM_WIDTH = 310;
@@ -49,7 +50,7 @@ const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className
     <div className={`relative ${className || ''}`}>
       <div className="max-w-4xl mx-auto mb-4">
         <h2 className="text-xl md:text-2xl font-bold text-center text-helloboku-headings mb-6">
-          Rien de plus agréable que des personnes satisfaites !
+          Une satisfaction à travers le Monde !
         </h2>
       </div>
       <div className="relative mx-auto max-w-4xl">

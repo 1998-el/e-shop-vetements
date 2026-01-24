@@ -139,94 +139,113 @@ export const reviews: Review[] = [
   {
     id: '1',
     userName: 'Sophie M.',
-    userAvatar: '/images/image_review/image_review1.png',
+    userAvatar: '/images/image_review/review1.png',
     rating: 5,
-    comment: 'Franchement trop pratique 😍 j\'ai gagner bcp de temps en cuisine, je recommande sans hésiter',
-    date: '2024-12-15',
+    comment: 'Je m’en sers tous les soirs pour les légumes, c’est rapide et mes mains ne fatiguent plus. Même mon fils a réussi à l’utiliser sans problème.',
+    date: '2025-12-15',
     badge: 'Client fidèle'
   },
   {
     id: '2',
     userName: 'Maxime L.',
-    userAvatar: '/images/image_review/image_review2.png',
+    userAvatar: '/images/image_review/review2.png',
     rating: 4,
-    comment: 'Au debut j\'étais sceptique 🤔 mais ça marche vraiment bien, fini la galère avec les patates',
-    date: '2024-12-14',
+    comment: 'Très pratique et facile à utiliser, ça épluche sans effort et ça va super vite.',
+    date: '2024-06-14',
     badge: 'Utilisateur régulier'
   },
   {
     id: '3',
     userName: 'Julie T.',
-    userAvatar: '/images/image_review/image_review3.png',
+    userAvatar: '/images/image_review/review3.png',
     rating: 4,
-    comment: 'Produit reçu rapidement 📦, bonne qualité, par contre un peu petit mais fait le taf 👍',
+    comment: 'Livraison rapide, produit conforme. J’avais peur que ça fasse du bazar mais le plan de travail reste propre.',
     date: '2024-12-13',
     badge: 'Nouveau client'
   },
   {
     id: '4',
     userName: 'Paul D.',
-    userAvatar: '/images/image_review/image_review4.png',
-    rating: 4.8,
-    comment: 'J\'utilise tt les jours, ça change la vie 😅 plus besoin de couteau dangereux',
-    date: '2024-12-12',
+    userAvatar: '/images/image_review/review4.png',
+    rating: 5,
+    comment: 'Je l’utilise tous les jours, ça me fait gagner un temps fou et plus aucune coupure aux doigts.',
+    date: '2025-07-12',
     badge: 'Utilisateur quotidien'
   },
   {
     id: '5',
     userName: 'Caroline G.',
-    userAvatar: '/images/image_review/image_review5.png',
-    rating: 4.8,
-    comment: 'Super utile pour les carrots 🥕 et courgetes, par contre faut pas forcer sinon ça bloque un peu',
-    date: '2024-12-11',
-    badge: 'Cuisinier amateur'
+    userAvatar: '/images/image_review/review5.png',
+    rating: 5,
+    comment: 'Je l’ai essayé sur des pommes et des poires, super simple à utiliser. Dommage qu’il n’y ait pas plus de couleurs mais franchement ça fait bien le boulot.',
+    date: '2025-12-11',
+    badge: 'Satisfaite'
   },
   {
     id: '6',
-    userName: 'Mélanie P.',
-    userAvatar: '/images/image_review/image_review6.png',
+    userName: 'Jacob P.',
+    userAvatar: '/images/image_review/review6.png',
     rating: 5,
-    comment: 'Je l\'ai offert à ma mère 🎁 elle est trop contente, elle dit que c\'est son gadget préféré',
-    date: '2024-12-10',
+    comment: 'Offert à ma mère, elle adore. Elle ne se fatigue plus et c’est sécurisé, même pour ses mains fragiles.',
+    date: '2025-01-10',
     badge: 'Cadeau parfait'
   },
   {
     id: '7',
     userName: 'Thomas B.',
-    userAvatar: '/images/image_review/image_review7.png',
+    userAvatar: '/images/image_review/review7.png',
     rating: 5,
-    comment: 'Pas cher et efficace 💯 franchement ça vaut largement le prix, je regrette pas',
-    date: '2024-12-09',
-    badge: 'Excellent rapport qualité-prix'
+    comment: 'Excellent rapport qualité-prix. Pour 59€ avec les accessoires offerts, c’est imbattable.',
+    date: '2025-10-09',
+    badge: 'Excellent'
   },
   {
     id: '8',
     userName: 'Lisa C.',
-    userAvatar: '/images/image_review/image_review8.png',
+    userAvatar: '/images/image_review/review8.png',
     rating: 4,
-    comment: 'J\'avais peur que ça casse vite 😬 mais solide et facile à nettoyer',
-    date: '2024-12-08',
+    comment: 'Facile à nettoyer, un coup sous l’eau et c’est réglé. Pas de saleté partout comme avec les couteaux.',
+    date: '2025-08-08',
     badge: 'Satisfaite'
   },
   {
     id: '9',
     userName: 'Isabelle F.',
-    userAvatar: '/images/image_review/image_review9.png',
+    userAvatar: '/images/image_review/review9.png',
     rating: 4,
-    comment: 'Très bon produit, simple à utiliser 👌 juste dommage pas dispo en plusieurs couleurs',
-    date: '2024-12-07',
+    comment: 'Simple à utiliser, même quand on est pressé. Dommage qu’il n’y ait pas plus de couleurs.',
+    date: '2025-12-07',
     badge: 'Utilisatrice régulière'
   },
   {
     id: '10',
     userName: 'David S.',
-    userAvatar: '/images/image_review/image_review10.png',
+    userAvatar: '/images/image_review/review10.png',
     rating: 5,
-    comment: 'Je pensais que c\'était un gadget inutile 😅 mais en fait je l\'utilise tt le temps',
-    date: '2024-12-06',
+    comment: 'Je pensais que c’était un gadget, mais après l’avoir utilisé sur des patates et des courgettes, je m’en sers tout le temps. Ça marche vraiment et ça fait gagner du temps.',
+    date: '2025-12-06',
     badge: 'Convaincu'
+  },
+  {
+    id: '11',
+    userName: 'Nouveau client',
+    userAvatar: '/images/image_review/review11.png',
+    rating: 5,
+    comment: 'Très bon produit, je suis ravi. Ça épluche nickel sans forcer et la livraison était rapide.',
+    date: '2025-12-05',
+    badge: 'Nouveau client'
+  },
+  {
+    id: '12',
+    userName: 'Utilisateur satisfait',
+    userAvatar: '/images/image_review/review12.png',
+    rating: 5,
+    comment: 'Fonctionne parfaitement, rien à redire. Gain de temps énorme et résultat propre à chaque fois.',
+    date: '2025-12-04',
+    badge: 'Satisfait'
   }
 ];
+
 
 export const brands: Brand[] = [
   { id: '1', name: 'KitchenPro', logo: '/images/logos/kitchenpro.png' },
@@ -283,19 +302,43 @@ export const benefits = [
 
 export const faqData = [
   {
-    question: 'Quelle est votre politique de retour ?',
-    answer: 'Nous offrons 30 jours pour retourner les articles non utilisés dans leur emballage d\'origine.'
+    question: 'J’ai déjà essayé plein d’éplucheurs, pourquoi celui-ci serait différent ?',
+    answer: "Parce que la plupart des éplucheurs manuels fatiguent la main et gaspillent de la chair. Notre machine est automatique, stable et précise : elle enlève uniquement la peau, sans effort, et fonctionne sur une large variété de fruits et légumes. Vous gagnez du temps et vous évitez la corvée."
   },
   {
-    question: 'Livrez-vous internationalement ?',
-    answer: 'Oui, nous livrons dans la plupart des pays européens. Les frais varient selon la destination.'
+    question: 'Est-ce que ça marche vraiment sur mes légumes du quotidien ?',
+    answer: "Oui. Il est conçu pour les classiques de la cuisine française : pommes de terre, carottes, courgettes, pommes, poires, tomates… et bien plus. Vous pouvez préparer un gratin dauphinois, une ratatouille ou une tarte Tatin sans passer des heures à éplucher."
   },
   {
-    question: 'Vos ustensiles sont-ils sûrs ?',
-    answer: 'Tous nos produits respectent les normes européennes de sécurité et sont testés pour la qualité.'
+    question: 'Est-ce que c’est compliqué à utiliser ?',
+    answer: "Pas du tout. Il suffit de poser le légume, d’appuyer sur un bouton et de laisser la machine travailler. Pas de réglages compliqués, pas de force à fournir. Même un enfant peut l’utiliser sous surveillance."
   },
   {
-    question: 'Puis-je suivre ma commande ?',
-    answer: 'Oui, vous recevrez un numéro de suivi par email une fois votre commande expédiée.'
+    question: 'Et pour le nettoyage ?',
+    answer: "Les pièces sont démontables et lavables facilement. Un simple rinçage suffit. Contrairement aux gadgets bas de gamme, vous n’avez pas de recoins impossibles à nettoyer."
+  },
+  {
+    question: 'Est-ce que c’est solide ?',
+    answer: "Oui. Lames en acier inoxydable, structure stable et robuste. Ce n’est pas un gadget jetable : il est conçu pour durer. Nous offrons en plus une garantie qualité et retour pour vous rassurer."
+  },
+  {
+    question: 'Je crains les accidents, est-ce sécurisé ?',
+    answer: "La machine est stable, avec une base antidérapante. Les lames sont protégées et vous n’avez pas besoin de les manipuler directement. Résultat : zéro risque de coupure comparé aux couteaux ou éplucheurs classiques."
+  },
+  {
+    question: 'Pourquoi je paierais 59,99 € alors que je trouve des éplucheurs moins chers ?',
+    answer: "Parce que les modèles basiques :\n\n    Fatiguent la main\n\n    Gaspiellent de la chair\n\n    Ne durent pas longtemps\n\n    Ne couvrent pas tous les aliments\n\nIci, vous achetez une solution complète : gain de temps, confort, sécurité, durabilité, + 2 accessoires offerts. C’est un investissement qui se rentabilise dès les premières semaines."
+  },
+  {
+    question: 'Et si je ne suis pas satisfait ?',
+    answer: "Vous êtes couvert par notre garantie satisfait ou remboursé. Vous pouvez tester sans risque. Si vous n’êtes pas convaincu, nous reprenons le produit."
+  },
+  {
+    question: 'Est-ce que je peux payer en toute sécurité ?',
+    answer: "Oui. Nous utilisons des logos de paiement sécurisé (Visa, Mastercard, Stripe, PayPal). Vos données sont protégées et vos transactions 100% sûres."
+  },
+  {
+    question: 'Est-ce que d’autres clients sont contents ?',
+    answer: "Absolument. Plus de 15 000 utilisateurs satisfaits et une note moyenne de 4,8/5. Les avis clients et vidéos UGC sont disponibles sur la page pour que vous voyiez les résultats réels."
   }
 ];

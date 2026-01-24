@@ -14,7 +14,7 @@ const FAQ: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 font-fredoka">
-            Questions fréquentes
+              FAQ
           </h2>
           <p className="text-gray-600">
             Retrouvez ici les réponses aux questions les plus courantes sur nos accessoires et services de cuisine.

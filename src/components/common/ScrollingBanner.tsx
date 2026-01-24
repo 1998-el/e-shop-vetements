@@ -6,12 +6,9 @@ const ScrollingBanner: React.FC = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   const messages = [
-    "Livraison gratuite dès 50€ d'achat",
-    "4.8/5 de satisfaction client",
-    "Expédition sous 24-48h",
-    "Paiement sécurisé",
-    "Retours gratuits sous 14 jours",
-    "Plus de 10 000 accessoires vendus"
+    "1  Éplucheur acheté = 2 Accessoires Offerts",
+    " -20€ sur toutes vos commandes dès aujourd'hui ",
+    "Plus de 17.3k éplucheur vendus" 
   ];
 
   useEffect(() => {
@@ -19,7 +16,7 @@ const ScrollingBanner: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
-    }, 4000); // Changement toutes les 4 secondes
+    }, 6000); // Changement toutes les 6 secondes
 
     return () => clearInterval(interval);
   }, [isVisible, messages.length]);
@@ -31,7 +28,7 @@ const ScrollingBanner: React.FC = () => {
       {/* Contenu */}
       <div className="flex items-center justify-center">
         <div className="text-center text-xs sm:text-sm max-w-full overflow-hidden">
-          <span className="inline-block transition-opacity duration-300 px-2 leading-tight">
+          <span className="inline-block transition-opacity duration-300 px-4 leading-tight font-bold">
             {messages[currentMessageIndex]}
           </span>
         </div>

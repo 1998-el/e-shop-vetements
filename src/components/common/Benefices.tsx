@@ -4,6 +4,7 @@
 import React from "react";
 import './benefices-animations.css';
 import { useNavigate } from "react-router-dom";
+import { useProducts } from '../../hooks/useProducts';
 
 // Données des bénéfices
 const benefitsData = [
@@ -38,7 +39,7 @@ const benefitsData = [
 ];
 
 // Données pour les badges
-const badges = ["❌ Temps perdu", "❌ Saleté", "❌ Risques"];
+const badges = ["❌ Temps perdu", "❌ Efforts", "❌ Saleté"];
 
 interface Benefit {
   id: number;
@@ -58,14 +59,18 @@ interface BeneficesProps {
 
 const Benefices: React.FC<BeneficesProps> = ({ 
   benefits = benefitsData,
-  title = "Une machine acheté  :  2 accesoires offerts + un livre de cuisine gratuit",
-  subtitle = "Une efficacité prouvée. Pas de fausses promesses",
+  title = "Pourquoi choisir beldouze ?",
+  subtitle = "Une efficacité prouvée, des milliers de clients satisfaits",
   badges: customBadges = badges,
   className = ""
 }) => {
   const navigate = useNavigate();
+  const { products } = useProducts({ limit: 1 });
+  const mainProduct = products && products.length > 0 ? products[0] : null;
   const handleClick = () => {
-    if (window.innerWidth < 768) {
+    if (mainProduct) {
+      navigate(`/product/${mainProduct.id}`);
+    } else {
       navigate('/products');
     }
   };
@@ -76,12 +81,11 @@ const Benefices: React.FC<BeneficesProps> = ({
     >
       {/* En-tête avec offre */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
           {title}
         </h1>
-        
         {/* Badges */}
-        <div className="flex flex-wrap justify-center items-center gap-3 mb-4">
+        <div className="flex flex-wrap justify-center items-center gap-2 mb-0">
           {customBadges.map((badge, index) => (
             <span 
               key={index}
@@ -89,18 +93,10 @@ const Benefices: React.FC<BeneficesProps> = ({
             >
               {badge}
             </span>
-          ))};
+          ))}
         </div>
-      </div>
-
-      {/* Sous-titre */}
-      <div className="text-center mb-10">
-        <h2 className="text-xl md:text-2xl font-semibold text-white mb-2">
-          {subtitle}
-        </h2>
-        <p className="text-white/80 max-w-2xl mx-auto">
-          Nos solutions sont conçues pour vous faire gangner du temps, diminuer vos efforts et refiare de la cuisine un plaisir quotidien.
-        </p>
+        {/* Sous-titre */}
+        <div className="text-white/80 text-base mt-4">{subtitle}</div>
       </div>
 
       {/* Liste des bénéfices */}
@@ -162,11 +158,11 @@ const Benefices: React.FC<BeneficesProps> = ({
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <div className="flex items-center" style={{gap: 0}}>
-                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center" style={{ position: 'relative', top: '-10px', marginLeft: '4px' }}>
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center" style={{ position: 'relative', top: '2px', marginLeft: '4px' }}>
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style={{marginRight: 0}}>
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                  </div><span style={{marginLeft: 0}}>Des résultats prouvés par des études</span>
+                  </div><span style={{marginLeft: '8px'}}>Des résultats prouvés par des études</span>
                 </div>
               </div>
             </div>
@@ -188,7 +184,7 @@ const Benefices: React.FC<BeneficesProps> = ({
           className="bg-white text-[#0e0e52] font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           onClick={handleClick}
         >
-          Je cuisine sans effort 
+      Je cuisine sans effort &ensp; -20€
         </button>
         <p className="text-white/60 text-sm mt-3">
           Livraison gratuite • 30 jours satisfait ou remboursées

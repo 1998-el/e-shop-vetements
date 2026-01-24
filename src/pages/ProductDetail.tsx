@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import ProductCard from '../components/home/ProductCard';
+
 import ButtonSpinner from '../components/common/ButtonSpinner';
 import { useProduct, useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import { reviews } from '../data/mockData';
 import { getProductImageUrl } from '../utils/productImageHelper';
 import { Star, ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus, AlertCircle, Shield, CheckCircle, Truck, RefreshCw, Lock, Award } from 'lucide-react';
+import Video_UGC from '../components/common/Video_UGC';
+import ReviewCarousel from '../components/home/ReviewCarousel';
+import FAQ from '../components/home/FAQ';
+import ProductOffertCarousel from '../components/common/ProductOffertCarousel';
+import CategoryCards from '../components/home/CategoryCards';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { addToCart, loading } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+    // Gestion du swipe mobile
+    const handleTouchStart = (e: React.TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+    const handleTouchMove = (e: React.TouchEvent) => {
+      touchEndX.current = e.touches[0].clientX;
+    };
+    const handleTouchEnd = () => {
+      if (touchStartX.current !== null && touchEndX.current !== null) {
+        const diff = touchStartX.current - touchEndX.current;
+        if (diff > 40) nextImage();
+        else if (diff < -40) prevImage();
+      }
+      touchStartX.current = null;
+      touchEndX.current = null;
+    };
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
 
@@ -151,34 +175,46 @@ const ProductDetail: React.FC = () => {
         </div>
       </div>
 
+      
+
       <div className="max-w-7xl mx-auto px-4 py-4 md:py-6 lg:py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Product Images */}
           <div>
 
             <div className="relative bg-gray-50 rounded border border-gray-200">
-              <img
-                src={product.images[selectedImage] || getProductImageUrl(product)}
-                alt={product.name}
-                className="w-full h-64 sm:h-80 md:h-96 object-contain p-4 sm:p-6 md:p-8"
-                onError={(_e) => {}}
-                crossOrigin="anonymous"
-              />
+              <div
+                style={{width:'100%',aspectRatio:'1/1',background:'#f9fafb',position:'relative',borderRadius:'0.5rem',overflow:'hidden'}} // rounded-md
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <img
+                  src={product.images[selectedImage] || getProductImageUrl(product)}
+                  alt={product.name}
+                  className="w-full h-full object-contain rounded-md" // arrondi léger
+                  style={{margin:0,padding:0,display:'block',position:'absolute',top:0,left:0,right:0,bottom:0,borderRadius:'0.5rem'}}
+                  onError={(_e) => {}}
+                  crossOrigin="anonymous"
+                />
+              </div>
               {product.images.length > 1 && (
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 bg-white border border-gray-300 p-3 sm:p-4 rounded-full hover:bg-gray-50 shadow-sm touch-manipulation"
+                    className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 touch-manipulation"
+                    style={{background:'none',border:'none',padding:8,opacity:0.7}}
                     aria-label="Image précédente"
                   >
-                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                    <ChevronLeft className="w-7 h-7 sm:w-8 sm:h-8 text-white" style={{opacity:0.8}} />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-2 sm:right-3 md:right-4 top-1/2 -translate-y-1/2 bg-white border border-gray-300 p-3 sm:p-4 rounded-full hover:bg-gray-50 shadow-sm touch-manipulation"
+                    className="absolute right-2 sm:right-3 md:right-4 top-1/2 -translate-y-1/2 touch-manipulation"
+                    style={{background:'none',border:'none',padding:8,opacity:0.7}}
                     aria-label="Image suivante"
                   >
-                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                    <ChevronRight className="w-7 h-7 sm:w-8 sm:h-8 text-white" style={{opacity:0.8}} />
                   </button>
                 </>
               )}
@@ -186,80 +222,201 @@ const ProductDetail: React.FC = () => {
 
             {product.images.length > 1 && (
               <div className="mt-4 sm:mt-6">
-                <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2">
-                  {product.images.map((image, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedImage(index)}
-                      className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded border-2 transition-all touch-manipulation ${
-                        selectedImage === index 
-                          ? 'border-gray-900 ring-2 ring-gray-200' 
-                          : 'border-gray-200 hover:border-gray-400'
-                      }`}
-                      aria-label={`Voir l'image ${index + 1}`}
-                    >
-                      <img
-                        src={image}
-                        alt={`${product.name} ${index + 1}`}
-                        className="w-full h-full object-cover rounded"
-                        onError={(_e) => {}}
-                        loading="lazy"
-                        crossOrigin="anonymous"
-                      />
-                    </button>
-                  ))}
+                <div className="flex gap-0 sm:gap-0 overflow-x-hidden pb-0">
+                  {Array.from({length: product.images.length}).map((_, i) => {
+                    // Décalage circulaire pour que la miniature 0 soit toujours celle de l'image active
+                    const realIndex = (selectedImage + i) % product.images.length;
+                    const image = product.images[realIndex];
+                    return (
+                      <button
+                        key={realIndex}
+                        onClick={() => setSelectedImage(realIndex)}
+                        className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-md border-2 border-gray-200 transition-all touch-manipulation ${
+                          realIndex === selectedImage 
+                            ? 'border-gray-900 ring-2 ring-gray-200' 
+                            : 'hover:border-gray-400'
+                        }`}
+                        aria-label={`Voir l'image ${realIndex + 1}`}
+                        style={{margin:0,padding:0, borderRadius:'0.5rem', overflow:'hidden'}} // arrondi léger
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.name} ${realIndex + 1}`}
+                          className="w-full h-full object-cover rounded-md"
+                          onError={(_e) => {}}
+                          loading="lazy"
+                          crossOrigin="anonymous"
+                          style={{margin:0,padding:0, borderRadius:'0.5rem'}}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}
-          </div>
-
-
-          {/* Product Info */}
+             {/* Product Info */}
           <div className="bg-white p-4 sm:p-6 md:p-8 border border-gray-200">
             <div className="mb-6 sm:mb-8">
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">{product.name}</h1>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="flex items-center">
-                  {renderStars(defaultRating)}
+              <div className="flex flex-row flex-nowrap items-center gap-1 mb-2 whitespace-nowrap">
+                <div className="flex items-center mr-1">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-4 h-4 ${i < defaultRating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                    />
+                  ))}
                 </div>
-                <span className="text-sm text-gray-600 font-medium">
-                  {defaultRating} (5000 avis)
+                <span className="text-sm text-gray-800 font-semibold mr-1">
+                  4.8/5 avis
                 </span>
+                <span className="text-sm text-gray-500 font-medium mr-1">(+1200 avis)</span>
+                <span className="text-sm text-green-600 font-bold">17.3k vendus</span>
               </div>
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
+              <div className=" sm:text- text-sm-[#0e0e52] mb-4">Fini l’épluchage pénibles et interminables !</div>
               <div className="mb-4 sm:mb-6">
-                <span className="text-2xl sm:text-3xl font-bold text-gray-900">€{product.price.toFixed(2)}</span>
-                {product.oldPrice && (
-                  <span className="ml-2 sm:ml-3 text-lg text-gray-500 line-through">€{product.oldPrice.toFixed(2)}</span>
-                )}
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-3">
+                    <span className="text-base sm:text-lg text-gray-400 line-through mr-2" style={{fontWeight:400}}>€79,99</span>
+                    <span className="text-xl sm:text-2xl font-bold text-gray-900">€{product.price.toFixed(2)}</span>
+                    <span className="ml-2 px-2 py-1 rounded bg-green-600 text-white text-xs sm:text-base font-semibold">
+                      Economisez 20€
+                    </span>
+                  </div>
+                  <div className="w-full h-px bg-blue-100 mt-2 rounded-full"></div>
+                  <div className="flex flex-col gap-3 mt-2">
+                    <div className="text-sm sm:text-base">
+                      <span className="font-bold text-gray-700 whitespace-nowrap">
+                        <span role="img" aria-label="Sans effort" className="mr-1">💪</span>
+                        Sans effort :
+                      </span>
+                      <span className="text-gray-600 font-normal break-words"> Ne fatiguez plus vos mains, l’outil fait le travail pour vous.</span>
+                    </div>
+                    <div className="text-sm sm:text-base">
+                      <span className="font-bold text-gray-700 whitespace-nowrap">
+                        <span role="img" aria-label="Plus vite" className="mr-1">⚡</span>
+                        Ni perte de temps :
+                      </span>
+                      <span className="text-gray-600 font-normal break-words"> Gagnez du temps sur la préparation, tout est prêt en quelques secondes.</span>
+                    </div>
+                    <div className="text-sm sm:text-base">
+                      <span className="font-bold text-gray-700 whitespace-nowrap">
+                        <span role="img" aria-label="Sans Salete" className="mr-1">🧼</span>
+                        Sans Saleté :
+                      </span>
+                      <span className="text-gray-600 font-normal break-words"> Gardez votre plan de travail propre, les déchets d'épluchage restent dans la machine.</span>
+                    </div>
+                    <div className="text-sm sm:text-base">
+                      <span className="font-bold text-gray-700 whitespace-nowrap">
+                        <span role="img" aria-label="En securite" className="mr-1">🛡️</span>
+                        En sécurité :
+                      </span>
+                      <span className="text-gray-600 font-normal break-words"> Utilisation sans risque de coupure, même pour les enfants.</span>
+                    </div>
+                  </div>
+                  {/* Bloc Cadeaux Offerts juste après les bénéfices */}
+                  <div className="mt-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Offert avec votre pack</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {/* 1er cadeau */}
+                      <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
+                        <div className="flex items-center gap-2">
+                          <img src="/images/photo_produits_offerts/produit offerts (5).jpeg" alt="Fouet offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <div className="flex-1">
+                            <div className="font-semibold text-gray-800 text-xs sm:text-sm">Casse-oeuf</div>
+                          </div>
+                          <div className="flex flex-col items-end ml-2">
+                            <span className="text-xs text-gray-400 line-through mb-1">17,99€</span>
+                            <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* 2e cadeau */}
+                      <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
+                        <div className="flex items-center gap-2">
+                          <img src="/images/photo_produits_offerts/produit offerts (6).jpeg" alt="Pinceau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <div className="flex-1">
+                            <div className="font-semibold text-gray-800 text-xs sm:text-sm">Fouet de cuisine</div>
+                          </div>
+                          <div className="flex flex-col items-end ml-2">
+                            <span className="text-xs text-gray-400 line-through mb-1">13,99€</span>
+                            <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* 3e cadeau surprise */}
+                      <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-2xl mr-2">🎁</span>
+                          <div className="flex-1">
+                            <div className="font-semibold text-gray-800 text-xs sm:text-sm">Cadeau surprise à gagner</div>
+                          </div>
+                          <div className="flex flex-col items-end ml-2">
+                            <span className="text-xs text-gray-400 line-through mb-1">&nbsp;</span>
+                            <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Compteur jusqu'à minuit */}
+                    <div className="mt-2 col-span-full">
+                      <CountdownToMidnight />
+                      {/* Date de livraison */}
+                      <LivraisonDate />
+                      {/* Bloc Garantie 30 jours */}
+                      <div
+                        className="mt-2 flex items-start sm:items-center gap-2 sm:gap-4 px-2 py-2 rounded-lg border"
+                        style={{ borderColor: '#0e0e52', background: '#f8f9fb' }}
+                      >
+                        <img
+                          src="/images/logos/Check.png"
+                          alt="Badge Beldouze"
+                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover bg-white flex-shrink-0"
+                          style={{ objectFit: 'cover' }}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col">
+                            <span className="text-xs sm:text-sm" style={{ whiteSpace: 'nowrap' }}>
+                              <span className="font-bold" style={{ color: '#0e0e52' }}>Garantie 30 jours</span> satisfait ou remboursé
+                            </span>
+                            <span className="text-[0.7rem] sm:text-xs text-gray-600 mt-0.5" style={{ lineHeight: 1.2 }}>
+                              Si vous n'êtes pas satisfait, à certaines conditions, vous serez remboursé.
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                </div>
               </div>
             </div>
 
             {/* Quantity Selector */}
             <div className="mb-6 sm:mb-8">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                <div className="flex items-center border border-gray-300 rounded-lg">
+                <div className="inline-flex items-center border border-gray-300 rounded-lg w-[20vw] min-w-[100px] max-w-[300px]">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-3 sm:p-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                    className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
                     disabled={loading}
                     aria-label="Diminuer la quantité"
                   >
-                    <Minus className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Minus className="w-4 h-4" />
                   </button>
-                  <span className="px-4 sm:px-6 py-3 sm:py-4 font-semibold min-w-[3rem] text-center">{quantity}</span>
+                  <span className="px-2 py-1 font-semibold text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(Math.min(product.available, quantity + 1))}
-                    className="p-3 sm:p-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                    className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
                     disabled={loading}
                     aria-label="Augmenter la quantité"
                   >
-                    <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Plus className="w-4 h-4" />
                   </button>
                 </div>
-                <span className="text-sm font-medium text-gray-600">
-                  {product.available} en stock
-                </span>
+                {/* Stock count removed as requested */}
               </div>
             </div>
 
@@ -283,13 +440,33 @@ const ProductDetail: React.FC = () => {
                   <>
                     <ShoppingCart className="w-5 h-5" />
                     <span className="hidden sm:inline">Ajouter au panier</span>
-                    <span className="sm:hidden">Au panier</span>
+                    <span className="sm:hidden">Au Panier</span>
                   </>
                 )}
               </button>
+              {/* Liste des icônes de paiement */}
+              <div className="flex flex-row items-center gap-3 mt-2 mb-2 justify-center">
+                {[
+                  {src: '/images/icon-payment/Apple Pay.png', alt: 'Apple Pay'},
+                  {src: '/images/icon-payment/visa.png', alt: 'Visa'},
+                  {src: '/images/icon-payment/Gpay.png', alt: 'Google Pay'},
+                  {src: '/images/icon-payment/paypal.png', alt: 'Paypal'},
+                  {src: '/images/icon-payment/mastercard.png', alt: 'Mastercard'}
+                ].map((icon) => (
+                  <div key={icon.alt} className="flex justify-center">
+                    <img
+                      src={icon.src}
+                      alt={icon.alt}
+                      className="rounded-md border border-gray-200 object-contain bg-white shadow-sm"
+                      style={{padding:'4px', width:'4.2rem', height:'2.2rem', maxWidth:'100%'}}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
-
+{/* Carrousel des produits offerts */}
+      <ProductOffertCarousel />
             {/* Trust Elements & Benefits */}
             <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm mb-4 sm:mb-6">
@@ -324,6 +501,41 @@ const ProductDetail: React.FC = () => {
               </div>
             </div>
           </div>
+          <CategoryCards />
+                {/* Bloc vidéos UGC, avis, FAQ */}
+                <div className="max-w-7xl mx-auto w-full">
+                  {/* Comment ca marche ? */}
+                  <div className="my-8">
+                    <img 
+                      src="/images/images_compsant/Comment ça marche.png" 
+                      alt="Tableau de comparaison" 
+                      className="w-screen max-w-none object-contain mx-auto block"
+                      style={{width:'100vw'}}
+                    />
+                  </div>
+                  <div className="my-8">
+                    <Video_UGC />
+                  </div>
+                  {/* Tableau de comparaison */}
+                  <div className="my-8">
+                    <img 
+                      src="/images/images_compsant/Tableau comparaison.png" 
+                      alt="Comment ça marche" 
+                      className="w-full object-contain mx-auto block"
+                      style={{width:'100%'}}
+                    />
+                  </div>
+                  <div className="my-8">
+                    <ReviewCarousel />
+                  </div>
+                  <div className="my-8">
+                    <FAQ />
+                  </div>
+                </div>
+          </div>
+
+
+         
 
           {/* Promotional Text */}
           <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-blue-50 rounded-lg border border-blue-200">
@@ -385,7 +597,7 @@ const ProductDetail: React.FC = () => {
                         <span className="text-xl sm:text-2xl font-bold text-gray-900">{defaultRating}</span>
                         <span className="text-gray-600 text-sm sm:text-base">sur 5</span>
                       </div>
-                      <span className="text-sm text-gray-600 font-medium">5000 avis clients</span>
+                      <span className="text-sm text-gray-600 font-medium">+1200 avis clients</span>
                     </div>
                     <div className="text-left sm:text-right">
                       <div className="flex items-center gap-2 text-green-600 mb-1">
@@ -503,9 +715,62 @@ const ProductDetail: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
+  
     </Layout>
   );
 };
+
+
+
+// Countdown component placé en dehors du composant principal
+const CountdownToMidnight: React.FC = () => {
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      setTimeLeft(Math.max(0, Math.floor((midnight.getTime() - now.getTime()) / 1000)));
+    };
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const hours = Math.floor(timeLeft / 3600);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
+  const seconds = timeLeft % 60;
+
+  return (
+    <div className="w-full flex items-center justify-center gap-0 text-xs text-red-700 bg-red-100 px-1 py-2 rounded border border-red-300 tracking-wide" style={{margin:0}}>
+      <span style={{fontSize:'0.85rem',marginRight:'2px',marginLeft:'2px',whiteSpace:'nowrap',fontWeight:'normal'}}>Uniquement aujourd'hui :</span>
+      <span className="font-mono" style={{fontSize:'1rem',marginRight:'2px',marginLeft:'2px',letterSpacing:'1px', fontWeight:'bold'}}>{hours.toString().padStart(2, '0')}:{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</span>
+      <span style={{fontSize:'0.85rem',marginRight:'2px',marginLeft:'2px',whiteSpace:'nowrap',fontWeight:'bold'}}>restant</span>
+    </div>
+  );
+};
+
+
+// Composant pour afficher la date de livraison
+const LivraisonDate: React.FC = () => {
+  // Délai de livraison en jours
+  const delai = 6;
+  const mois = [
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+  ];
+  const today = new Date();
+  // Ajout du délai en jours, gère le passage au mois suivant automatiquement
+  const livraison = new Date(today);
+  livraison.setDate(today.getDate() + delai);
+  const jour = livraison.getDate();
+  const moisNom = mois[livraison.getMonth()];
+  return (
+    <div className="my-2 text-sm sm:text-base text-blue-900 text-left" style={{fontWeight:'normal'}}>
+      Livraison le <span style={{fontWeight:'bold', fontSize:'1em'}}>{jour} {moisNom}</span>
+    </div>
+  );
+}
 
 export default ProductDetail;

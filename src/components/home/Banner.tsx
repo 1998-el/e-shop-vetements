@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useProducts } from '../../hooks/useProducts';
 
 const Banner: React.FC = () => {
+  const navigate = useNavigate();
+  const { products } = useProducts({ limit: 1 });
+  const mainProduct = products && products.length > 0 ? products[0] : null;
+  const handleBannerClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (mainProduct) {
+      navigate(`/product/${mainProduct.id}`);
+    }
+  };
   return (
     <>
       {/* Mobile Banner - Version simplifiée */}
@@ -18,23 +28,24 @@ const Banner: React.FC = () => {
         
         {/* Contenu centré */}
         <div className="relative h-full flex flex-col items-center justify-center px-6 text-center">
-          <h1 className="text-2xl font-bold mb-4 leading-tight drop-shadow" style={{ color: '#fff' }}>
-            Un repas prêt en 10 minutes
+          <h1 className="text-2xl md:text-3xl font-bold mb-2 leading-tight drop-shadow" style={{ color: '#fff'}}>
+            Un repas prêt en <span>10 minutes
             <br />
-            sans corvée d'épluchage
+            sans corvée </span>d'épluchage
           </h1>
           
           <p className="text-white/90 mb-6 text-sm max-w-md">
             Notre machine épluche tous vos ingrédients en 1-2 minutes, vous permettant de cuisiner rapidement et sans effort vos repas préférés.
           </p>
           
-          <Link
-            to="/products"
+          <button
+            onClick={handleBannerClick}
             className="inline-flex items-center gap-2 bg-helloboku-links text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-helloboku-links transition-all"
+            disabled={!mainProduct}
           >
-            Je cuisine plus vite 
+            Je cuisine sans efforts
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </button>
           
           <p className="text-white/80 text-xs mt-6 max-w-sm">
             Un éplucheur acheté, deux accessoires offerts + un livre de recette gratuit
@@ -71,7 +82,7 @@ const Banner: React.FC = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl font-bold mb-6 leading-tight" style={{ color: '#fff' }}>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2 leading-tight drop-shadow" style={{ color: '#fff' }}>
                 Un repas prêt en 10 minutes
                 <br />
                 sans corvée d'épluchage
@@ -88,7 +99,7 @@ const Banner: React.FC = () => {
                   Un éplucheur acheté, deux accessoires offerts + un livre de recette gratuit
                 </p>
                 <p className="text-sm text-helloboku-text mt-1">
-                  Offre valable jusqu'au 31 décembre 2024
+                  Offre valable jusqu'au 30 janvier 2026
                 </p>
               </div>
               
@@ -98,7 +109,7 @@ const Banner: React.FC = () => {
                   to="/products" 
                   className="inline-flex items-center gap-3 bg-helloboku-links text-white px-8 py-4 rounded-lg font-bold hover:bg-helloboku-headings transition-all"
                 >
-                  Profiter de l'offre
+                  Je cuisine sans efforts
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 

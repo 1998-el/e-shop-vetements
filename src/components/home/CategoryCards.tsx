@@ -112,10 +112,6 @@ const BrandLogos: React.FC = () => {
   return (
     <div className="bg-[#f3f4ff] pt-0 pb-0">
       <div className="max-w-6xl mx-auto px-1 md:px-2">
-        <h3 className="text-center text-lg md:text-2xl font-bold text-gray-900 mb-1 mt-1 padding-top-16">
-          Ces marques parlent de nous
-        </h3>
-        
         {/* Version Desktop - Affichage direct en ligne */}
         <div className="hidden md:flex justify-center items-center overflow-x-auto whitespace-nowrap gap-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {brands.map((brand) => {

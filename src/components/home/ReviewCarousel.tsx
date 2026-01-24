@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { Star } from 'lucide-react';
 import { reviews } from '../../data/mockData';
 
 const getRelativeTime = (dateString: string) => {
@@ -15,49 +15,8 @@ const getRelativeTime = (dateString: string) => {
 };
 
 const ReviewCarousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleReviews, setVisibleReviews] = useState(3);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setVisibleReviews(1);
-      } else if (window.innerWidth < 1024) {
-        setVisibleReviews(2);
-      } else {
-        setVisibleReviews(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      (prevIndex + 1) % Math.ceil(reviews.length / visibleReviews)
-    );
-  }, [visibleReviews]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0
-        ? Math.ceil(reviews.length / visibleReviews) - 1
-        : prevIndex - 1
-    );
-  }, [visibleReviews]);
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 6000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
-
-  const startIndex = currentIndex * visibleReviews;
-  const displayedReviews = reviews.slice(startIndex, startIndex + visibleReviews);
-
   // Calculate average rating
-  const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
+  // const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
 
   return (
     <div className="bg-white py-12">
@@ -71,24 +30,20 @@ const ReviewCarousel: React.FC = () => {
               </h2>
               <div className="flex items-center gap-4 mt-2">
                 <div className="flex items-center">
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-5 h-5 ${
-                          star <= Math.floor(averageRating) 
-                            ? 'text-yellow-500 fill-yellow-500' 
-                            : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="ml-2 text-lg font-bold text-gray-900">
-                    {averageRating.toFixed(1)} sur 5
-                  </span>
+                            <span className="flex items-center">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <Star
+                                  key={star}
+                                  className="w-5 h-5 text-yellow-500 fill-yellow-500"
+                                />
+                              ))}
+                              <span className="ml-2 text-lg font-bold text-gray-900">
+                                4.8 sur 5
+                              </span>
+                            </span>
                 </div>
                 <span className="text-gray-600">
-                  {reviews.length} avis
+                  +1200 avis
                 </span>
               </div>
             </div>
@@ -99,102 +54,83 @@ const ReviewCarousel: React.FC = () => {
                 <div className="text-gray-600">Satisfaction</div>
               </div>
               <div className="text-center">
-                <div className="text-gray-900 font-bold">4.8/5</div>
+                <div className="text-gray-900 font-bold">100%</div>
                 <div className="text-gray-600">Qualité</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Reviews Grid */}
-        <div className="relative">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {displayedReviews.map((review) => (
-              <div
-                key={review.id}
-                className="border rounded-md p-6 transition-colors" style={{ borderColor: '#3c3c7a', borderWidth: '2px', borderStyle: 'solid' }}
-              >
-                {/* Review Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-base font-medium text-gray-700 overflow-hidden">
-                      {review.userAvatar ? (
-                        <img src={review.userAvatar} alt={review.userName} className="w-full h-full object-cover rounded-full" />
-                      ) : (
-                        review.userName.charAt(0)
-                      )}
-                    </div>
-                    <div className="ml-3">
-                      <h4 className="font-medium text-gray-900">{review.userName}</h4>
-                      <div className="text-sm text-gray-500">
-                        {getRelativeTime(review.date)}
-                      </div>
-                    </div>
+        {/* Bloc d'avis : 2 avis par ligne */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {reviews.map((review) => (
+            <div
+              key={review.id}
+              className="border rounded-md p-0 transition-colors flex flex-col justify-between"
+              style={{ borderColor: '#bfc2d6', borderWidth: '1.5px', borderStyle: 'solid', minHeight: '220px', position: 'relative' }}
+            >
+              {/* Moitié supérieure : image verticale */}
+              <div className="flex items-start justify-center bg-gray-100" style={{ height: '50%', overflow: 'hidden' }}>
+                {review.userAvatar ? (
+                  <img src={review.userAvatar} alt={review.userName} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block', backgroundColor: '#f3f4f6' }} onError={e => { e.currentTarget.src = '/images/image_review/review1.png'; }} />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-gray-700">
+                    {review.userName.charAt(0)}
                   </div>
-                  
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-4 h-4 ${
-                          star <= review.rating 
-                            ? 'text-yellow-500 fill-yellow-500' 
-                            : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Review Content */}
-                <div>
-                  {review.badge && (
-                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mb-3">
-                      {review.badge}
-                    </span>
-                  )}
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    "{review.comment}"
-                  </p>
+                )}
+              </div>
+              {/* Sous l'image : nom, étoiles, avis vérifiés */}
+              <div className="flex flex-col px-3 pt-3 pb-1 bg-white">
+                <span className="flex items-center font-semibold text-gray-900 truncate mb-1" style={{ maxWidth: '100%' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: '50%', background: 'transparent', marginRight: 6 }}>
+                    <img src="/images/logos/Check.png" alt="check" style={{ width: 20, height: 20, objectFit: 'contain', display: 'block' }} />
+                  </span>
+                  {review.userName}
+                </span>
+                <div className="flex items-center gap-1 mb-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                    />
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Navigation - Alibaba Style */}
-          <div className="flex items-center justify-center gap-3">
-            <button
-              onClick={prevSlide}
-              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:border-gray-400 hover:bg-gray-50 transition-colors"
-              aria-label="Précédent"
-            >
-              <ChevronLeft className="w-4 h-4 text-gray-600" />
-            </button>
-            
-            {/* Small Circular Indicators */}
-            {/* <div className="flex items-center gap-2 mx-4">
-              {Array.from({ length: Math.ceil(reviews.length / visibleReviews) }, (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    i === currentIndex 
-                      ? 'bg-gray-900' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                  aria-label={`Page ${i + 1}`}
-                />
-              ))}
-            </div> */}
-            
-            <button
-              onClick={nextSlide}
-              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:border-gray-400 hover:bg-gray-50 transition-colors"
-              aria-label="Suivant"
-            >
-              <ChevronRight className="w-4 h-4 text-gray-600" />
-            </button>
-          </div>
+              {/* Avis texte */}
+              <div className="px-3 py-1 flex-1 flex flex-col justify-between bg-white">
+                {review.badge && (
+                  <span
+                    className="inline-block bg-blue-100 text-blue-800 font-bold mb-2"
+                    style={{
+                      padding: '6px',
+                      margin: '2px 0 8px 0', // top, right, bottom, left
+                      marginLeft: '2px',
+                      width: 'fit-content',
+                      fontSize: '11px',
+                      whiteSpace: 'nowrap',
+                      borderRadius: '999px',
+                      textAlign: 'center',
+                      height: '25px',
+                      lineHeight: '1.1',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      top: '-6px',
+                    }}
+                  >
+                    {review.badge}
+                  </span>
+                )}
+                <p className="text-gray-700 text-sm leading-relaxed mb-1">
+                  {review.comment}
+                </p>
+                <div className="mt-auto text-xs text-gray-500 font-medium pt-2">
+                  {getRelativeTime(review.date)}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

@@ -227,7 +227,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between gap-3 lg:gap-4">
             <div className="text-center sm:text-left">
               <p className="text-xs text-gray-500">
-                © 2020 beldouze. Tous droits réservés.
+                © 2023 beldouze. Tous droits réservés.
               </p>
             </div>
 

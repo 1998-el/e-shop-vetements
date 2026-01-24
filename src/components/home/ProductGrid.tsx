@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { useProducts } from '../../hooks/useProducts';
-import { AlertCircle, RefreshCw, Flame, Clock, Tag, Sparkles, ChevronRight, Grid } from 'lucide-react';
+import { AlertCircle, RefreshCw, Flame, Clock, Tag, Sparkles } from 'lucide-react';
 
 const ProductGrid: React.FC = () => {
   const [activeTab, setActiveTab] = useState('bestsellers');
-  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  // const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Fetch products from API
   const { products: allProducts, loading, error, refresh } = useProducts({ limit: 20 });
@@ -83,17 +82,17 @@ const ProductGrid: React.FC = () => {
     <div className="bg-gray-50 py-6 lg:py-12">
       <div className="max-w-7xl mx-auto px-3 lg:px-8">
         {/* Section Header - Mobile Optimized */}
-        <div className="mb-6 lg:mb-8">
+        {/* <div className="mb-6 lg:mb-8">
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 mb-1 lg:mb-2">
             Notre sélection
           </h2>
           <p className="text-gray-600 text-xs lg:text-sm">
             Accessoires de cuisine de qualité pour simplifier vos repas
           </p>
-        </div>
+        </div> */}
 
         {/* Mobile Filter Toggle */}
-        <div className="lg:hidden mb-4">
+        {/* <div className="lg:hidden mb-4">
           <button
             onClick={() => setShowMobileFilters(!showMobileFilters)}
             className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded-lg text-sm font-medium w-full justify-center"
@@ -102,10 +101,10 @@ const ProductGrid: React.FC = () => {
             <span>Filtrer : {tabs.find(t => t.id === activeTab)?.label}</span>
             <ChevronRight className={`w-4 h-4 transition-transform ${showMobileFilters ? 'rotate-90' : ''}`} />
           </button>
-        </div>
+        </div> */}
 
         {/* Mobile Filters Dropdown */}
-        {showMobileFilters && (
+        {/* {showMobileFilters && (
           <div className="lg:hidden mb-4 bg-gray-50 rounded-lg p-3 shadow-sm">
             <div className="grid grid-cols-2 gap-2">
               {tabs.map((tab) => (
@@ -127,7 +126,7 @@ const ProductGrid: React.FC = () => {
               ))}
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Desktop Tabs */}
         <div className="hidden lg:block mb-8">
@@ -154,7 +153,7 @@ const ProductGrid: React.FC = () => {
         </div>
 
         {/* Mobile Horizontal Scroll Indicator */}
-        <div className="lg:hidden mb-3">
+        {/* <div className="lg:hidden mb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
@@ -169,7 +168,7 @@ const ProductGrid: React.FC = () => {
               Voir plus →
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Products Grid - Responsive Grid */}
         <div
@@ -182,7 +181,7 @@ const ProductGrid: React.FC = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center">
+        {/* <div className="text-center">
           <Link
             to="/products"
             className="inline-block border border-gray-300 text-gray-700 px-5 py-2.5 lg:px-6 lg:py-3 rounded text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors"
@@ -191,7 +190,7 @@ const ProductGrid: React.FC = () => {
             <span className="sm:hidden">Voir tout</span>
             <ChevronRight className="w-4 h-4 inline-block ml-1" />
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

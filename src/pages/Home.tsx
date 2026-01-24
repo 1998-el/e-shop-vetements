@@ -8,7 +8,8 @@ import FAQ from '../components/home/FAQ';
 import Positionnement from '../components/common/Positionnement';
 import VideoAutoplayOnScroll from '../components/home/VideoAutoplayOnScroll';
 import Benefices from '../components/common/Benefices';
-import Video_UGC from '../components/common/Video_UGC'; 
+import Video_UGC from '../components/common/Video_UGC';
+import ProductOffertCarousel from '../components/common/ProductOffertCarousel';
 
 // New Amazon/Alibaba style components
 const Home: React.FC = () => {
@@ -19,10 +20,11 @@ const Home: React.FC = () => {
       
       {/* Main Hero Banner */}
       <Banner />
+      {/* Carrousel des produits offerts */}
       
 
       {/* Deals & Flash Sales Section supprimée */}
-       <CategoryCards />
+      <CategoryCards />
        {/* Bloc d'infos statistiques mobile, sur une ligne */}
       <div className="flex flex-row items-center justify-center gap-6 mt-10 mb-12 px-6 py-4 text-center text-gray-800 text-base font-semibold md:hidden" style={{ borderRadius: '1rem' }}>
          <div>
@@ -52,6 +54,15 @@ const Home: React.FC = () => {
       {/* Product Grid - Existing but enhanced */}
       <ProductGrid />
       <Benefices />
+      {/* Image Comment ça marche sous les bénéfices */}
+      <div className="w-full my-6">
+        <img
+          src="/images/images_compsant/Comment ça marche.png"
+          alt="Comment ça marche"
+          className="w-full object-contain mx-auto block"
+          style={{width:'100%'}}
+        />
+      </div>
       {/* Recommended Products - Amazon Style */}
       {/* <RecommendedSection /> */}
       
@@ -68,6 +79,15 @@ const Home: React.FC = () => {
         className="bg-gradient-to-b from-white to-gray-50 py-12 md:py-16"
         threshold={0.5}
       />
+      {/* Image Tableau comparaison sous la vidéo démo */}
+      <div className="w-full my-6">
+        <img
+          src="/images/images_compsant/Tableau comparaison.png"
+          alt="Tableau de comparaison"
+          className="w-full object-contain mx-auto block"
+          style={{width:'100%'}}
+        />
+      </div>
       
     
 
@@ -127,15 +147,7 @@ const Home: React.FC = () => {
             <div className="grid md:grid-cols-3 gap-8 mt-12">
            
               
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center space-y-4">
-                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-helloboku-links" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-helloboku-headings">Rapidité & Plaisir</h3>
-                <p className="text-helloboku-text">Repas plus rapides et agréables</p>
-              </div>
+              <ProductOffertCarousel /> 
             </div>
 
             {/* Citation finale sobre */}

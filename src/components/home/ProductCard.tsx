@@ -1,9 +1,5 @@
-
-
-
-
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Star, ShoppingCart } from 'lucide-react';
 import type { UIProduct } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -18,6 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [_imageError, _setImageError] = React.useState(false);
   const [addingToCart, setAddingToCart] = React.useState(false);
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
 
 
@@ -29,23 +26,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    // Set local loading state for this specific product card
     setAddingToCart(true);
-    
     try {
       await addToCart(product.id, 1);
-
+      navigate(`/product/${product.id}`);
     } catch (error) {
-
+      // Optionally handle error
     } finally {
-      // Always reset local loading state
       setAddingToCart(false);
     }
   };
 
   return (
-    <div className="group bg-white border border-helloboku-page-bg h-full flex flex-col rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-helloboku-links/30">
+    <div className="group bg-white border border-gray-200 shadow-md h-full flex flex-col rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-purple-400">
       <Link to={`/product/${product.id}`} className="flex flex-col h-full">
         {/* Image container with discount badge */}
         <div className="relative w-full pt-[100%] bg-white overflow-hidden">
@@ -55,14 +48,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               -{discountPercentage}%
             </div>
           )}
-          
           <img
             src={getProductImageUrl(product)}
             alt={product.name}
-            className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+            className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300 rounded-2xl border border-gray-200"
             onError={() => {}}
             loading="lazy"
             crossOrigin="anonymous"
+            style={{boxSizing:'border-box'}}
           />
         </div>
 
@@ -114,6 +107,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </Link>
       
+      {/* Bénéfices avant le bouton */}
+      <div className="px-3 lg:px-4 pb-2 pt-0">
+        <ul className="mb-2 space-y-3 text-xs text-gray-700">
+          <li><span className="font-bold text-gray-700 mr-1">💪 Sans effort :</span> Ne fatiguez plus vos mains, l’outil fait le travail pour vous.</li>
+          <li><span className="font-bold text-gray-700 mr-1">⚡ Plus vite :</span> Gagnez du temps sur la préparation, tout est prêt en quelques secondes.</li>
+          <li><span className="font-bold text-gray-700 mr-1">🧼 Sans saleté :</span> Gardez votre plan de travail propre, fini les éclaboussures et les déchets partout.</li>
+          <li><span className="font-bold text-gray-700 mr-1">🛡️ En sécurité :</span> Utilisation sans risque de coupure, même pour les enfants.</li>
+        </ul>
+      </div>
       {/* Add to cart button - Outside the Link */}
       <div className="p-3 lg:p-4 pt-0">
         <button
@@ -130,7 +132,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {addingToCart ? 'Ajout en cours...' : 'Ajouter au panier'}
           </span>
           <span className="sm:hidden">
-            {addingToCart ? '...' : 'Ajouter'}
+            {addingToCart ? '...' : 'Je cuisine sans effort   -20€'}
           </span>
         </button>
       </div>

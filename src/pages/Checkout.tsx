@@ -392,9 +392,7 @@ const Checkout: React.FC = () => {
                           )}
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-                            <Smartphone className="w-5 h-5 text-white" />
-                          </div>
+                         <img src="/images/logos/payer_par_carte-removebg-preview.png" className="w-11 h-11 ml-4" alt="" />
                           <div>
                             <h3 className="font-semibold text-gray-900">Carte Bancaire</h3>
                             <p className="text-sm text-gray-600">Paiement sécurisé</p>
@@ -413,9 +411,7 @@ const Checkout: React.FC = () => {
                         <div className="w-5 h-5 rounded-full border-2 border-gray-300 bg-gray-300">
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-8 bg-gray-400 rounded-lg flex items-center justify-center">
-                            <span className="text-white text-sm font-bold">PP</span>
-                          </div>
+                         <img src="/images/logos/paypal-removebg-preview.png" alt="" className="w-18 h-18 object-contain" />
                           <div>
                             <h3 className="font-semibold text-gray-500">PayPal</h3>
                             <p className="text-sm text-gray-400">Temporairement indisponible</p>
@@ -480,8 +476,8 @@ const Checkout: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      <Shield className="w-5 h-5" />
-                      Payer avec Stripe
+                      <img src="/images/logos/payer_par_carte-removebg-preview.png" alt="Stripe" className="w-9 h-9 object-contain" />
+                      <span className="text-lg font-semibold">Payer par Carte</span>
                     </>
                   )}
                 </button>
