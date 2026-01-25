@@ -327,7 +327,7 @@ export const faqData = [
   },
   {
     question: 'Pourquoi je paierais 59,99 € alors que je trouve des éplucheurs moins chers ?',
-    answer: "Parce que les modèles basiques :\n\n    Fatiguent la main\n\n    Gaspiellent de la chair\n\n    Ne durent pas longtemps\n\n    Ne couvrent pas tous les aliments\n\nIci, vous achetez une solution complète : gain de temps, confort, sécurité, durabilité, + 2 accessoires offerts. C’est un investissement qui se rentabilise dès les premières semaines."
+    answer: "Parce que les modèles basiques :\n\n    Fatiguent la main\n\n    Gaspiellent de la chair \n\n    Ne durent pas longtemps\n\n    Ne couvrent pas tous les aliments\n\nIci, vous achetez une solution complète : gain de temps, confort, sécurité, durabilité, + 2 accessoires offerts. C’est un investissement qui se rentabilise dès les premières semaines."
   },
   {
     question: 'Et si je ne suis pas satisfait ?',

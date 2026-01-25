@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import ProductCard from '../components/home/ProductCard';
 
@@ -18,6 +18,7 @@ import CategoryCards from '../components/home/CategoryCards';
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { addToCart, loading } = useCart();
+  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
@@ -83,8 +84,9 @@ const ProductDetail: React.FC = () => {
   const handleAddToCart = async () => {
     try {
       await addToCart(product.id, quantity);
+      navigate('/cart');
     } catch (error) {
-
+      // Optionnel : afficher une notification d'erreur
     }
   };
 
@@ -396,7 +398,7 @@ const ProductDetail: React.FC = () => {
             </div>
 
             {/* Quantity Selector */}
-            <div className="mb-6 sm:mb-8">
+            <div className="mb-6 sm:mb-8 ml-4">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                 <div className="inline-flex items-center border border-gray-300 rounded-lg w-[20vw] min-w-[100px] max-w-[300px]">
                     <button

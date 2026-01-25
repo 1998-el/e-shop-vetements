@@ -16,6 +16,30 @@ const DEFAULT_VIDEOS = [
 const ITEM_WIDTH = 310;
 
 const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className }) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+    // Stop all sounds if component leaves viewport
+    React.useEffect(() => {
+      const observer = new window.IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              setActiveIndex(null);
+              // Mute all videos
+              videoRefs.current.forEach((v) => { if (v) v.muted = true; });
+            }
+          });
+        },
+        { threshold: 0.01 }
+      );
+      if (containerRef.current) {
+        observer.observe(containerRef.current);
+      }
+      return () => {
+        if (containerRef.current) observer.unobserve(containerRef.current);
+        observer.disconnect();
+      };
+    }, []);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -47,7 +71,7 @@ const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className
   const stopDrag = () => setIsDragging(false);
 
   return (
-    <div className={`relative ${className || ''}`}>
+    <div ref={containerRef} className={`relative ${className || ''}`}>
       <div className="max-w-4xl mx-auto mb-4">
         <h2 className="text-xl md:text-2xl font-bold text-center text-helloboku-headings mb-6">
           Une satisfaction à travers le Monde !
@@ -73,6 +97,7 @@ const Video_UGC: React.FC<VideoUGCProps> = ({ videos = DEFAULT_VIDEOS, className
                 className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border border-gray-100 relative group"
               >
                 <video
+                  ref={el => { videoRefs.current[index] = el; }}
                   src={v.src}
                   {...(v.poster ? { poster: v.poster } : {})}
                   muted={!isActive}

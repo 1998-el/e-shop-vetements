@@ -148,12 +148,13 @@ const Benefices: React.FC<BeneficesProps> = ({
       {/* Section validation */}
       <div className="mt-10 pt-8 border-t border-white/20">
         <div className="text-center">
-          <div className="flex flex-row items-center justify-center mb-6 gap-4 md:gap-6">
-            <span className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 border-4 border-white bg-white/10 shadow-lg">
+          <div className="flex flex-row items-center justify-center mb-6 gap-4 md:gap-6 mx-2 ">
+            <span className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-white/10 shadow-lg rounded-full">
               <img src="/images/logos/ce.svg" alt="CE" className="w-8 h-8 md:w-10 md:h-10" style={{ verticalAlign: 'middle' }} />
+              <style>{`.ce-circle { border-radius: 9999px !important; }`}</style>
             </span>
             <p className="text-white text-xl md:text-2xl font-semibold text-left leading-snug max-w-xl mx-0 mb-0">
-              Validé par des tests de conformités & les utilisateurs
+              <span className="text-base md:text-lg">Validé par des tests de conformités & les utilisateurs</span>
             </p>
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 text-white/80">
@@ -183,7 +184,7 @@ const Benefices: React.FC<BeneficesProps> = ({
       {/* Bouton d'action */}
       <div className="mt-10 text-center">
         <button
-          className="bg-white text-[#0e0e52] font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          className="bg-white text-[#0e0e52] font-bold py-2 px-5 rounded-full text-base md:text-sm hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 whitespace-nowrap"
           onClick={handleClick}
         >
       Je cuisine sans effort &ensp; -20€
