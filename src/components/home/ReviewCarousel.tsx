@@ -61,13 +61,13 @@ const ReviewCarousel: React.FC = () => {
           </div>
         </div>
 
-        {/* Bloc d'avis : 2 avis par ligne */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
+        {/* Bloc d'avis : 4 avis par ligne sur desktop, 2 sur mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
           {reviews.map((review) => (
             <div
               key={review.id}
               className="border rounded-md p-0 transition-colors flex flex-col justify-between"
-              style={{ borderColor: '#bfc2d6', borderWidth: '1.5px', borderStyle: 'solid', minHeight: '220px', position: 'relative' }}
+              style={{ borderColor: '#bfc2d6', borderWidth: '1.5px', borderStyle: 'solid', minHeight: '170px', maxWidth: '260px', margin: '0 auto', position: 'relative' }}
             >
               {/* Moitié supérieure : image verticale */}
               <div className="flex items-start justify-center bg-gray-100" style={{ height: '50%', overflow: 'hidden' }}>

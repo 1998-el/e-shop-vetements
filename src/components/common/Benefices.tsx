@@ -76,8 +76,8 @@ const Benefices: React.FC<BeneficesProps> = ({
   };
   return (
     <div 
-      className={`rounded-2xl p-6 md:p-8 shadow-2xl max-w-4xl mx-auto overflow-hidden ${className}`}
-      style={{ backgroundColor: "#12123be5" }}
+      className={`p-6 md:p-8 shadow-2xl w-full mx-auto overflow-hidden ${className}`}
+      style={{ backgroundColor: "#12123be5", maxWidth: '100vw' }}
     >
       {/* En-tête avec offre */}
       <div className="text-center mb-8">
@@ -100,58 +100,60 @@ const Benefices: React.FC<BeneficesProps> = ({
       </div>
 
       {/* Liste des bénéfices */}
-      <div className="space-y-6 max-w-3xl mx-auto mb-10">
-        {benefits.map((benefit, idx) => {
-          const slideClass = idx % 2 === 0 ? 'animate-benefit-slide-in-left' : 'animate-benefit-slide-in-right';
-          const delayClass = `animate-delay-${idx}`;
-          return (
-            <div
-              key={benefit.id}
-              className={`flex flex-col sm:flex-row items-start gap-4 p-5 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white/15 transition-all duration-300 relative overflow-hidden opacity-0 ${slideClass} ${delayClass}`}
-            >
-            {/* Case à cocher et icône alignés horizontalement sur mobile */}
-            <div className="flex items-center gap-4 w-full sm:w-auto">
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 flex items-center justify-center rounded-xl border border-white bg-white/10 shadow-md">
-                  <img
-                    src={benefit.img}
-                    alt={benefit.label}
-                    className="w-10 h-10 object-contain"
-                  />
+      <div className="mb-10 w-full">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-4 w-full justify-center items-stretch">
+          {benefits.map((benefit, idx) => {
+            const slideClass = idx % 2 === 0 ? 'animate-benefit-slide-in-left' : 'animate-benefit-slide-in-right';
+            const delayClass = `animate-delay-${idx}`;
+            return (
+              <div
+                key={benefit.id}
+                className={`flex flex-col sm:flex-row items-start gap-4 p-5 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white/15 transition-all duration-300 relative overflow-hidden opacity-0 ${slideClass} ${delayClass} flex-1`}
+                style={{ minWidth: 0 }}
+              >
+                {/* Case à cocher et icône alignés horizontalement sur mobile */}
+                <div className="flex items-center gap-4 w-full sm:w-auto">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 flex items-center justify-center rounded-xl border border-white bg-white/10 shadow-md">
+                      <img
+                        src={benefit.img}
+                        alt={benefit.label}
+                        className="w-10 h-10 object-contain"
+                      />
+                    </div>
+                  </div>
+                  {/* Titre visible sur mobile seulement */}
+                  <div className="sm:hidden">
+                    <h3 className="text-lg font-bold text-white">
+                      {benefit.label}
+                    </h3>
+                  </div>
+                </div>
+                {/* Texte descriptif */}
+                <div className="flex-1 sm:pl-2">
+                  {/* Titre caché sur mobile, visible sur desktop */}
+                  <h3 className="hidden sm:block text-xl font-bold text-white mb-2">
+                    {benefit.label}
+                  </h3>
+                  <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                    {benefit.description}
+                  </p>
                 </div>
               </div>
-              
-              {/* Titre visible sur mobile seulement */}
-              <div className="sm:hidden">
-                <h3 className="text-lg font-bold text-white">
-                  {benefit.label}
-                </h3>
-              </div>
-            </div>
-
-            {/* Texte descriptif */}
-            <div className="flex-1 sm:pl-2">
-              {/* Titre caché sur mobile, visible sur desktop */}
-              <h3 className="hidden sm:block text-xl font-bold text-white mb-2">
-                {benefit.label}
-              </h3>
-              <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                {benefit.description}
-              </p>
-            </div>
-          </div>
-           );})}
+            );
+          })}
+        </div>
       </div>
 
       {/* Section validation */}
       <div className="mt-10 pt-8 border-t border-white/20">
         <div className="text-center">
-          <div className="flex flex-col items-center justify-center mb-6">
-            <span className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full border-4 border-white bg-white/10 mb-4 shadow-lg">
+          <div className="flex flex-row items-center justify-center mb-6 gap-4 md:gap-6">
+            <span className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 border-4 border-white bg-white/10 shadow-lg">
               <img src="/images/logos/ce.svg" alt="CE" className="w-8 h-8 md:w-10 md:h-10" style={{ verticalAlign: 'middle' }} />
             </span>
-            <p className="text-white text-xl md:text-2xl font-semibold text-center leading-snug max-w-xl mx-auto">
-              Validé par des tests de conformités <br className="hidden md:block" />& les utilisateurs
+            <p className="text-white text-xl md:text-2xl font-semibold text-left leading-snug max-w-xl mx-0 mb-0">
+              Validé par des tests de conformités & les utilisateurs
             </p>
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 text-white/80">

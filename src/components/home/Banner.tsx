@@ -82,7 +82,7 @@ const Banner: React.FC = () => {
                 </span>
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-bold mb-2 leading-tight drop-shadow" style={{ color: '#fff' }}>
+                <h1 className="text-2xl md:text-3xl font-bold mb-2 leading-tight drop-shadow" style={{ color: '#3931f8' }}>
                 Un repas prêt en 10 minutes
                 <br />
                 sans corvée d'épluchage
@@ -105,13 +105,14 @@ const Banner: React.FC = () => {
               
               {/* Boutons CTA */}
               <div className="flex gap-4 mb-8">
-                <Link 
-                  to="/products" 
+                <button
+                  onClick={handleBannerClick}
                   className="inline-flex items-center gap-3 bg-helloboku-links text-white px-8 py-4 rounded-lg font-bold hover:bg-helloboku-headings transition-all"
+                  disabled={!mainProduct}
                 >
                   Je cuisine sans efforts
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </button>
                 
                 <Link 
                   to="/about" 

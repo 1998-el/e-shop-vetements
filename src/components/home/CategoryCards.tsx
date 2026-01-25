@@ -110,43 +110,37 @@ const BrandLogos: React.FC = () => {
 
 
   return (
-    <div className="bg-[#f3f4ff] pt-0 pb-0">
+    <div className="bg-[#f3f4ff] py-2">
       <div className="max-w-6xl mx-auto px-1 md:px-2">
-        {/* Version Desktop - Affichage direct en ligne */}
-        <div className="hidden md:flex justify-center items-center overflow-x-auto whitespace-nowrap gap-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {brands.map((brand) => {
-            let extraMargin = 0;
-            if (brand.id === 'lecreuset' || brand.id === 'Le_monde' || brand.id === 'La_french_tech') {
-              extraMargin = 24;
-            }
-            return (
-              <div
-                key={brand.id}
-                className="flex items-center justify-center"
-                style={{ minWidth: '220px', minHeight: '140px', maxWidth: '320px', background: 'transparent', boxShadow: 'none', border: 'none', margin: `0 ${18 + extraMargin}px`, padding: '0 !important' }}
-              >
-                <img
-                  src={brand.logo}
-                  alt={brand.alt}
-                  className="object-contain max-h-80 w-auto max-w-full mx-auto"
-                  style={{ maxWidth: '320px', minHeight: '160px', background: 'transparent' }}
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      parent.innerHTML = `
-                        <div class='text-sm md:text-base font-semibold text-gray-700 text-center'>
-                          ${brand.name}
-                        </div>
-                      `;
-                    }
-                  }}
-                />
-              </div>
-            );
-          })}
+        {/* Version Desktop - Tous les logos sur une ligne */}
+        <div className="hidden md:flex flex-row items-center justify-center gap-10 overflow-x-auto scrollbar-hide" style={{ whiteSpace: 'nowrap', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {brands.map((brand) => (
+            <div
+              key={brand.id}
+              className="flex flex-col items-center justify-center p-2"
+              style={{ minHeight: '100px', background: 'transparent', boxShadow: 'none', border: 'none' }}
+            >
+              <img
+                src={brand.logo}
+                alt={brand.alt}
+                className="object-contain max-h-24 w-auto max-w-full mx-auto"
+                style={{ maxWidth: '170px', minHeight: '60px', background: 'transparent' }}
+                loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    parent.innerHTML = `
+                      <div class='text-base font-semibold text-gray-700 text-center'>
+                        ${brand.name}
+                      </div>
+                    `;
+                  }
+                }}
+              />
+            </div>
+          ))}
         </div>
 
         {/* Version Mobile - Carrousel automatique */}

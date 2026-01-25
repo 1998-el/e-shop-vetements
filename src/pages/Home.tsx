@@ -54,44 +54,51 @@ const Home: React.FC = () => {
       {/* Product Grid - Existing but enhanced */}
       <ProductGrid />
       <Benefices />
-      {/* Image Comment ça marche sous les bénéfices */}
+      {/* Bloc vidéo + image comment ça marche côte à côte sur desktop */}
       <div className="w-full my-6">
-        <img
-          src="/images/images_compsant/Comment ça marche.png"
-          alt="Comment ça marche"
-          className="w-full object-contain mx-auto block"
-          style={{width:'100%'}}
-        />
+        <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
+          {/* Vidéo */}
+          <div className="w-full md:w-1/2">
+            <VideoAutoplayOnScroll
+              videoSrc="/videos/tiktok_1766724838220.mp4"
+              posterSrc="https://picsum.photos/1920/1080?random=1"
+              title="L'épluchage ne doit plus être une souffrance"
+              description="Regardez comment notre éplucheur révolutionnaire transforme la préparation des légumes en quelques secondes, sans effort et avec une précision parfaite."
+              className="bg-gradient-to-b from-white to-gray-50 py-8 md:py-0"
+              threshold={0.5}
+            />
+          </div>
+          {/* Image Comment ça marche */}
+          <div className="w-full md:w-1/2 flex items-center justify-center">
+            <img
+              src="/images/images_compsant/Comment ça marche.png"
+              alt="Comment ça marche"
+              className="w-full object-contain mx-auto block"
+              style={{ maxWidth: '500px' }}
+            />
+          </div>
+        </div>
       </div>
-      {/* Recommended Products - Amazon Style */}
-      {/* <RecommendedSection /> */}
-      
-      {/* Services & Trust Section */}
-      {/* <ServicesSection /> */}
-      
-      
-      {/* Section vidéo avec autoplay au scroll - Plus large */}
-      <VideoAutoplayOnScroll
-        videoSrc="/videos/tiktok_1766724838220.mp4" // Vidéo de démo pour test
-        posterSrc="https://picsum.photos/1920/1080?random=1" // Image de remplacement
-        title="L'épluchage ne doit plus être une souffrance"
-        description="Regardez comment notre éplucheur révolutionnaire transforme la préparation des légumes en quelques secondes, sans effort et avec une précision parfaite."
-        className="bg-gradient-to-b from-white to-gray-50 py-12 md:py-16"
-        threshold={0.5}
-      />
-      {/* Image Tableau comparaison sous la vidéo démo */}
-      <div className="w-full my-6">
-        <img
-          src="/images/images_compsant/Tableau comparaison.png"
-          alt="Tableau de comparaison"
-          className="w-full object-contain mx-auto block"
-          style={{width:'100%'}}
-        />
+      {/* Tableau comparaison + texte côte à côte sur desktop */}
+      <div className="w-full flex flex-col md:flex-row justify-center items-stretch gap-8 my-8">
+        <div className="flex justify-center w-full md:w-1/2">
+          <img
+            src="/images/images_compsant/Tableau comparaison.png"
+            alt="Tableau de comparaison"
+            className="object-contain mx-auto block rounded-lg shadow-md"
+            style={{ maxWidth: '400px', width: '100%', margin: '0 16px' }}
+          />
+        </div>
+        <div className="w-full md:w-1/2 flex items-center">
+          <div className="bg-white py-8 w-full">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Fini les corvées d'épluchage interminables et épuisantes : découvrez notre éplucheur innovant qui transforme la préparation des repas en plaisir rapide et sans casse-tête ni effort.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      
-    
-
-      {/* Best Selling Products Carousel */}
       {/* <ProductCarousel 
         title="Produits les plus vendus" 
         subtitle="Découvrez les produits favoris de nos clients"
@@ -109,13 +116,7 @@ const Home: React.FC = () => {
       /> */}
 
       {/* Intro Text Below Video */}
-      <div className="bg-white py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-lg text-gray-700 leading-relaxed">
-            Fini les corvées d'épluchage interminables et épuisantes : découvrez notre éplucheur innovant qui transforme la préparation des repas en plaisir rapide et sans casse-tête ni effort.
-          </p>
-        </div>
-      </div>
+    
       {/* Vidéos UGC juste après le texte d'intro */}
         <Video_UGC 
           className="my-8"
@@ -145,9 +146,9 @@ const Home: React.FC = () => {
 
             {/* Points de différenciation avec icônes sobres */}
             <div className="grid md:grid-cols-3 gap-8 mt-12">
-           
-              
-              <ProductOffertCarousel /> 
+              <div className="col-span-3 flex justify-center items-center w-full">
+                <ProductOffertCarousel />
+              </div>
             </div>
 
             {/* Citation finale sobre */}

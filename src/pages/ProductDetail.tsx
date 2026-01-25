@@ -177,7 +177,7 @@ const ProductDetail: React.FC = () => {
 
       
 
-      <div className="max-w-7xl mx-auto px-4 py-4 md:py-6 lg:py-8">
+      <div className="w-full px-0 py-4 md:py-6 lg:py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Product Images */}
           <div>
@@ -221,7 +221,7 @@ const ProductDetail: React.FC = () => {
             </div>
 
             {product.images.length > 1 && (
-              <div className="mt-4 sm:mt-6">
+              <div>
                 <div className="flex gap-0 sm:gap-0 overflow-x-hidden pb-0">
                   {Array.from({length: product.images.length}).map((_, i) => {
                     // Décalage circulaire pour que la miniature 0 soit toujours celle de l'image active
@@ -255,7 +255,7 @@ const ProductDetail: React.FC = () => {
               </div>
             )}
              {/* Product Info */}
-          <div className="bg-white p-4 sm:p-6 md:p-8 border border-gray-200">
+          <div className="bg-white p-4 sm:p-6 md:p-8 border border-gray-200 m-0 w-full">
             <div className="mb-6 sm:mb-8">
 
               <div className="flex flex-row flex-nowrap items-center gap-1 mb-2 whitespace-nowrap">
@@ -268,10 +268,11 @@ const ProductDetail: React.FC = () => {
                   ))}
                 </div>
                 <span className="text-sm text-gray-800 font-semibold mr-1">
-                  4.8/5 avis
+                  4.8/5
                 </span>
-                <span className="text-sm text-gray-500 font-medium mr-1">(+1200 avis)</span>
-                <span className="text-sm text-green-600 font-bold">17.3k vendus</span>
+                <span className="text-sm text-gray-500 font-medium mr-1">(+1.2k avis)</span>
+                <br/>
+                <span className="text-sm text-green-600 font-bold block">17.3k vendus</span>
               </div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
               <div className=" sm:text- text-sm-[#0e0e52] mb-4">Fini l’épluchage pénibles et interminables !</div>
@@ -377,10 +378,10 @@ const ProductDetail: React.FC = () => {
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-col">
-                            <span className="text-xs sm:text-sm" style={{ whiteSpace: 'nowrap' }}>
+                            <span className="text-[0.68em] sm:text-xs" style={{ whiteSpace: 'nowrap' }}>
                               <span className="font-bold" style={{ color: '#0e0e52' }}>Garantie 30 jours</span> satisfait ou remboursé
                             </span>
-                            <span className="text-[0.7rem] sm:text-xs text-gray-600 mt-0.5" style={{ lineHeight: 1.2 }}>
+                            <span className="text-[0.65em] sm:text-xs text-gray-600 mt-0.5" style={{ lineHeight: 1.2 }}>
                               Si vous n'êtes pas satisfait, à certaines conditions, vous serez remboursé.
                             </span>
                           </div>
@@ -398,7 +399,7 @@ const ProductDetail: React.FC = () => {
             <div className="mb-6 sm:mb-8">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                 <div className="inline-flex items-center border border-gray-300 rounded-lg w-[20vw] min-w-[100px] max-w-[300px]">
-                  <button
+                    <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
                     disabled={loading}
@@ -425,7 +426,7 @@ const ProductDetail: React.FC = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={loading}
-                className="w-full py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-200 text-white hover:opacity-90 touch-manipulation"
+                className="w-[90%] max-w-[400px] py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-200 text-white hover:opacity-90 touch-manipulation mx-auto"
                 style={{
                   backgroundColor: loading ? '#9CA3AF' : '#0e0e52'
                 }}
@@ -445,7 +446,7 @@ const ProductDetail: React.FC = () => {
                 )}
               </button>
               {/* Liste des icônes de paiement */}
-              <div className="flex flex-row items-center gap-3 mt-2 mb-2 justify-center">
+              <div className="flex flex-row items-center justify-center mt-2 mb-2 mx-auto w-[90%] max-w-[400px] gap-2">
                 {[
                   {src: '/images/icon-payment/Apple Pay.png', alt: 'Apple Pay'},
                   {src: '/images/icon-payment/visa.png', alt: 'Visa'},
@@ -458,7 +459,7 @@ const ProductDetail: React.FC = () => {
                       src={icon.src}
                       alt={icon.alt}
                       className="rounded-md border border-gray-200 object-contain bg-white shadow-sm"
-                      style={{padding:'4px', width:'4.2rem', height:'2.2rem', maxWidth:'100%'}}
+                      style={{padding:'2px', width:'3.2rem', height:'2rem', maxWidth:'100%'}}
                     />
                   </div>
                 ))}
@@ -525,7 +526,7 @@ const ProductDetail: React.FC = () => {
                       style={{width:'100%'}}
                     />
                   </div>
-                  <div className="my-8">
+                  <div>
                     <ReviewCarousel />
                   </div>
                   <div className="my-8">
@@ -744,7 +745,7 @@ const CountdownToMidnight: React.FC = () => {
 
   return (
     <div className="w-full flex items-center justify-center gap-0 text-xs text-red-700 bg-red-100 px-1 py-2 rounded border border-red-300 tracking-wide" style={{margin:0}}>
-      <span style={{fontSize:'0.85rem',marginRight:'2px',marginLeft:'2px',whiteSpace:'nowrap',fontWeight:'normal'}}>Uniquement aujourd'hui :</span>
+      <span style={{fontSize:'0.8rem',marginRight:'2px',marginLeft:'2px',whiteSpace:'nowrap',fontWeight:'normal'}}>Aujourd'hui :</span>
       <span className="font-mono" style={{fontSize:'1rem',marginRight:'2px',marginLeft:'2px',letterSpacing:'1px', fontWeight:'bold'}}>{hours.toString().padStart(2, '0')}:{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</span>
       <span style={{fontSize:'0.85rem',marginRight:'2px',marginLeft:'2px',whiteSpace:'nowrap',fontWeight:'bold'}}>restant</span>
     </div>

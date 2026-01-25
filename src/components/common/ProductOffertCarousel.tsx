@@ -43,9 +43,9 @@ const ProductOffertCarousel: React.FC<ProductOffertCarouselProps> = ({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-8">
+    <div className="w-full py-8 flex flex-col items-center justify-center">
       <h2 className="text-lg font-bold text-center mb-6 text-[#0e0e52]">{title}</h2>
-      <div className="relative flex items-center justify-center w-full">
+      <div className="relative flex items-center justify-center w-full" style={{ maxWidth: '420px', marginLeft: 'auto', marginRight: 'auto' }}>
         <button
           onClick={prev}
           className="absolute left-2 z-10 bg-white/80 hover:bg-white text-[#0e0e52] rounded-full p-2 shadow-md transition-colors"
