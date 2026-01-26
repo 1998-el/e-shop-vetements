@@ -727,18 +727,34 @@ const ProductDetail: React.FC = () => {
 
 // Countdown component placé en dehors du composant principal
 const CountdownToMidnight: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState(0);
+  // Initialise le timer à la bonne valeur dès le départ
+  const getSecondsToMidnight = () => {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0);
+    return Math.max(0, Math.floor((midnight.getTime() - now.getTime()) / 1000));
+  };
+  const [timeLeft, setTimeLeft] = useState(getSecondsToMidnight());
 
   useEffect(() => {
     const update = () => {
-      const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(24, 0, 0, 0);
-      setTimeLeft(Math.max(0, Math.floor((midnight.getTime() - now.getTime()) / 1000)));
+      setTimeLeft(getSecondsToMidnight());
     };
     update();
     const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
+
+    // Gestion de la visibilité de la page (mobile, onglet inactif)
+    const handleVisibility = () => {
+      if (!document.hidden) {
+        update();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, []);
 
   const hours = Math.floor(timeLeft / 3600);
