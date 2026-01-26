@@ -301,7 +301,7 @@ const ProductDetail: React.FC = () => {
                         <span role="img" aria-label="Plus vite" className="mr-1">⚡</span>
                         Ni perte de temps :
                       </span>
-                      <span className="text-gray-600 font-normal break-words"> Gagnez du temps sur la préparation, tout est prêt en quelques secondes.</span>
+                      <span className="text-gray-600 font-normal break-words"> La machine épluche plusieurs légumes simultanément en 1 ou 2 minutes.</span>
                     </div>
                     <div className="text-sm sm:text-base">
                       <span className="font-bold text-gray-700 whitespace-nowrap">
