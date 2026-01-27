@@ -180,13 +180,13 @@ const ProductDetail: React.FC = () => {
       
 
       <div className="w-full px-0 py-4 md:py-6 lg:py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {/* Product Images */}
-          <div>
-
+        {/* Desktop: grille 2 colonnes, mobile: stack */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Colonne 1: Images + Carrousel */}
+          <div className="w-full">
             <div className="relative bg-gray-50 rounded border border-gray-200">
               <div
-                style={{width:'100%',aspectRatio:'1/1',background:'#f9fafb',position:'relative',borderRadius:'0.5rem',overflow:'hidden'}} // rounded-md
+                style={{width:'100%',aspectRatio:'1/1',background:'#f9fafb',position:'relative',borderRadius:'0.5rem',overflow:'hidden'}}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
@@ -194,7 +194,7 @@ const ProductDetail: React.FC = () => {
                 <img
                   src={product.images[selectedImage] || getProductImageUrl(product)}
                   alt={product.name}
-                  className="w-full h-full object-contain rounded-md" // arrondi léger
+                  className="w-full h-full object-contain rounded-md"
                   style={{margin:0,padding:0,display:'block',position:'absolute',top:0,left:0,right:0,bottom:0,borderRadius:'0.5rem'}}
                   onError={(_e) => {}}
                   crossOrigin="anonymous"
@@ -221,12 +221,10 @@ const ProductDetail: React.FC = () => {
                 </>
               )}
             </div>
-
             {product.images.length > 1 && (
               <div>
                 <div className="flex gap-0 sm:gap-0 overflow-x-hidden pb-0">
                   {Array.from({length: product.images.length}).map((_, i) => {
-                    // Décalage circulaire pour que la miniature 0 soit toujours celle de l'image active
                     const realIndex = (selectedImage + i) % product.images.length;
                     const image = product.images[realIndex];
                     return (
@@ -239,7 +237,7 @@ const ProductDetail: React.FC = () => {
                             : 'hover:border-gray-400'
                         }`}
                         aria-label={`Voir l'image ${realIndex + 1}`}
-                        style={{margin:0,padding:0, borderRadius:'0.5rem', overflow:'hidden'}} // arrondi léger
+                        style={{margin:0,padding:0, borderRadius:'0.5rem', overflow:'hidden'}}
                       >
                         <img
                           src={image}
@@ -256,7 +254,12 @@ const ProductDetail: React.FC = () => {
                 </div>
               </div>
             )}
-             {/* Product Info */}
+            {/* Carrousel des produits offerts - Desktop uniquement */}
+            <div className="mt-6 hidden lg:block">
+              <ProductOffertCarousel />
+            </div>
+          </div>
+          {/* Colonne 2: Infos produit */}
           <div className="bg-white p-4 sm:p-6 md:p-8 border border-gray-200 m-0 w-full">
             <div className="mb-6 sm:mb-8">
 
@@ -397,109 +400,111 @@ const ProductDetail: React.FC = () => {
               </div>
             </div>
 
-            {/* Quantity Selector */}
-            <div className="mb-6 sm:mb-8 ml-4">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                <div className="inline-flex items-center border border-gray-300 rounded-lg w-[20vw] min-w-[100px] max-w-[300px]">
-                    <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
-                    disabled={loading}
-                    aria-label="Diminuer la quantité"
-                  >
-                    <Minus className="w-4 h-4" />
-                  </button>
-                  <span className="px-2 py-1 font-semibold text-center">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(Math.min(product.available, quantity + 1))}
-                    className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
-                    disabled={loading}
-                    aria-label="Augmenter la quantité"
-                  >
-                    <Plus className="w-4 h-4" />
-                  </button>
+            {/* Bloc actions aligné à droite sur desktop, déplacé juste après le bloc infos produit */}
+            <div className="flex flex-col items-center lg:items-end gap-6 mt-0">
+              {/* Quantity Selector */}
+              <div className="mb-0 w-full lg:w-auto flex justify-center lg:justify-end">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 w-full justify-center">
+                  <div className="inline-flex items-center border border-gray-300 rounded-lg w-[90px] mx-auto">
+                      <button
+                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
+                        disabled={loading}
+                        aria-label="Diminuer la quantité"
+                      >
+                        <Minus className="w-4 h-4" />
+                      </button>
+                      <span className="px-2 py-1 font-semibold text-center">{quantity}</span>
+                      <button
+                        onClick={() => setQuantity(Math.min(product.available, quantity + 1))}
+                        className="px-2 py-1 hover:bg-gray-50 transition-colors touch-manipulation"
+                        disabled={loading}
+                        aria-label="Augmenter la quantité"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                  </div>
                 </div>
-                {/* Stock count removed as requested */}
               </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="space-y-3 sm:space-y-4">
-              <button
-                onClick={handleAddToCart}
-                disabled={loading}
-                className="w-[90%] max-w-[400px] py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-200 text-white hover:opacity-90 touch-manipulation mx-auto"
-                style={{
-                  backgroundColor: loading ? '#9CA3AF' : '#0e0e52'
-                }}
-              >
-                {loading ? (
-                  <>
-                    <ButtonSpinner size="sm" color="white" />
-                    <span className="hidden sm:inline">Ajout en cours...</span>
-                    <span className="sm:hidden">Ajout...</span>
-                  </>
-                ) : (
-                  <>
-                    <ShoppingCart className="w-5 h-5" />
-                    <span className="hidden sm:inline">Ajouter au panier</span>
-                    <span className="sm:hidden">Au Panier</span>
-                  </>
-                )}
-              </button>
-              {/* Liste des icônes de paiement */}
-              <div className="flex flex-row items-center justify-center mt-2 mb-2 mx-auto w-[90%] max-w-[400px] gap-2">
-                {[
-                  {src: '/images/icon-payment/Apple Pay.png', alt: 'Apple Pay'},
-                  {src: '/images/icon-payment/visa.png', alt: 'Visa'},
-                  {src: '/images/icon-payment/Gpay.png', alt: 'Google Pay'},
-                  {src: '/images/icon-payment/paypal.png', alt: 'Paypal'},
-                  {src: '/images/icon-payment/mastercard.png', alt: 'Mastercard'}
-                ].map((icon) => (
-                  <div key={icon.alt} className="flex justify-center">
-                    <img
-                      src={icon.src}
-                      alt={icon.alt}
-                      className="rounded-md border border-gray-200 object-contain bg-white shadow-sm"
-                      style={{padding:'2px', width:'3.2rem', height:'2rem', maxWidth:'100%'}}
-                    />
-                  </div>
-                ))}
+              {/* Action Buttons */}
+              <div className="space-y-3 sm:space-y-4 w-full lg:w-auto flex flex-col items-center lg:items-end">
+                <button
+                  onClick={handleAddToCart}
+                  disabled={loading}
+                  className="w-[90%] max-w-[400px] py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-200 text-white hover:opacity-90 touch-manipulation lg:ml-auto"
+                  style={{
+                    backgroundColor: loading ? '#9CA3AF' : '#0e0e52'
+                  }}
+                >
+                  {loading ? (
+                    <>
+                      <ButtonSpinner size="sm" color="white" />
+                      <span className="hidden sm:inline">Ajout en cours...</span>
+                      <span className="sm:hidden">Ajout...</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-5 h-5" />
+                      <span className="hidden sm:inline">Ajouter au panier</span>
+                      <span className="sm:hidden">Au Panier</span>
+                    </>
+                  )}
+                </button>
+                {/* Liste des icônes de paiement */}
+                <div className="flex flex-row items-center justify-center lg:justify-end mt-2 mb-2 mx-auto lg:mx-0 w-[90%] max-w-[400px] gap-2">
+                  {[
+                    {src: '/images/icon-payment/Apple Pay.png', alt: 'Apple Pay'},
+                    {src: '/images/icon-payment/visa.png', alt: 'Visa'},
+                    {src: '/images/icon-payment/Gpay.png', alt: 'Google Pay'},
+                    {src: '/images/icon-payment/paypal.png', alt: 'Paypal'},
+                    {src: '/images/icon-payment/mastercard.png', alt: 'Mastercard'}
+                  ].map((icon) => (
+                    <div key={icon.alt} className="flex justify-center">
+                      <img
+                        src={icon.src}
+                        alt={icon.alt}
+                        className="rounded-md border border-gray-200 object-contain bg-white shadow-sm"
+                        style={{padding:'2px', width:'3.2rem', height:'2rem', maxWidth:'100%'}}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-
-{/* Carrousel des produits offerts */}
-      <ProductOffertCarousel />
-            {/* Trust Elements & Benefits */}
-            <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm mb-4 sm:mb-6">
-                <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <Truck className="w-6 h-6 text-green-600 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <div className="font-medium text-gray-800 text-sm sm:text-base">Livraison gratuite</div>
-                    <div className="text-gray-600 text-xs">Dès 50€ d'achat</div>
+              {/* Trust Elements & Benefits */}
+              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200 w-full lg:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm mb-4 sm:mb-6">
+                  <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
+                    <Truck className="w-6 h-6 text-green-600 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <div className="font-medium text-gray-800 text-sm sm:text-base">Livraison gratuite</div>
+                      <div className="text-gray-600 text-xs">Dès 50€ d'achat</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
+                    <RefreshCw className="w-6 h-6 text-blue-600 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <div className="font-medium text-gray-800 text-sm sm:text-base">Retour 14 jours</div>
+                      <div className="text-gray-600 text-xs">30 jours satisfait ou remboursées</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
+                    <Lock className="w-6 h-6 text-purple-600 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <div className="font-medium text-gray-800 text-sm sm:text-base">Paiement sécurisé</div>
+                      <div className="text-gray-600 text-xs">SSL 256-bit chiffré</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
+                    <Award className="w-6 h-6 text-orange-600 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <div className="font-medium text-gray-800 text-sm sm:text-base">Garantie qualité</div>
+                      <div className="text-gray-600 text-xs">Produits certifiés CE</div>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <RefreshCw className="w-6 h-6 text-blue-600 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <div className="font-medium text-gray-800 text-sm sm:text-base">Retour 14 jours</div>
-                    <div className="text-gray-600 text-xs">30 jours satisfait ou remboursées</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <Lock className="w-6 h-6 text-purple-600 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <div className="font-medium text-gray-800 text-sm sm:text-base">Paiement sécurisé</div>
-                    <div className="text-gray-600 text-xs">SSL 256-bit chiffré</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation">
-                  <Award className="w-6 h-6 text-orange-600 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <div className="font-medium text-gray-800 text-sm sm:text-base">Garantie qualité</div>
-                    <div className="text-gray-600 text-xs">Produits certifiés CE</div>
-                  </div>
+                {/* Carrousel des produits offerts - Mobile uniquement */}
+                <div className="block lg:hidden mt-4">
+                  <ProductOffertCarousel />
                 </div>
               </div>
             </div>
@@ -507,26 +512,27 @@ const ProductDetail: React.FC = () => {
           <CategoryCards />
                 {/* Bloc vidéos UGC, avis, FAQ */}
                 <div className="max-w-7xl mx-auto w-full">
-                  {/* Comment ca marche ? */}
-                  <div className="my-8">
-                    <img 
-                      src="/images/images_compsant/Comment ça marche.png" 
-                      alt="Tableau de comparaison" 
-                      className="w-screen max-w-none object-contain mx-auto block"
-                      style={{width:'100vw'}}
-                    />
+                  {/* Images "Comment ça marche" et "Tableau comparaison" côte à côte sur desktop */}
+                  <div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <img 
+                        src="/images/images_compsant/Comment ça marche.png" 
+                        alt="Comment ça marche" 
+                        className="w-full object-contain mx-auto block"
+                        style={{maxWidth:'100%'}}
+                      />
+                    </div>
+                    <div>
+                      <img 
+                        src="/images/images_compsant/Tableau comparaison.png" 
+                        alt="Tableau de comparaison" 
+                        className="w-full object-contain mx-auto block"
+                        style={{maxWidth:'100%'}}
+                      />
+                    </div>
                   </div>
                   <div className="my-8">
                     <Video_UGC />
-                  </div>
-                  {/* Tableau de comparaison */}
-                  <div className="my-8">
-                    <img 
-                      src="/images/images_compsant/Tableau comparaison.png" 
-                      alt="Comment ça marche" 
-                      className="w-full object-contain mx-auto block"
-                      style={{width:'100%'}}
-                    />
                   </div>
                   <div>
                     <ReviewCarousel />
@@ -546,7 +552,7 @@ const ProductDetail: React.FC = () => {
               Fini les longues corvées d'épluchage : avec notre éplucheur innovant, préparez vos légumes en un instant, sans effort et en toute sécurité
             </p>
           </div>
-        </div>
+        
 
         {/* Product Details Tabs */}
         <div className="mt-8 sm:mt-12 border border-gray-200 rounded">
