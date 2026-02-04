@@ -173,149 +173,179 @@ const Cart: React.FC = () => {
           )}
 
           <div className="lg:grid lg:grid-cols-3 lg:gap-6 xl:gap-8">
-            {/* Cart Items */}
-            <div className="lg:col-span-2 mb-6 lg:mb-0">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-                {cartItems.map((item, index) => {
-                  const isUpdating = updatingItems.has(item.id);
-                  
-                  return (
-                    <div key={item.id} className={`flex flex-col sm:flex-row items-start sm:items-center p-4 sm:p-6 ${index !== cartItems.length - 1 ? 'border-b border-gray-200' : ''}`}>
-                      {/* Product Image */}
-                      <div className="w-full sm:w-16 h-48 sm:h-16 flex-shrink-0 mb-4 sm:mb-0">
-                        <img
-                          src={getImageUrl(item.product, item.product.id)}
-                          alt={item.product.name}
-                          className="w-full h-full object-contain rounded-lg border border-gray-200 p-2"
-                          onError={() => handleImageError(item.product.id)}
-                          loading="lazy"
-                        />
-                      </div>
-
-                      {/* Product Details */}
-                      <div className="flex-1 w-full sm:ml-4">
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                          <div className="flex-1">
-                            <h3 className="text-sm sm:text-base font-medium text-gray-900 mb-2 line-clamp-2">
-                              {item.product.name}
-                              {isUpdating && (
-                                <span className="ml-2 text-xs text-blue-600">
-                                  •
-                                </span>
-                              )}
-                            </h3>
-                            <p className="text-sm sm:text-base text-gray-600 mb-3">€{item.product.price.toFixed(2)}</p>
-                            
-                            {/* Quantity Controls */}
-                            <div className="flex items-center gap-3">
-                              <div className="flex items-center border border-gray-300 rounded-lg">
-                                <button
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleUpdateQuantity(item.id, item.quantity - 1);
-                                  }}
-                                  disabled={isUpdating}
-                                  type="button"
-                                  className="p-2 hover:bg-gray-50 disabled:opacity-50 transition-colors rounded-l-lg"
-                                >
-                                  <Minus className="w-4 h-4" />
-                                </button>
-                                <span className="px-4 py-2 text-sm font-medium min-w-[3rem] text-center">
-                                  {isUpdating ? (
-                                    <span className="text-blue-600">•</span>
-                                  ) : (
-                                    item.quantity
-                                  )}
-                                </span>
-                                <button
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleUpdateQuantity(item.id, item.quantity + 1);
-                                  }}
-                                  disabled={isUpdating}
-                                  type="button"
-                                  className="p-2 hover:bg-gray-50 disabled:opacity-50 transition-colors rounded-r-lg"
-                                >
-                                  <Plus className="w-4 h-4" />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Subtotal & Remove */}
-                          <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-4">
-                            <div className="text-right">
-                              <p className="text-sm sm:text-base font-semibold text-gray-900">
-                                €{(item.product.price * item.quantity).toFixed(2)}
-                              </p>
-                            </div>
+              {/* Cart Items */}
+              <div className="lg:col-span-2 mb-6 lg:mb-0">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+                  {cartItems.map((item, index) => {
+                    const isUpdating = updatingItems.has(item.id);
+                    return (
+                      <div key={item.id} className={`flex flex-col gap-2 p-4 sm:p-6 ${index !== cartItems.length - 1 ? 'border-b border-gray-200' : ''}`}> 
+                        {/* Product Image Full Width */}
+                        <div className="w-full flex">
+                          <img
+                            src={getImageUrl(item.product, item.product.id)}
+                            alt={item.product.name}
+                            className="w-full h-32 object-cover rounded-lg border border-gray-200"
+                            onError={() => handleImageError(item.product.id)}
+                            loading="lazy"
+                          />
+                        </div>
+                        {/* Title, Old Price, Price Row */}
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-xs sm:text-sm text-gray-400 line-through">€79,99</span>
+                          <span className="text-lg sm:text-xl font-bold text-green-600 ml-2">€{item.product.price.toFixed(2)}</span>
+                          <span className="text-base sm:text-lg font-medium text-gray-900 ml-2 flex-1">{item.product.name}</span>
+                          {isUpdating && (
+                            <span className="ml-2 text-xs text-blue-600">•</span>
+                          )}
+                        </div>
+                        {/* Quantity & Delete Row */}
+                        <div className="flex items-center justify-between mt-1">
+                          <div className="flex items-center border border-gray-300 rounded-lg px-1 py-0.5">
                             <button
-                              onClick={() => handleRemoveItem(item.id)}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleUpdateQuantity(item.id, item.quantity - 1);
+                              }}
                               disabled={isUpdating}
-                              className="text-gray-500 hover:text-red-600 p-2 disabled:opacity-50 transition-colors rounded-lg hover:bg-red-50"
+                              type="button"
+                              className="p-1 hover:bg-gray-50 disabled:opacity-50 transition-colors rounded-l-lg"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Minus className="w-4 h-4" />
+                            </button>
+                            <span className="px-2 py-1 text-sm font-medium min-w-[2rem] text-center">
+                              {isUpdating ? (
+                                <span className="text-blue-600">•</span>
+                              ) : (
+                                item.quantity
+                              )}
+                            </span>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleUpdateQuantity(item.id, item.quantity + 1);
+                              }}
+                              disabled={isUpdating}
+                              type="button"
+                              className="p-1 hover:bg-gray-50 disabled:opacity-50 transition-colors rounded-r-lg"
+                            >
+                              <Plus className="w-4 h-4" />
                             </button>
                           </div>
+                          <button
+                            onClick={() => handleRemoveItem(item.id)}
+                            disabled={isUpdating}
+                            className="text-gray-500 hover:text-red-600 p-2 disabled:opacity-50 transition-colors rounded-lg hover:bg-red-50 ml-2"
+                          >
+                            <Trash2 className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Bloc Cadeaux Offerts juste après les produits du panier */}
+                <div className="mt-6">
+                  {/* <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Offert avec votre pack</h3> */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {/* 1er cadeau */}
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
+                      <div className="flex items-center gap-2">
+                        <img src="/images/photo_produits_offerts/produit offerts (5).jpeg" alt="Fouet offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                        <div className="flex-1">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm">Casse-oeuf</div>
+                        </div>
+                        <div className="flex flex-col items-end ml-2">
+                          <span className="text-xs text-gray-400 line-through mb-1">17,99€</span>
+                          <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
                         </div>
                       </div>
                     </div>
-                  );
-                })}
+                    {/* 2e cadeau */}
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
+                      <div className="flex items-center gap-2">
+                        <img src="/images/photo_produits_offerts/produit offerts (6).jpeg" alt="Pinceau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                        <div className="flex-1">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm">Fouet de cuisine</div>
+                        </div>
+                        <div className="flex flex-col items-end ml-2">
+                          <span className="text-xs text-gray-400 line-through mb-1">13,99€</span>
+                          <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* 3e cadeau surprise */}
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl mr-2">🎁</span>
+                        <div className="flex-1">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm">Cadeau surprise à gagner</div>
+                        </div>
+                        <div className="flex flex-col items-end ml-2">
+                          <span className="text-xs text-gray-400 line-through mb-1">&nbsp;</span>
+                          <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Compteur jusqu'à minuit */}
+                  <div className="mt-2 col-span-full">
+                    {/* CountdownToMidnight & LivraisonDate components if available */}
+                    {/* <CountdownToMidnight /> */}
+                    {/* <LivraisonDate /> */}
+                    <div
+                      className="mt-2 flex items-start sm:items-center gap-2 sm:gap-4 px-2 py-2 rounded-lg border"
+                      style={{ borderColor: '#0e0e52', background: '#f8f9fb' }}
+                    >
+                      <img
+                        src="/images/logos/Check.png"
+                        alt="Badge Beldouze"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover bg-white flex-shrink-0"
+                        style={{ objectFit: 'cover' }}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col">
+                          <span className="text-[0.68em] sm:text-xs" style={{ whiteSpace: 'nowrap' }}>
+                            <span className="font-bold" style={{ color: '#0e0e52' }}>Garantie 30 jours</span> satisfait ou remboursé
+                          </span>
+                          <span className="text-[0.65em] sm:text-xs text-gray-600 mt-0.5" style={{ lineHeight: 1.2 }}>
+                            Si vous n'êtes pas satisfait, à certaines conditions, vous serez remboursé.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Message de félicitations */}
+                    <div className="mt-4 text-center">
+                      <span className=" text-green-600 text-base sm:text-lg flex items-center justify-center gap-2">
+                        🎉 Félicitations&nbsp;! Vous venez de gagner des cadeaux&nbsp;🎁, une livraison gratuite&nbsp;🚚 et une garantie&nbsp;🛡️
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                {/* Continue Shopping */}
+                <div className="mt-4 sm:mt-6">
+                  <Link
+                    to="/products"
+                    className="inline-flex items-center text-[#0e0e52] hover:text-[#0e0e52]/80 text-sm sm:text-base transition-colors"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Continuer les achats
+                  </Link>
+                </div>
               </div>
-
-              {/* Continue Shopping */}
-              <div className="mt-4 sm:mt-6">
-                <Link
-                  to="/products"
-                  className="inline-flex items-center text-[#0e0e52] hover:text-[#0e0e52]/80 text-sm sm:text-base transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Continuer les achats
-                </Link>
-              </div>
-            </div>
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 sticky top-4">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Récapitulatif</h2>
 
-                <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm sm:text-base text-gray-600">Prix total</span>
-                    <span className="text-sm sm:text-base font-medium">€{subtotal.toFixed(2)}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm sm:text-base text-gray-600">Taxes TVA (20%)</span>
-                    <span className="text-sm sm:text-base font-medium">€{tva.toFixed(2)}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm sm:text-base text-gray-600">Livraison</span>
-                    <span className="text-sm sm:text-base font-medium">
-                      {shippingCost === 0 ? (
-                        <span className="text-green-600 font-semibold">Gratuite</span>
-                      ) : (
-                        `€${shippingCost.toFixed(2)}`
-                      )}
-                    </span>
-                  </div>
-
-                  {subtotal > 0 && subtotal < 50 && (
-                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                      <p className="text-xs sm:text-sm text-orange-700">
-                        Ajoutez €{(50 - subtotal).toFixed(2)} pour la livraison gratuite
-                      </p>
-                    </div>
-                  )}
-                </div>
+                {/* Suppression des lignes prix total, taxes, livraison */}
 
                 <div className="border-t border-gray-200 pt-4 sm:pt-6 mb-6 sm:mb-8">
-                  <div className="flex justify-between items-center text-base sm:text-lg font-semibold">
-                    <span>Total</span>
-                    <span className="text-gray-900">€{totalWithShipping.toFixed(2)}</span>
+                  <div className="flex justify-between items-center text-base sm:text-lg font-semibold gap-2">
+                    <span className="text-gray-900 text-base sm:text-lg">Prix total :</span>
+                    <span className="text-gray-900 font-bold text-xl">€{subtotal.toFixed(2)}</span>
+                    <span className="text-green-600 font-bold text-xs sm:text-sm whitespace-nowrap">Économisez&nbsp;€102,9</span>
                   </div>
                 </div>
 
