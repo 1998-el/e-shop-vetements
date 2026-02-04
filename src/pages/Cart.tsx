@@ -138,9 +138,9 @@ const Cart: React.FC = () => {
 
   // Calculs des totaux
   const subtotal = getTotal();
-  const shippingCost = subtotal >= 50 ? 0 : 5.99;
-  const tva = subtotal * 0.20;
-  const totalWithShipping = subtotal + shippingCost + tva;
+ // const shippingCost = subtotal >= 50 ? 0 : 5.99;
+ // const tva = subtotal * 0.20;
+  //  const totalWithShipping = subtotal + shippingCost + tva;
 
   return (
     <Layout>
