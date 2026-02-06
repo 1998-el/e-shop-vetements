@@ -31,6 +31,14 @@ const Checkout: React.FC = () => {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const getFirstProductImageUrl = () => {
+    const firstItem = cart?.cartItems?.[0];
+    const firstImage = (firstItem?.product as any)?.images?.[0];
+    if (typeof firstImage === 'string') return firstImage;
+    if (firstImage && typeof firstImage === 'object' && 'url' in firstImage) return (firstImage as any).url as string;
+    return '';
+  };
+
 
 
   const shippingCost = getTotal() >= 50 ? 0 : 5.99;
@@ -427,18 +435,88 @@ const Checkout: React.FC = () => {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-2xl p-6 shadow-sm sticky top-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Récapitulatif</h2>
+                <div className="flex items-center mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Récapitulatif</h2>
+                  <span className="mx-2 text-4xl text-gray-900">·</span>
+                  <span className="text-lg sm:text-sm text-500 font-normal">{(cart?.cartItems?.length || 0) + 3} articles</span>
+                </div>
 
-                <div className="space-y-4 mb-6">
-                  {(cart?.cartItems || []).map((item) => (
-                    <div key={item.id} className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-sm font-medium text-gray-900">{item.product.name}</h3>
-                        <p className="text-sm text-gray-600">Qté: {item.quantity}</p>
+                {/* Ligne récapitulatif produit supprimée comme demandé */}
+
+                {/* Bloc produit + cadeaux offerts */}
+                <div className="mb-6 space-y-3">
+                  {cart?.cartItems?.[0] && (
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex items-center gap-2">
+                      <div className="relative w-12 h-12">
+                        <img
+                          src={getFirstProductImageUrl()}
+                          alt={cart.cartItems[0].product.name}
+                          className="w-12 h-12 object-cover rounded-lg border border-gray-200"
+                        />
+                        <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">1</span>
                       </div>
-                      <span className="text-sm font-medium">€{(item.product.price * item.quantity).toFixed(2)}</span>
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-800 text-xs sm:text-sm line-clamp-1">
+                          {cart.cartItems[0].product.name}
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end ml-2">
+                        <span className="text-xs text-gray-400 line-through mb-1">79,99€</span>
+                        <span className="text-sm font-bold text-green-600">€{cart.cartItems[0].product.price.toFixed(2)}</span>
+                      </div>
                     </div>
-                  ))}
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {/* 1er cadeau */}
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between min-h-[70px] max-h-[90px]">
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-12 h-12">
+                          <img src="/images/photo_produits_offerts/produit offerts (5).jpeg" alt="Fouet offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">2</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm">Casse-oeuf</div>
+                        </div>
+                        <div className="flex flex-col items-end ml-2">
+                          <span className="text-xs text-gray-400 line-through mb-1">17,99€</span>
+                          <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* 2e cadeau */}
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between min-h-[70px] max-h-[90px]">
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-12 h-12">
+                          <img src="/images/photo_produits_offerts/produit offerts (6).jpeg" alt="Pinceau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">3</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm">Fouet de cuisine</div>
+                        </div>
+                        <div className="flex flex-col items-end ml-2">
+                          <span className="text-xs text-gray-400 line-through mb-1">13,99€</span>
+                          <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* 3e cadeau surprise */}
+                    <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between min-h-[70px] max-h-[90px]">
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-12 h-12 flex items-center justify-center">
+                          <img src="/images/produits_a_gagner.png" alt="Cadeau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">4</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm">Cadeau surprise à gagner</div>
+                        </div>
+                        <div className="flex flex-col items-end ml-2">
+                          <span className="text-xs text-gray-400 line-through mb-1">&nbsp;</span>
+                          <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-bold">Offert</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="border-t border-gray-100 pt-4 space-y-3 mb-6">
@@ -463,9 +541,9 @@ const Checkout: React.FC = () => {
                   type="button"
                   onClick={paymentMethod === 'paypal' ? handlePayPalPayment : handleStripePayment}
                   disabled={isSubmitting || !isFormFilled()}
-                  className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all ${
+                  className={`w-full py-4 rounded-xl flex items-center justify-center font-medium transition-all ${
                     isFormFilled() && !isSubmitting
-                      ? 'bg-gray-900 text-white hover:bg-gray-800'
+                      ? 'bg-[#0e0e52] text-white hover:bg-[#18186a]'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 >
@@ -475,10 +553,7 @@ const Checkout: React.FC = () => {
                       Traitement en cours...
                     </>
                   ) : (
-                    <>
-                      <img src="/images/logos/payer_par_carte-removebg-preview.png" alt="Stripe" className="w-9 h-9 object-contain" />
-                      <span className="text-lg font-semibold">Payer par Carte</span>
-                    </>
+                    <span className="text-lg font-bold">Je&nbsp;  commande</span>
                   )}
                 </button>
 
@@ -490,10 +565,10 @@ const Checkout: React.FC = () => {
                   </div>
                 )}
 
-                <div className="mt-4 text-xs text-gray-500 text-center">
+                <div className="mt-4 text-center">
                   <div className="flex items-center justify-center gap-1">
-                    <Shield className="w-3 h-3" />
-                    <span>Paiement sécurisé SSL</span>
+                    <Shield className="w-4 h-4 text-gray-500" />
+                    <span className="text-base text-gray-700 font-semibold" >Paiement sécurisé SSL</span>
                   </div>
                 </div>
               </div>

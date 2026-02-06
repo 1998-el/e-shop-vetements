@@ -93,7 +93,9 @@ const Home: React.FC = () => {
           <div className="bg-white py-8 w-full">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <p className="text-lg text-gray-700 leading-relaxed">
-                Fini les corvées d'épluchage interminables et épuisantes : découvrez notre éplucheur innovant qui transforme la préparation des repas en plaisir rapide et sans casse-tête ni effort.
+              Fini les corvées d’épluchage interminables et épuisantes :
+Tu rentres tard le soir, tu es <span className="font-bold">fatigué, crevé, affamé</span>...mais au lieu de manger rapidement,tu dois encore éplucher un tas de légumes.
+Tout ça, c’est fini !!!
               </p>
             </div>
           </div>

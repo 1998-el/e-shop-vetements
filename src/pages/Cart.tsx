@@ -144,20 +144,18 @@ const Cart: React.FC = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8">
+      {/* Bande de réservation du panier */}
+      <div className="w-full bg-[#0e0e52] text-white py-2 flex items-center justify-center mb-3" style={{marginTop:0}}>
+        <span className=" text-xs sm:text-sm flex items-center gap-1 whitespace-nowrap">
+          Votre panier est réservé pendant
+          <span className="text-red-500 font-bold text-xs sm:text-sm ml-1">
+            6:30
+          </span>
+          minutes !
+        </span>
+      </div>
+      <div className="min-h-screen bg-gray-50 pt-0 sm:pt-2 lg:pt-3">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
-          {/* Header */}
-          <div className="mb-4 sm:mb-6">
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1">Panier</h1>
-            <p className="text-gray-600 text-sm sm:text-base">
-              {cartItems.length} article{cartItems.length > 1 ? 's' : ''}
-              {(updatingItems.size > 0 || addingItems) && (
-                <span className="text-blue-600">
-                  {' '}•
-                </span>
-              )}
-            </p>
-          </div>
 
           {/* Message d'erreur de mise à jour */}
           {updateError && (
@@ -251,7 +249,10 @@ const Cart: React.FC = () => {
                     {/* 1er cadeau */}
                     <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
                       <div className="flex items-center gap-2">
-                        <img src="/images/photo_produits_offerts/produit offerts (5).jpeg" alt="Fouet offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                        <div className="relative w-12 h-12">
+                          <img src="/images/photo_produits_offerts/produit offerts (5).jpeg" alt="Fouet offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">1</span>
+                        </div>
                         <div className="flex-1">
                           <div className="font-semibold text-gray-800 text-xs sm:text-sm">Casse-oeuf</div>
                         </div>
@@ -264,7 +265,10 @@ const Cart: React.FC = () => {
                     {/* 2e cadeau */}
                     <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
                       <div className="flex items-center gap-2">
-                        <img src="/images/photo_produits_offerts/produit offerts (6).jpeg" alt="Pinceau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                        <div className="relative w-12 h-12">
+                          <img src="/images/photo_produits_offerts/produit offerts (6).jpeg" alt="Pinceau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">2</span>
+                        </div>
                         <div className="flex-1">
                           <div className="font-semibold text-gray-800 text-xs sm:text-sm">Fouet de cuisine</div>
                         </div>
@@ -277,7 +281,10 @@ const Cart: React.FC = () => {
                     {/* 3e cadeau surprise */}
                     <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl mr-2">🎁</span>
+                        <div className="relative w-12 h-12 flex items-center justify-center">
+                          <img src="/images/produits_a_gagner.png" alt="Cadeau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center z-10">3</span>
+                        </div>
                         <div className="flex-1">
                           <div className="font-semibold text-gray-800 text-xs sm:text-sm">Cadeau surprise à gagner</div>
                         </div>
@@ -337,22 +344,29 @@ const Cart: React.FC = () => {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 sticky top-4">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Récapitulatif</h2>
+                <div className="flex items-center mb-4 sm:mb-6">
+                  <h2 className="text-lg font-semibold text-gray-900">Récapitulatif</h2>
+                  <span className="mx-2 text-4xl text-gray-900">·</span>
+                  <span className="text-sm sm:text-sm text-black-500 font-normal">{cartItems.length + 3} articles</span>
+                </div>
 
                 {/* Suppression des lignes prix total, taxes, livraison */}
 
-                <div className="border-t border-gray-200 pt-4 sm:pt-6 mb-6 sm:mb-8">
+                <div className="border-t border-gray-200 pt-4 sm:pt-6 mb-2 sm:mb-3">
                   <div className="flex justify-between items-center text-base sm:text-lg font-semibold gap-2">
                     <span className="text-gray-900 text-base sm:text-lg">Prix total :</span>
                     <span className="text-gray-900 font-bold text-xl">€{subtotal.toFixed(2)}</span>
                     <span className="text-green-600 font-bold text-xs sm:text-sm whitespace-nowrap">Économisez&nbsp;€102,9</span>
+                  </div>
+                  <div className="flex justify-end">
+                    <span className="text-[0.65em] text-gray-400 mt-1">taxes 20% : 11,99</span>
                   </div>
                 </div>
 
                 <div className="space-y-3 sm:space-y-4">
                   <Link
                     to="/checkout"
-                    className="w-full bg-[#0e0e52] text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-[#0e0e52]/90 transition-colors block text-center shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full bg-[#0e0e52] text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg text-base sm:text-base font-medium hover:bg-[#0e0e52]/90 transition-colors block text-center shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {(addingItems || updatingItems.size > 0) ? (
                       <>
@@ -360,7 +374,7 @@ const Cart: React.FC = () => {
                         Mise à jour...
                       </>
                     ) : (
-                      'Procéder au paiement'
+                      ' Continuer '
                     )}
                   </Link>
 

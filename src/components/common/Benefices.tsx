@@ -1,7 +1,7 @@
 
 
 // export default Benefices;
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import './benefices-animations.css';
 import { useNavigate } from "react-router-dom";
 import { useProducts } from '../../hooks/useProducts';
@@ -74,6 +74,27 @@ const Benefices: React.FC<BeneficesProps> = ({
       navigate('/products');
     }
   };
+  // Référence pour la liste des bénéfices
+  const benefitsRef = useRef<HTMLDivElement>(null);
+  const [visibleIndexes, setVisibleIndexes] = React.useState<number[]>([]);
+
+  useEffect(() => {
+    const benefitEls = benefitsRef.current?.querySelectorAll('.benefit-animated') ?? [];
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).getAttribute('data-idx'));
+            setVisibleIndexes((prev) => prev.includes(idx) ? prev : [...prev, idx]);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    benefitEls.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [benefits]);
+
   return (
     <div 
       className={`p-6 md:p-8 shadow-2xl w-full mx-auto overflow-hidden ${className}`}
@@ -101,14 +122,16 @@ const Benefices: React.FC<BeneficesProps> = ({
 
       {/* Liste des bénéfices */}
       <div className="mb-10 w-full">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-4 w-full justify-center items-stretch">
+        <div ref={benefitsRef} className="flex flex-col md:flex-row gap-4 md:gap-4 w-full justify-center items-stretch">
           {benefits.map((benefit, idx) => {
             const slideClass = idx % 2 === 0 ? 'animate-benefit-slide-in-left' : 'animate-benefit-slide-in-right';
             const delayClass = `animate-delay-${idx}`;
+            const isVisible = visibleIndexes.includes(idx);
             return (
               <div
                 key={benefit.id}
-                className={`flex flex-col sm:flex-row items-start gap-4 p-5 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white/15 transition-all duration-300 relative overflow-hidden opacity-0 ${slideClass} ${delayClass} flex-1`}
+                data-idx={idx}
+                className={`benefit-animated flex flex-col sm:flex-row items-start gap-4 p-5 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white/15 transition-all duration-300 relative overflow-hidden ${slideClass} ${delayClass} flex-1 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 style={{ minWidth: 0 }}
               >
                 {/* Case à cocher et icône alignés horizontalement sur mobile */}

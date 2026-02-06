@@ -354,7 +354,9 @@ const ProductDetail: React.FC = () => {
                       {/* 3e cadeau surprise */}
                       <div className="bg-white rounded-xl border border-gray-300 border-gray-400 shadow-lg p-2 flex flex-col justify-between relative min-h-[70px] max-h-[90px]">
                         <div className="flex items-center gap-2">
-                          <span className="text-2xl mr-2">🎁</span>
+                          <div className="relative w-12 h-12 flex items-center justify-center">
+                            <img src="/images/produits_a_gagner.png" alt="Cadeau offert" className="w-12 h-12 object-cover rounded-lg border border-gray-200" />
+                          </div>
                           <div className="flex-1">
                             <div className="font-semibold text-gray-800 text-xs sm:text-sm">Cadeau surprise à gagner</div>
                           </div>
