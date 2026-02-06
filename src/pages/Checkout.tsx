@@ -519,7 +519,7 @@ const Checkout: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-gray-100 pt-4 space-y-3 mb-6">
+                <div className="border-t border-gray-100 pt-4 space-y-2 mb-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Sous-total</span>
                     <span className="font-medium">€{getTotal().toFixed(2)}</span>
@@ -530,9 +530,12 @@ const Checkout: React.FC = () => {
                       {shippingCost === 0 ? 'Gratuite' : `€${shippingCost.toFixed(2)}`}
                     </span>
                   </div>
-                  <div className="flex justify-between text-lg font-semibold pt-3 border-t border-gray-100">
+                  <div className="flex justify-between text-lg font-semibold pt-2 border-t border-gray-100">
                     <span>Total</span>
                     <span>€{total.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-end">
+                    <span className="text-[0.65em] text-gray-400 mt-0">taxes 20% : 11,99</span>
                   </div>
                 </div>
 
@@ -541,7 +544,7 @@ const Checkout: React.FC = () => {
                   type="button"
                   onClick={paymentMethod === 'paypal' ? handlePayPalPayment : handleStripePayment}
                   disabled={isSubmitting || !isFormFilled()}
-                  className={`w-full py-4 rounded-xl flex items-center justify-center font-medium transition-all ${
+                  className={`w-full py-3 rounded-xl flex items-center justify-center font-medium transition-all ${
                     isFormFilled() && !isSubmitting
                       ? 'bg-[#0e0e52] text-white hover:bg-[#18186a]'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -558,14 +561,14 @@ const Checkout: React.FC = () => {
                 </button>
 
                 {!isFormFilled() && !isSubmitting && (
-                  <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                  <div className="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg">
                     <p className="text-amber-800 text-sm text-center">
                       Veuillez remplir tous les champs requis
                     </p>
                   </div>
                 )}
 
-                <div className="mt-4 text-center">
+                <div className="mt-2 text-center">
                   <div className="flex items-center justify-center gap-1">
                     <Shield className="w-4 h-4 text-gray-500" />
                     <span className="text-base text-gray-700 font-semibold" >Paiement sécurisé SSL</span>
